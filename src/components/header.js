@@ -5,7 +5,7 @@ import styled from "styled-components"
 
 const Header = ({ siteTitle }) => (
   <HeaderWrapper>
-    <nav>
+    <Nav>
       <ul>
         <li>
           <Link to="/">{siteTitle}</Link>
@@ -30,7 +30,7 @@ const Header = ({ siteTitle }) => (
           <Link>Sign In</Link>
         </li>
       </ul>
-    </nav>
+    </Nav>
   </HeaderWrapper>
 )
 
@@ -45,27 +45,40 @@ Header.defaultProps = {
 export default Header
 
 const HeaderWrapper = styled.section`
-  background: rebeccapurple;
+  background: transparent;
+`
+export const Nav = styled.nav`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #000;
+  border-bottom: 0.1rem solid #fff;
+  position: fixed;
+  top: 0;
+  min-width: 100%;
 
-  nav {
+  > ul {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0.5rem;
 
-    > ul {
-      display: flex;
-      list-style: none;
-      margin: 0;
-      padding: 0;
+    > li {
+      padding: 0.4rem;
+      margin-bottom: 0;
+      align-items: center;
 
-      > li {
-        padding: 0.4rem;
-        margin-bottom: 0;
+      > a {
+        text-decoration: none;
         align-items: center;
-        > a {
-          text-decoration: none;
-          color: #fff;
-          align-items: center;
+        padding: 0 2rem;
+        color: #fff;
+        font-family: "Archivo", sans-serif;
+        font-size: 1.2rem;
+        transition: 0.5s ease;
+
+        :hover {
+          color: #8a2be2;
         }
       }
     }

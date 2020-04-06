@@ -11,6 +11,7 @@ import { useStaticQuery, graphql } from "gatsby"
 import styled from "styled-components"
 
 import Header from "./header"
+import Nav from "./header"
 import "./layout.css"
 
 const Layout = ({ children }) => {
@@ -28,18 +29,20 @@ const Layout = ({ children }) => {
     <>
       <Header siteTitle={data.site.siteMetadata.title} />
       <div>
-        <Main>{children}</Main>
-        <footer>
+        <main>{children}</main>
+        <FooterSection>
           <p>Additional Resources</p>
           <nav>
-            <li>
-              <a href="https://www.nasa.gov">NASA</a>
-            </li>
-            <li>
-              <a href="https://www.spacex.com">SpaceX</a>
-            </li>
+            <ul>
+              <li>
+                <a href="https://www.nasa.gov">NASA</a>
+              </li>
+              <li>
+                <a href="https://www.spacex.com">SpaceX</a>
+              </li>
+            </ul>
           </nav>
-        </footer>
+        </FooterSection>
       </div>
     </>
   )
@@ -51,8 +54,43 @@ Layout.propTypes = {
 
 export default Layout
 
-const Main = styled.main`
+const FooterSection = styled.footer`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: flex-end;
+  color: #fff;
+  background: #000;
+  bottom: 0;
+  width: 100%;
+  border-top: 0.1rem solid #fff;
+
+  p {
+    margin-top: 0.5rem;
+    margin-bottom: 0;
+    font-style: italic;
+    font-size: 1.5rem;
+  }
+
+  nav {
+    display: flex;
+    justify-content: space-between;
+
+    > ul {
+      display: flex;
+      list-style: none;
+      margin: 0;
+      padding: 0.1rem;
+
+      > li {
+        margin: 0.5rem 10rem;
+
+        > a {
+          text-decoration: none;
+          color: #fff;
+          font-size: 1.2rem;
+        }
+      }
+    }
+  }
 `

@@ -13,6 +13,9 @@ module.exports = {
         path: `${__dirname}/src/images`,
       },
     },
+    // {
+    //   resolve: "nasa-satellite-source",
+    // },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {
