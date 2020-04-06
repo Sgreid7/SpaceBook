@@ -52,7 +52,7 @@ export const Nav = styled.nav`
   justify-content: center;
   align-items: center;
   background: #000;
-  border-bottom: 0.1rem solid #fff;
+  border-bottom: 0.1rem solid #8a2be2;
   position: fixed;
   top: 0;
   min-width: 100%;

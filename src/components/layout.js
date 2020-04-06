@@ -63,7 +63,7 @@ const FooterSection = styled.footer`
   background: #000;
   bottom: 0;
   width: 100%;
-  border-top: 0.1rem solid #fff;
+  border-top: 0.1rem solid #8a2be2;
 
   p {
     margin-top: 0.5rem;
@@ -89,6 +89,11 @@ const FooterSection = styled.footer`
           text-decoration: none;
           color: #fff;
           font-size: 1.2rem;
+          transition: 0.5s ease;
+
+          :hover {
+            color: #8a2be2;
+          }
         }
       }
     }

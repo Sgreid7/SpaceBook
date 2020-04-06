@@ -49,7 +49,8 @@ const HeaderSection = styled.header`
   h1 {
     font-size: 5rem;
     margin-bottom: 2.5rem;
-    text-shadow: 0.1rem 0.1rem 0.1rem #8a2be2;
+    text-shadow: 0.2rem 0.2rem 0.2rem #8a2be2;
+    font-style: oblique;
   }
 
   h2 {
