@@ -8,14 +8,9 @@ const Header = ({ siteTitle }) => (
     <Nav>
       <ul>
         <li>
-          <Link to="/">{siteTitle}</Link>
-        </li>
-        <li>
-          <input
-            type="search"
-            name="search"
-            placeholder="Search satellites..."
-          />
+          <Link to="/" className="brand">
+            {siteTitle}
+          </Link>
         </li>
         <li>
           <Link>Most Tracked</Link>
@@ -57,6 +52,12 @@ export const Nav = styled.nav`
   top: 0;
   min-width: 100%;
 
+  .brand {
+    font-style: oblique;
+    font-size: 1.4rem;
+    text-shadow: 0.1rem 0.1rem 0.1rem #8a2be2;
+  }
+
   > ul {
     display: flex;
     list-style: none;
@@ -67,14 +68,6 @@ export const Nav = styled.nav`
       padding: 0.4rem;
       margin-bottom: 0;
       align-items: center;
-
-      > input[type="search"] {
-        border: 0.13rem solid #8a2be2;
-
-        :focus {
-          outline: none;
-        }
-      }
 
       > a {
         text-decoration: none;
