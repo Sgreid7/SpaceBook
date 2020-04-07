@@ -68,6 +68,14 @@ export const Nav = styled.nav`
       margin-bottom: 0;
       align-items: center;
 
+      > input[type="search"] {
+        border: 0.13rem solid #8a2be2;
+
+        :focus {
+          outline: none;
+        }
+      }
+
       > a {
         text-decoration: none;
         align-items: center;

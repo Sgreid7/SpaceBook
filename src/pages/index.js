@@ -1,6 +1,6 @@
 import React from "react"
 import { Link } from "gatsby"
-import styled, { keyframes } from "styled-components"
+import styled from "styled-components"
 import Satellite from "../images/satellite.jpg"
 import Outerspace from "../images/outerspace.jpg"
 
