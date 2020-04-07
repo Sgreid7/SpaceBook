@@ -11,7 +11,6 @@ import { useStaticQuery, graphql } from "gatsby"
 import styled from "styled-components"
 
 import Header from "./header"
-import Nav from "./header"
 import "./layout.css"
 
 const Layout = ({ children }) => {
@@ -61,7 +60,8 @@ const FooterSection = styled.footer`
   justify-content: flex-end;
   color: #fff;
   background: #000;
-  bottom: 0;
+  margin-top: auto;
+  /* bottom: 0; */
   width: 100%;
   border-top: 0.1rem solid #8a2be2;
 

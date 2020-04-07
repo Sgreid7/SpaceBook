@@ -6,31 +6,54 @@ import Satellite from "../templates/satellite"
 import Satellite1 from "../images/satellite.jpg"
 import Satellite2 from "../images/satellite2.jpg"
 import Satellite3 from "../images/satellite3.jpg"
+import CityView from "../images/cityview.jpg"
 
 const Satellites = () => {
   return (
     <Layout>
       <SatelliteSection>
+        <input type="search" name="search" placeholder="Search satellites..." />
         <ul>
           <li>
             <Satellite
               name="Calipso"
-              organizationName="NASA Langley Research Center"
-              personName="David M. Winker"
+              src={Satellite1}
+              alt="Satellite in space"
             />
           </li>
           <li>
             <Satellite
               name="Genesis"
-              organizationName="Johnson Space Center"
-              personName="Fake Name"
+              src={Satellite2}
+              alt="Black & white satellite"
+            />
+          </li>
+          <li>
+            <Satellite
+              name="Spitzer"
+              src={Satellite3}
+              alt="Satellite in the sunset"
+            />
+          </li>
+          <li>
+            <Satellite
+              name="Calipso"
+              src={Satellite1}
+              alt="Satellite in space"
             />
           </li>
           <li>
             <Satellite
               name="Genesis"
-              organizationName="Johnson Space Center"
-              personName="Fake Name"
+              src={Satellite2}
+              alt="Black & white satellite"
+            />
+          </li>
+          <li>
+            <Satellite
+              name="Spitzer"
+              src={Satellite3}
+              alt="Satellite in the sunset"
             />
           </li>
         </ul>
@@ -42,13 +65,26 @@ const Satellites = () => {
 export default Satellites
 
 const SatelliteSection = styled.section`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  margin-top: 5rem;
-  height: 100vh;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  input {
+    margin: 0 auto;
+    width: 30vw;
+  }
 
   ul {
-    display: flex;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-row-gap: 2rem;
+    margin: 2rem 0;
+    text-align: center;
+    list-style: none;
+  }
+
+  li {
   }
 `
