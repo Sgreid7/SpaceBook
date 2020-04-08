@@ -30,26 +30,49 @@ const Content = styled.section`
 
   button {
     background: transparent;
-    padding: 0.5rem;
-    width: 9rem;
+    height: 3rem;
+    width: 10rem;
     color: #8a2be2;
-    border: 0.1rem solid #8a2be2;
-    transition: 0.5s ease;
+    border: 0.25rem solid #8a2be2;
+    transition: 0.4s ease;
+    position: relative;
+
+    ::before,
+    ::after {
+      content: "";
+      position: absolute;
+      width: 0.8rem;
+      height: 0.25rem;
+      background: #fff;
+      transform: skewX(50deg);
+      transition: 0.4s linear;
+    }
+
+    ::before {
+      top: -4px;
+      left: 10%;
+    }
+
+    ::after {
+      bottom: -4px;
+      right: 10%;
+    }
+
+    :hover::before {
+      left: 80%;
+    }
+
+    :hover::after {
+      right: 80%;
+    }
 
     :hover {
       cursor: pointer;
       color: #fff;
       background: #8a2be2;
-      transform: translateY(-0.5rem);
-      box-shadow: 0 0.25rem 0.25rem rgba(0, 0, 0, 0.4);
+      text-shadow: 0.05rem 0.05rem 0.05rem #000;
+      /* transform: translateY(-0.5rem); */
+      /* box-shadow: 0 0.3rem 0.3rem rgba(0, 0, 0, 0.5); */
     }
   }
-`
-
-const Image = styled.image`
-  width: 30vw;
-  height: 40vh;
-  border-radius: 2rem;
-  text-align: center;
-  border: 0.1rem solid #8a2be2;
 `

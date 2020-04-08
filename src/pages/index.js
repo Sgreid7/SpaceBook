@@ -57,7 +57,7 @@ const HeaderSection = styled.header`
     font-size: 2.5rem;
     font-style: italic;
     margin-bottom: 2.5rem;
-    text-shadow: 0.05rem 0.05rem 0.05rem #8a2be2;
+    text-shadow: 0.1rem 0.1rem 0.1rem #8a2be2;
   }
 
   button {

@@ -56,6 +56,12 @@ export const Nav = styled.nav`
     font-style: oblique;
     font-size: 1.4rem;
     text-shadow: 0.1rem 0.1rem 0.1rem #8a2be2;
+    transition: 0.5s ease;
+
+    :hover {
+      color: #8a2be2;
+      text-shadow: 0.05rem 0.05rem 0.05rem #fff;
+    }
   }
 
   > ul {
@@ -77,6 +83,21 @@ export const Nav = styled.nav`
         font-family: "Archivo", sans-serif;
         font-size: 1.2rem;
         transition: 0.5s ease;
+        width: 0;
+
+        > a::after {
+          content: "";
+          display: block;
+          width: 0;
+          height: 10px;
+          background: #fff;
+          transition: width 0.3s;
+        }
+
+        a::hover::after {
+          width: 100%;
+          transition: width 0.3s;
+        }
 
         :hover {
           color: #8a2be2;

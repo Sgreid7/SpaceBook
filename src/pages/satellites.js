@@ -6,7 +6,6 @@ import Satellite from "../templates/satellite"
 import Satellite1 from "../images/satellite.jpg"
 import Satellite2 from "../images/satellite2.jpg"
 import Satellite3 from "../images/satellite3.jpg"
-import CityView from "../images/cityview.jpg"
 
 const Satellites = () => {
   return (
