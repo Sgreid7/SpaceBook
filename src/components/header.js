@@ -82,21 +82,41 @@ export const Nav = styled.nav`
         color: #fff;
         font-family: "Archivo", sans-serif;
         font-size: 1.2rem;
-        transition: 0.5s ease;
-        width: 0;
+        /* transition: 0.5s ease; */
+        position: relative;
 
-        > a::after {
+        ::before,
+        ::after {
           content: "";
-          display: block;
-          width: 0;
-          height: 10px;
-          background: #fff;
-          transition: width 0.3s;
+          height: 1rem;
+          width: 1rem;
+          position: absolute;
+          transition: all 0.35s ease;
+          opacity: 0;
         }
 
-        a::hover::after {
-          width: 100%;
-          transition: width 0.3s;
+        ::before {
+          content: "";
+          right: 0;
+          top: 0;
+          border-top: 0.15rem solid rgb(34, 240, 255);
+          border-right: 0.15rem solid rgb(34, 210, 255);
+          transform: translate(-100%, 50%);
+        }
+
+        ::after {
+          content: "";
+          left: 0;
+          bottom: 0;
+          border-bottom: 0.15rem solid rgb(34, 210, 255);
+          border-left: 0.15rem solid rgb(34, 240, 255);
+          transform: translate(100%, -50%);
+        }
+
+        :hover:before,
+        :hover:after {
+          transform: translate(0, 0);
+          opacity: 1;
         }
 
         :hover {
