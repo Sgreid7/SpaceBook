@@ -7,6 +7,7 @@ exports.sourceNodes = async ({
   createContentDigest,
 }) => {
   // getting all satellites from the observatory
+  // working as intended
   const observatories = await axios({
     method: "GET",
     url: "https://sscweb.sci.gsfc.nasa.gov/WS/sscr/2/observatories",
@@ -16,9 +17,9 @@ exports.sourceNodes = async ({
   }).catch(error => {
     console.error("observatories GET error: ", error.message)
   })
-  console.log("observatories", observatories.data.Observatory)
 
   const getDetails = async resId => {
+    // console.log("resId: ", resId)
     // takes in resourceId to get more information about satellite
     const details = await axios({
       method: "GET",
@@ -45,9 +46,9 @@ exports.sourceNodes = async ({
     }
   }
 
-  // console.log(observatories.data.Observatory[1])
+  console.log(observatories.data.Observatory[1])
 
-  const promise1 = new Promise(resolve => {
+  const promise1 = new Promise((resolve, reject) => {
     observatories.data.Observatory[1].forEach(satellites => {
       // iterates over each satellite to get details and returns via promise
 
@@ -63,32 +64,41 @@ exports.sourceNodes = async ({
       const hasResourceId = ResourceId ? ResourceId : null
 
       if (hasResourceId) {
-        const details = ResourceId ? getDetails(hasResourceId) : null
-        console.log(details)
-
+        const details = getDetails(hasResourceId)
+        console.log({ details })
+        // https://nssdc.gsfc.nasa.gov/thumbnail/spacecraft/ace1.gif
         if (details) {
-          details.then(res => {
-            const node = {
-              nameID: Id,
-              resolution: Resolution,
-              endTime: EndTime[1],
-              startTime: StartTime[1],
-              name: Name,
-              resourceId: ResourceId,
-              details: res,
-              id: createNodeId(satellites.Id),
-              internal: {
-                type: "satellite",
-                contentDigest: createContentDigest(satellites),
-              },
-            }
-            actions.createNode(node)
+          details
+            .then(res => {
+              const node = {
+                nameID: Id,
+                resolution: Resolution,
+                endTime: EndTime[1],
+                startTime: StartTime[1],
+                name: Name,
+                resourceId: ResourceId,
+                details: res,
+                id: createNodeId(satellites.Id),
+                internal: {
+                  type: "satellite",
+                  contentDigest: createContentDigest(satellites),
+                },
+              }
+              actions.createNode(node)
 
-            if (res) resolve()
-          })
+              console.log("DETAILS", node.details)
+              if (res) resolve()
+              // resolve()
+            })
+            .catch(error => {
+              console.log("details error:", error)
+              reject()
+            })
         }
       }
     })
+    resolve()
+    return null
   })
-  return Promise.all([promise1])
+  return null
 }
