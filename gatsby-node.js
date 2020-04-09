@@ -1,4 +1,5 @@
 const axios = require("axios")
+const path = require(`path`)
 
 // Exports as sourceNodes for gatsby to store in GraphQL
 exports.sourceNodes = async ({
@@ -103,39 +104,39 @@ exports.sourceNodes = async ({
   return null
 }
 
-const path = require(`path`)
 // create pages for satellites based on resourceId
 exports.createPages = ({ graphql, actions }) => {
   const satelliteTemplate = path.resolve(`src/templates/satellite.js`)
   const { createPage } = actions
 
-  return new Promise((resolve, reject) => {
-    graphql(`
-      query SatelliteInfo {
-        allSatellite {
-          edges {
-            node {
-              name
-              nameID
-              resourceId
-              startTime
-              endTime
-            }
-          }
-        }
-      }
-    `).then(result => {
-      result.data.allSatellite.edges.forEach(({ node }) => {
-        createPage({
-          // Path for this page — required
-          path: `/satellites/${id}`,
-          component: satelliteTemplate,
-          context: {
-            data: node,
-          },
-        })
-      })
-      resolve()
-    })
-  })
+  // return new Promise((resolve, reject) => {
+  //   graphql(`
+  //     query SatelliteInfo {
+  //       allSatellite {
+  //         edges {
+  //           node {
+  //             name
+  //             nameID
+  //             resourceId
+  //             startTime
+  //             endTime
+  //           }
+  //         }
+  //       }
+  //     }
+  //   `).then(result => {
+  //     console.log("result", result)
+  //     result.data.allSatellite.edges.forEach(({ node }) => {
+  //       createPage({
+  //         // Path for this page — required
+  //         path: `/satellites/${id}`,
+  //         component: satelliteTemplate,
+  //         context: {
+  //           data: node,
+  //         },
+  //       })
+  //     })
+  //     resolve()
+  //   })
+  // })
 }
