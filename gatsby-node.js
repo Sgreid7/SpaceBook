@@ -69,7 +69,7 @@ exports.sourceNodes = async ({
         // https://nssdc.gsfc.nasa.gov/thumbnail/spacecraft/ace1.gif
         if (details) {
           details
-            .then(results => {
+            .then(result => {
               const node = {
                 nameID: Id,
                 resolution: Resolution,
@@ -77,7 +77,7 @@ exports.sourceNodes = async ({
                 startTime: StartTime[1],
                 name: Name,
                 resourceId: ResourceId,
-                details: results,
+                details: result,
                 id: createNodeId(satellites.Id),
                 internal: {
                   type: "satellite",
@@ -87,7 +87,7 @@ exports.sourceNodes = async ({
               actions.createNode(node)
 
               // console.log("DETAILS", node.details)
-              if (results) resolve()
+              if (result) resolve()
               // resolve()
             })
             .catch(error => {
@@ -104,67 +104,38 @@ exports.sourceNodes = async ({
 }
 
 const path = require(`path`)
-
 // create pages for satellites based on resourceId
 exports.createPages = ({ graphql, actions }) => {
-  // const satelliteTemplate = path.resolve(`src/templates/satellite.js`)
+  const satelliteTemplate = path.resolve(`src/templates/satellite.js`)
   const { createPage } = actions
 
-  const createPagesFromSatellites = async () => {
-    const { data } = await graphql(`
-      {
-        query
-        SatelliteInfo {
-          allSatellite {
-            edges {
-              node {
-                name
-                nameID
-                resourceId
-                startTime
-                endTime
-              }
+  return new Promise((resolve, reject) => {
+    graphql(`
+      query SatelliteInfo {
+        allSatellite {
+          edges {
+            node {
+              name
+              nameID
+              resourceId
+              startTime
+              endTime
             }
           }
         }
       }
-    `)
-
-    const satellitePages = data.allSatellite.edges
-
-    satellitePages.forEach(({ node }) => {
-      createPage({
-        // Path for this page — required
-        path: `/satellites${node.resourceId}`,
-        component: path.resolve(`src/templates/satellite.js`),
+    `).then(result => {
+      result.data.allSatellite.edges.forEach(({ node }) => {
+        createPage({
+          // Path for this page — required
+          path: `/satellites/${id}`,
+          component: satelliteTemplate,
+          context: {
+            data: node,
+          },
+        })
       })
+      resolve()
     })
-  }
-  return createPagesFromSatellites()
-  // return new Promise((resolve, reject) => {
-  //   graphql(`
-  //     query SatelliteInfo {
-  //       allSatellite {
-  //         edges {
-  //           node {
-  //             name
-  //             nameID
-  //             resourceId
-  //             startTime
-  //             endTime
-  //           }
-  //         }
-  //       }
-  //     }
-  //   `).then(results => {
-  //     results.data.allSatellite.edges.forEach(({ node }) => {
-  //       createPage({
-  //         // Path for this page — required
-  //         path: node.resourceId,
-  //         component: path.resolve(`src/templates/satellite.js`),
-  //       })
-  //     })
-  //     resolve()
-  //   })
-  // })
+  })
 }
