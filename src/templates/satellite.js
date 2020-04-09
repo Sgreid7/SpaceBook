@@ -71,6 +71,7 @@ const Content = styled.section`
       color: #fff;
       background: #8a2be2;
       text-shadow: 0.05rem 0.05rem 0.05rem #000;
+      border: 0.25rem solid #000;
       /* transform: translateY(-0.5rem); */
       /* box-shadow: 0 0.3rem 0.3rem rgba(0, 0, 0, 0.5); */
     }

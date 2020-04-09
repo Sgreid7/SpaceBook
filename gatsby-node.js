@@ -46,12 +46,11 @@ exports.sourceNodes = async ({
     }
   }
 
-  console.log(observatories.data.Observatory[1])
+  // console.log(observatories.data.Observatory[1])
 
   const promise1 = new Promise((resolve, reject) => {
     observatories.data.Observatory[1].forEach(satellites => {
       // iterates over each satellite to get details and returns via promise
-
       const {
         Id,
         EndTime,
@@ -61,15 +60,16 @@ exports.sourceNodes = async ({
         ResourceId,
       } = satellites
       // console.log({ ResourceId, Resolution, StartTime, EndTime, Name, Id })
+      // console.log({ Name })
       const hasResourceId = ResourceId ? ResourceId : null
 
       if (hasResourceId) {
         const details = getDetails(hasResourceId)
-        console.log({ details })
+        // console.log({ details })
         // https://nssdc.gsfc.nasa.gov/thumbnail/spacecraft/ace1.gif
         if (details) {
           details
-            .then(res => {
+            .then(results => {
               const node = {
                 nameID: Id,
                 resolution: Resolution,
@@ -77,7 +77,7 @@ exports.sourceNodes = async ({
                 startTime: StartTime[1],
                 name: Name,
                 resourceId: ResourceId,
-                details: res,
+                details: results,
                 id: createNodeId(satellites.Id),
                 internal: {
                   type: "satellite",
@@ -86,8 +86,8 @@ exports.sourceNodes = async ({
               }
               actions.createNode(node)
 
-              console.log("DETAILS", node.details)
-              if (res) resolve()
+              // console.log("DETAILS", node.details)
+              if (results) resolve()
               // resolve()
             })
             .catch(error => {
@@ -101,4 +101,70 @@ exports.sourceNodes = async ({
     return null
   })
   return null
+}
+
+const path = require(`path`)
+
+// create pages for satellites based on resourceId
+exports.createPages = ({ graphql, actions }) => {
+  // const satelliteTemplate = path.resolve(`src/templates/satellite.js`)
+  const { createPage } = actions
+
+  const createPagesFromSatellites = async () => {
+    const { data } = await graphql(`
+      {
+        query
+        SatelliteInfo {
+          allSatellite {
+            edges {
+              node {
+                name
+                nameID
+                resourceId
+                startTime
+                endTime
+              }
+            }
+          }
+        }
+      }
+    `)
+
+    const satellitePages = data.allSatellite.edges
+
+    satellitePages.forEach(({ node }) => {
+      createPage({
+        // Path for this page — required
+        path: `/satellites${node.resourceId}`,
+        component: path.resolve(`src/templates/satellite.js`),
+      })
+    })
+  }
+  return createPagesFromSatellites()
+  // return new Promise((resolve, reject) => {
+  //   graphql(`
+  //     query SatelliteInfo {
+  //       allSatellite {
+  //         edges {
+  //           node {
+  //             name
+  //             nameID
+  //             resourceId
+  //             startTime
+  //             endTime
+  //           }
+  //         }
+  //       }
+  //     }
+  //   `).then(results => {
+  //     results.data.allSatellite.edges.forEach(({ node }) => {
+  //       createPage({
+  //         // Path for this page — required
+  //         path: node.resourceId,
+  //         component: path.resolve(`src/templates/satellite.js`),
+  //       })
+  //     })
+  //     resolve()
+  //   })
+  // })
 }

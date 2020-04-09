@@ -67,7 +67,7 @@ const HeaderSection = styled.header`
     height: 5rem;
     font-size: 1.4rem;
     border-radius: 0.5rem;
-    border: 0.1rem solid #8a2be2;
+    border: 0.2rem solid #8a2be2;
     transition: 0.6s;
     letter-spacing: 0.1rem;
     overflow: hidden;
@@ -80,7 +80,7 @@ const HeaderSection = styled.header`
       font-style: italic;
       cursor: pointer;
       color: #8a2be2;
-      border: 0.1rem solid #fff;
+      border: 0.2rem solid #fff;
     }
   }
 `
