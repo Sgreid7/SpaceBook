@@ -35,6 +35,7 @@ export default IndexPage
 
 const Main = styled.main`
   background-image: url(${Outerspace});
+  /* Photo by NASA on Unsplash */
 `
 
 const HeaderSection = styled.header`

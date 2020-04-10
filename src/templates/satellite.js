@@ -1,18 +1,32 @@
 import React from "react"
-import { graphql } from "gatsby"
+import { Link, graphql } from "gatsby"
 import styled from "styled-components"
 
-const Satellite = ({ name, src, alt }) => {
+export default ({ data }) => {
   return (
     <Content>
-      <img src={src} alt={alt} />
+      {/* <img src={src} alt={alt} />
       <h3>{name}</h3>
-      <button>More Details</button>
+      <button>More Details</button> */}
     </Content>
   )
 }
 
-export default Satellite
+export const query = graphql`
+  query SatelliteQuery {
+    satellite(resourceId: { eq: "" }) {
+      id
+      name
+      nameID
+      resourceId
+      startTime(formatString: "MMM DD, YYYY")
+      endTime(formatString: "MMM DD, YYYY")
+      details {
+        description
+      }
+    }
+  }
+`
 
 const Content = styled.section`
   margin: 0;

@@ -109,34 +109,57 @@ exports.createPages = ({ graphql, actions }) => {
   const satelliteTemplate = path.resolve(`src/templates/satellite.js`)
   const { createPage } = actions
 
-  // return new Promise((resolve, reject) => {
-  //   graphql(`
-  //     query SatelliteInfo {
-  //       allSatellite {
-  //         edges {
-  //           node {
-  //             name
-  //             nameID
-  //             resourceId
-  //             startTime
-  //             endTime
-  //           }
-  //         }
-  //       }
-  //     }
-  //   `).then(result => {
-  //     console.log("result", result)
-  //     result.data.allSatellite.edges.forEach(({ node }) => {
-  //       createPage({
-  //         // Path for this page — required
-  //         path: `/satellites/${id}`,
-  //         component: satelliteTemplate,
-  //         context: {
-  //           data: node,
-  //         },
-  //       })
-  //     })
-  //     resolve()
-  //   })
-  // })
+  return graphql(`
+    query SatelliteInfo {
+      allSatellite {
+        edges {
+          node {
+            id
+            name
+            nameID
+            startTime
+            endTime
+          }
+        }
+      }
+    }
+  `).then(result => {
+    console.log("result", result.data)
+    // result.data.allSatellite.edges.forEach(({ node }) => {
+    //   createPage({
+    //     // Path for this page — required
+    //     path: `/satellites/${node.id}`,
+    //     component: satelliteTemplate,
+    //     // use the node props
+    //     context: {
+    //        id: node.id,
+    //        name: node.name,
+    //        nameID: node.nameID,
+    //        resourceId: node.resourceId,
+    //        startTime: node.startTime,
+    //        endTime: node.endTime,
+    //        details: node.details,
+    //        description: node.details.description,
+    //     },
+    //   })
+    // })
+  })
 }
+
+// query SatelliteInfo {
+//   allSatellite {
+//     edges {
+//       node {
+//         id
+//         name
+//         nameID
+//         resourceId
+//         startTime(formatString: "MMM DD, YYYY")
+//         endTime(formatString: "MMM DD, YYYY")
+//         details {
+//           description
+//         }
+//       }
+//     }
+//   }
+// }
