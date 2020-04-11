@@ -3,30 +3,38 @@ import { Link, graphql } from "gatsby"
 import styled from "styled-components"
 
 export default ({ data }) => {
+  const satellite = data.satellite
   return (
     <Content>
-      {/* <img src={src} alt={alt} />
-      <h3>{name}</h3>
-      <button>More Details</button> */}
+      <div>
+        <h2>{satellite.name}</h2>
+        <p>Launch Date</p>
+        <p>{satellite.startTime}</p>
+        <p>End Date</p>
+        <p>{satellite.endTime}</p>
+      </div>
+      <div>
+        <p>{satellite.details.description}</p>
+      </div>
     </Content>
   )
 }
 
-// export const query = graphql`
-// query SatelliteQuery {
-//   satellite {
-//     id
-//     name
-//     nameID
-//     resourceId
-//     startTime(formatString: "MMM DD, YYYY")
-//     endTime(formatString: "MMM DD, YYYY")
-//     details {
-//       description
-//     }
-//   }
-// }
-// `
+export const query = graphql`
+  query SatelliteQuery($resourceId: String!) {
+    satellite(resourceId: { eq: $resourceId }) {
+      id
+      name
+      nameID
+      resourceId
+      startTime(formatString: "MMM DD, YYYY")
+      endTime(formatString: "MMM DD, YYYY")
+      details {
+        description
+      }
+    }
+  }
+`
 
 const Content = styled.section`
   margin: 0;
