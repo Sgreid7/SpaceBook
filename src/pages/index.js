@@ -1,5 +1,6 @@
 import React from "react"
 import { Link } from "gatsby"
+import { useSpring, animated } from "react-spring"
 import styled from "styled-components"
 import Satellite from "../images/satellite.jpg"
 import Outerspace from "../images/outerspace.jpg"
@@ -7,33 +8,43 @@ import Outerspace from "../images/outerspace.jpg"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
-const IndexPage = () => (
-  <Layout>
-    <Main>
-      <HeaderSection>
-        <SEO title="Home" />
-        <h1>SpaceBook</h1>
-        <h2>It's time to explore</h2>
-        <Link to="/satellites">
-          <button>View Satellites</button>
-        </Link>
-      </HeaderSection>
-      <ContentSection>
-        <p>
-          SpaceBook is a satellite tracker that notifies you via text and/or
-          tweet when a satellite you are subscribed to is within your viewing
-          area. SpaceBook is also your go to website designed to keep you up to
-          date and informed with all things related to satellites.
-        </p>
-        <Image src={Satellite} alt="Satellite in space" />
-      </ContentSection>
-    </Main>
-  </Layout>
-)
+const IndexPage = () => {
+  const fade = useSpring({
+    from: {
+      opacity: 0,
+    },
+    to: {
+      opacity: 1,
+    },
+  })
+  return (
+    <Layout>
+      <Main style={fade}>
+        <HeaderSection>
+          <SEO title="Home" />
+          <h1>SpaceBook</h1>
+          <h2>It's time to explore</h2>
+          <Link to="/satellites">
+            <button>View Satellites</button>
+          </Link>
+        </HeaderSection>
+        <ContentSection>
+          <p>
+            SpaceBook is a satellite tracker that notifies you via text and/or
+            tweet when a satellite you are subscribed to is within your viewing
+            area. SpaceBook is also your go to website designed to keep you up
+            to date and informed with all things related to satellites.
+          </p>
+          <Image src={Satellite} alt="Satellite in space" />
+        </ContentSection>
+      </Main>
+    </Layout>
+  )
+}
 
 export default IndexPage
 
-const Main = styled.main`
+const Main = styled(animated.main)`
   background-image: url(${Outerspace});
   /* Photo by NASA on Unsplash */
 `
