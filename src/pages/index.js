@@ -1,5 +1,6 @@
 import React from "react"
 import { Link } from "gatsby"
+import { useSpring, animated } from 'react-spring'
 import styled from "styled-components"
 import Satellite from "../images/satellite.jpg"
 import Outerspace from "../images/outerspace.jpg"
@@ -7,9 +8,18 @@ import Outerspace from "../images/outerspace.jpg"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
-const IndexPage = () => (
+const IndexPage = () => {
+  const fade = useSpring({
+    from: {
+      opacity: 0
+    },
+    to: {
+      opacity: 1
+    }
+  });
+  return (
   <Layout>
-    <Main>
+    <Main style={fade}>
       <HeaderSection>
         <SEO title="Home" />
         <h1>SpaceBook</h1>
@@ -29,11 +39,12 @@ const IndexPage = () => (
       </ContentSection>
     </Main>
   </Layout>
-)
+  )
+}
 
 export default IndexPage
 
-const Main = styled.main`
+const Main = styled(animated.main)`
   background-image: url(${Outerspace});
   /* Photo by NASA on Unsplash */
 `
