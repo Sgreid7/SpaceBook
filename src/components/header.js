@@ -6,35 +6,27 @@ import devices from "../utils/devices"
 
 const Header = ({ siteTitle }) => (
   <HeaderWrapper>
-    <input type="checkbox" className="toggler" />
-    <div className="hamburger">
-      <div></div>
-    </div>
-    <div className="menu">
-      <div>
-        <Nav>
-          <ul>
-            <li>
-              <Link to="/" className="brand">
-                {siteTitle}
-              </Link>
-            </li>
-            <li className="hide">
-              <Link>Most Tracked</Link>
-            </li>
-            <li className="hide">
-              <Link>Satellites on Orbit</Link>
-            </li>
-            <li className="hide">
-              <Link>Just Launched</Link>
-            </li>
-            <li className="hide">
-              <Link>Sign In</Link>
-            </li>
-          </ul>
-        </Nav>
-      </div>
-    </div>
+    <Nav>
+      <ul>
+        <li>
+          <Link to="/" className="brand">
+            {siteTitle}
+          </Link>
+        </li>
+        <li className="hide">
+          <Link>Most Tracked</Link>
+        </li>
+        <li className="hide">
+          <Link>Satellites on Orbit</Link>
+        </li>
+        <li className="hide">
+          <Link>Just Launched</Link>
+        </li>
+        <li className="hide">
+          <Link>Sign In</Link>
+        </li>
+      </ul>
+    </Nav>
   </HeaderWrapper>
 )
 
