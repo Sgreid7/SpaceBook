@@ -8,6 +8,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
+import { createGlobalStyle } from "styled-components"
 import styled from "styled-components"
 
 import Header from "./header"
@@ -23,6 +24,17 @@ const Layout = ({ children }) => {
       }
     }
   `)
+
+  const GlobalStyle = createGlobalStyle`
+  body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+  }
+`
 
   return (
     <>
@@ -62,8 +74,9 @@ const FooterSection = styled.footer`
   background: #000;
   margin-top: auto;
   /* bottom: 0; */
-  width: 100%;
+  /* width: 100%; */
   border-top: 0.1rem solid #8a2be2;
+  overflow-x: hidden;
 
   p {
     margin-top: 0.5rem;
@@ -80,7 +93,7 @@ const FooterSection = styled.footer`
       display: flex;
       list-style: none;
       margin: 0;
-      padding: 0.1rem;
+      padding: 0;
 
       > li {
         margin: 0.5rem 10rem;

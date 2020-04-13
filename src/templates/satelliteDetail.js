@@ -13,9 +13,9 @@ export default ({ data }) => {
         <p>End Date</p>
         <p>{satellite.endTime}</p>
       </div>
-      <div>
+      {/* <div>
         <p>{satellite.details.description}</p>
-      </div>
+      </div> */}
     </Content>
   )
 }
@@ -29,12 +29,13 @@ export const query = graphql`
       resourceId
       startTime(formatString: "MMM DD, YYYY")
       endTime(formatString: "MMM DD, YYYY")
-      details {
-        description
-      }
     }
   }
 `
+
+// details {
+//   description
+// }
 
 const Content = styled.section`
   margin: 0;

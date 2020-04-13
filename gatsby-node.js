@@ -164,14 +164,15 @@ exports.createPages = async ({ graphql, actions }) => {
             resourceId
             startTime(formatString: "MMM DD, YYYY")
             endTime(formatString: "MMM DD, YYYY")
-            details {
-              description
-            }
           }
         }
       }
     }
   `)
+
+  // details {
+  //   description
+  // }
 
   const satellitePages = data.allSatellite.edges
 
