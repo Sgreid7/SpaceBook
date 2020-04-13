@@ -49,59 +49,60 @@ exports.sourceNodes = async ({
 
   // console.log(observatories.data.Observatory[1])
 
-  const promise1 = new Promise((resolve, reject) => {
-    observatories.data.Observatory[1].forEach(satellites => {
-      // iterates over each satellite to get details and returns via promise
-      const {
-        Id,
-        EndTime,
-        Name,
-        StartTime,
-        Resolution,
-        ResourceId,
-      } = satellites
-      // console.log({ ResourceId, Resolution, StartTime, EndTime, Name, Id })
-      // console.log({ Name })
-      const hasResourceId = ResourceId ? ResourceId : null
+  const promise1 = new Promise(async (resolve, reject) => {
+    await Promise.all(
+      observatories.data.Observatory[1].map(satellites => {
+        // iterates over each satellite to get details and returns via promise
+        const {
+          Id,
+          EndTime,
+          Name,
+          StartTime,
+          Resolution,
+          ResourceId,
+        } = satellites
+        // console.log({ ResourceId, Resolution, StartTime, EndTime, Name, Id })
+        // console.log({ Name })
+        const hasResourceId = ResourceId ? ResourceId : null
 
-      if (hasResourceId) {
-        const details = getDetails(hasResourceId)
-        // console.log({ details })
-        // https://nssdc.gsfc.nasa.gov/thumbnail/spacecraft/ace1.gif
-        if (details) {
-          details
-            .then(result => {
-              const node = {
-                nameID: Id,
-                resolution: Resolution,
-                endTime: EndTime[1],
-                startTime: StartTime[1],
-                name: Name,
-                resourceId: ResourceId,
-                details: result,
-                id: createNodeId(satellites.Id),
-                internal: {
-                  type: "satellite",
-                  contentDigest: createContentDigest(satellites),
-                },
-              }
-              actions.createNode(node)
+        if (hasResourceId) {
+          const details = getDetails(hasResourceId)
+          // console.log({ details })
+          // https://nssdc.gsfc.nasa.gov/thumbnail/spacecraft/ace1.gif
+          if (details) {
+            details
+              .then(result => {
+                const node = {
+                  nameID: Id,
+                  resolution: Resolution,
+                  endTime: EndTime[1],
+                  startTime: StartTime[1],
+                  name: Name,
+                  resourceId: ResourceId,
+                  details: result,
+                  id: createNodeId(satellites.Id),
+                  internal: {
+                    type: "satellite",
+                    contentDigest: createContentDigest(satellites),
+                  },
+                }
+                actions.createNode(node)
 
-              // console.log("DETAILS", node.details)
-              if (result) resolve()
-              // resolve()
-            })
-            .catch(error => {
-              console.log("details error:", error)
-              reject()
-            })
+                // console.log("DETAILS", node.details)
+                // if (result) resolve()
+                // resolve()
+              })
+              .catch(error => {
+                console.log("details error:", error)
+                reject()
+              })
+          }
         }
-      }
-    })
-    resolve()
-    return null
+      })
+    )
+    return resolve()
   })
-  return null
+  return promise1
 }
 
 // create pages for satellites based on resourceId
@@ -173,25 +174,27 @@ exports.createPages = async ({ graphql, actions }) => {
   // details {
   //   description
   // }
-
   const satellitePages = data.allSatellite.edges
 
-  satellitePages.forEach(({ node }) => {
-    createPage({
-      // Path for this page — required
-      path: `/satellites/${node.id}`,
-      component: satelliteTemplate,
-      // use the node props
-      context: {
-        id: node.id,
-        name: node.name,
-        nameID: node.nameID,
-        resourceId: node.resourceId,
-        startTime: node.startTime,
-        endTime: node.endTime,
-        details: node.details,
-        description: node.details.description,
-      },
+  await Promise.all(
+    satellitePages.map(({ node }) => {
+      console.log(node)
+      return createPage({
+        // Path for this page — required
+        path: `/satellites/${node.id}`,
+        component: satelliteTemplate,
+        // use the node props
+        context: {
+          id: node.id,
+          name: node.name,
+          nameID: node.nameID,
+          resourceId: node.resourceId,
+          startTime: node.startTime,
+          endTime: node.endTime,
+          details: node.details,
+          // description: node.details.description,
+        },
+      })
     })
-  })
+  )
 }
