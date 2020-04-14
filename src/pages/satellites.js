@@ -26,7 +26,10 @@ const Satellites = () => {
         <ul>
           {satellites.allSatellite.edges.map(edge => (
             <li key={edge.node.id}>
-              <Link to={`/satellites/${edge.node.id}`}>{edge.node.name}</Link>
+              <h2>{edge.node.name}</h2>
+              <Link to={`/satellites/${edge.node.id}`}>
+                <button>More Details</button>
+              </Link>
             </li>
           ))}
         </ul>
@@ -58,6 +61,50 @@ const SatelliteSection = styled.section`
     list-style: none;
   }
 
-  li {
+  button {
+    background: transparent;
+    height: 3rem;
+    width: 10rem;
+    color: #8a2be2;
+    border: 0.25rem solid #8a2be2;
+    transition: 0.4s ease;
+    position: relative;
+
+    ::before,
+    ::after {
+      content: "";
+      position: absolute;
+      width: 0.8rem;
+      height: 0.25rem;
+      background: #fff;
+      transform: skewX(50deg);
+      transition: 0.4s linear;
+    }
+
+    ::before {
+      top: -4px;
+      left: 10%;
+    }
+
+    ::after {
+      bottom: -4px;
+      right: 10%;
+    }
+
+    :hover::before {
+      left: 80%;
+    }
+
+    :hover::after {
+      right: 80%;
+    }
+
+    :hover {
+      cursor: pointer;
+      color: #fff;
+      background: #8a2be2;
+      text-shadow: 0.05rem 0.05rem 0.05rem #000;
+      border: 0.25rem solid #000;
+    }
   }
 `
