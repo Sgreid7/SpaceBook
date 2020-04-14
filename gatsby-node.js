@@ -105,52 +105,6 @@ exports.sourceNodes = async ({
   return promise1
 }
 
-// create pages for satellites based on resourceId
-// exports.createPages = ({ graphql, actions }) => {
-//   const satelliteTemplate = path.resolve(`./src/templates/satellite.js`)
-//   const { createPage } = actions
-
-//   return graphql(`
-//     query SatelliteInfo {
-//       allSatellite {
-//         edges {
-//           node {
-//             id
-//             name
-//             nameID
-//             resourceId
-//             startTime(formatString: "MMM DD, YYYY")
-//             endTime(formatString: "MMM DD, YYYY")
-//             details {
-//               description
-//             }
-//           }
-//         }
-//       }
-//     }
-//   `).then(result => {
-// console.log("result", result.data)
-// result.data.allSatellite.edges.forEach(({ node }) => {
-//   createPage({
-//     // Path for this page — required
-//     path: `/satellites/${node.id}`,
-//     component: satelliteTemplate,
-//     // use the node props
-//     context: {
-//        id: node.id,
-//        name: node.name,
-//        nameID: node.nameID,
-//        resourceId: node.resourceId,
-//        startTime: node.startTime,
-//        endTime: node.endTime,
-//        details: node.details,
-//        description: node.details.description,
-//     },
-//   })
-// })
-// })
-// }
-
 exports.createPages = async ({ graphql, actions }) => {
   const satelliteTemplate = path.resolve(`./src/templates/satelliteDetail.js`)
   const { createPage } = actions
@@ -191,7 +145,7 @@ exports.createPages = async ({ graphql, actions }) => {
           resourceId: node.resourceId,
           startTime: node.startTime,
           endTime: node.endTime,
-          // details: node.details,
+          details: node.details,
           description: node.details.description,
         },
       })

@@ -8,7 +8,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
-import { createGlobalStyle } from "styled-components"
+// import { createGlobalStyle } from "styled-components"
 import styled from "styled-components"
 
 import Header from "./header"
@@ -25,16 +25,16 @@ const Layout = ({ children }) => {
     }
   `)
 
-  const GlobalStyle = createGlobalStyle`
-  body {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    width: 100%;
-    height: 100%;
-    overflow-x: hidden;
-  }
-`
+  //   const GlobalStyle = createGlobalStyle`
+  //   body {
+  //     margin: 0;
+  //     padding: 0;
+  //     box-sizing: border-box;
+  //     width: 100%;
+  //     height: 100%;
+  //     overflow-x: hidden;
+  //   }
+  // `
 
   return (
     <>

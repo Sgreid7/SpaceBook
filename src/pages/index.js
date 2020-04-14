@@ -5,7 +5,6 @@ import styled from "styled-components"
 import Satellite from "../images/satellite.jpg"
 import Outerspace from "../images/outerspace.jpg"
 import devices from "../utils/devices"
-
 import Layout from "../components/layout"
 
 const IndexPage = () => {
@@ -102,18 +101,19 @@ const ContentSection = styled.section`
   align-items: center;
   text-align: center;
   justify-content: center;
-  padding-bottom: 5rem;
+  padding-bottom: 3rem;
   overflow-x: hidden;
 
   p {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 2rem;
+    margin: 0 2rem 3rem 2rem;
     font-size: 1.5rem;
     color: #fff;
     text-shadow: 0.05rem 0.05rem 0.05rem #8a2be2;
     line-height: 2rem;
+    /* width: 70%; */
   }
 
   @media (${devices.laptop}) {
@@ -127,8 +127,6 @@ const ContentSection = styled.section`
 const Image = styled.img`
   display: flex;
   justify-content: center;
-  /* width: 30vw;
-  height: 40vh; */
   width: 60%;
   height: auto;
   max-width: 720px;
