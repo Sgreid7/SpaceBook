@@ -159,14 +159,19 @@ exports.createPages = async ({ graphql, actions }) => {
 exports.createSchemaCustomization = ({ actions }) => {
   const { createTypes } = actions
   const typeDefs = `
-    type Satellite {
+    type Satellite implements Node {
       id: ID!
       name: String
       nameID: String
-      startTime: Date
-      endTime: Date
+      startTime: Date @dateformat(formatString: "MMM DD, YYYY")
+      endTime: Date @dateformat(formatString: "MMM DD, YYYY")
       resourceId: String
       details: satelliteDetails
     }
+
+    type satelliteDetails {
+      details: String
+    }
   `
+  createTypes(typeDefs)
 }
