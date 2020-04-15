@@ -47,7 +47,7 @@ exports.sourceNodes = async ({
     }
   }
 
-  // console.log(observatories.data.Observatory[1])
+  console.log(observatories.data.Observatory[1].length)
 
   const promise1 = new Promise(async (resolve, reject) => {
     await Promise.all(
@@ -93,10 +93,13 @@ exports.sourceNodes = async ({
                 // resolve()
               })
               .catch(error => {
-                console.log("details error:", error)
+                // console.log("details error:", error)
                 reject()
               })
           }
+          // } else {
+          //   console.log("No resource ID here")
+          // }
         }
       })
     )
@@ -108,7 +111,7 @@ exports.sourceNodes = async ({
 exports.createPages = async ({ graphql, actions }) => {
   const satelliteTemplate = path.resolve(`./src/templates/satelliteDetail.js`)
   const { createPage } = actions
-  const { data } = await graphql(`
+  const resp = await graphql(`
     query SatelliteInfo {
       allSatellite {
         edges {
@@ -128,11 +131,11 @@ exports.createPages = async ({ graphql, actions }) => {
     }
   `)
 
-  const satellitePages = data.allSatellite.edges
-
+  // console.log({ resp })
+  const satellitePages = resp.data.allSatellite.edges
   await Promise.all(
     satellitePages.map(({ node }) => {
-      console.log(node)
+      // console.log(node)
       return createPage({
         // Path for this page — required
         path: `/satellites/${node.id}`,
@@ -151,4 +154,19 @@ exports.createPages = async ({ graphql, actions }) => {
       })
     })
   )
+}
+
+exports.createSchemaCustomization = ({ actions }) => {
+  const { createTypes } = actions
+  const typeDefs = `
+    type Satellite {
+      id: ID!
+      name: String
+      nameID: String
+      startTime: Date
+      endTime: Date
+      resourceId: String
+      details: satelliteDetails
+    }
+  `
 }

@@ -1,22 +1,32 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
 import styled from "styled-components"
+import Layout from "../components/layout"
+import Satellite from "../images/satellite.jpg"
 
 export default ({ data }) => {
   const satellite = data.satellite
   return (
-    <Content>
-      <div>
-        <h2>{satellite.name}</h2>
-        <p>Launch Date</p>
-        <p>{satellite.startTime}</p>
-        <p>End Date</p>
-        <p>{satellite.endTime}</p>
-      </div>
-      <div>
-        <p>{satellite.details.description}</p>
-      </div>
-    </Content>
+    <Layout>
+      <Content>
+        <header>
+          <h2>{satellite.name}</h2>
+          <p className="date">Launch Date:</p>
+          <p>{satellite.startTime}</p>
+          <p className="date">End Date:</p>
+          <p>{satellite.endTime}</p>
+          <Image src={Satellite} alt="Satellite in space" />
+        </header>
+        <div>
+          <p>{satellite.details.description}</p>
+        </div>
+        <div>
+          <Link to="/">
+            <button>Go back</button>
+          </Link>
+        </div>
+      </Content>
+    </Layout>
   )
 }
 
@@ -39,19 +49,23 @@ export const query = graphql`
 const Content = styled.section`
   margin: 0;
 
-  img {
-    width: 15vw;
-    height: 30vh;
-    border-radius: 5%;
-    margin-bottom: 0;
+  > header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    > .date {
+      margin-bottom: 0;
+    }
   }
 
-  h3 {
+  > h2 {
     font-style: italic;
-    margin-bottom: 1rem;
+    margin: 1rem;
   }
 
-  button {
+  > button {
     background: transparent;
     height: 3rem;
     width: 10rem;
@@ -95,8 +109,18 @@ const Content = styled.section`
       background: #8a2be2;
       text-shadow: 0.05rem 0.05rem 0.05rem #000;
       border: 0.25rem solid #000;
-      /* transform: translateY(-0.5rem); */
-      /* box-shadow: 0 0.3rem 0.3rem rgba(0, 0, 0, 0.5); */
     }
   }
+`
+
+const Image = styled.img`
+  display: flex;
+  justify-content: center;
+  width: 60%;
+  height: auto;
+  max-width: 720px;
+  border-radius: 2rem;
+  text-align: center;
+  margin: auto;
+  border: 0.1rem solid #8a2be2;
 `
