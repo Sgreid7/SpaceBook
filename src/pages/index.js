@@ -3,6 +3,7 @@ import { Link } from "gatsby"
 import { useSpring, animated } from "react-spring"
 import styled from "styled-components"
 import Satellite from "../images/satellite.jpg"
+import NASA from "../images/NASA.jpg"
 import Outerspace from "../images/outerspace.jpg"
 import devices from "../utils/devices"
 import Layout from "../components/layout"
@@ -44,7 +45,7 @@ const IndexPage = () => {
 export default IndexPage
 
 const Main = styled(animated.main)`
-  background-image: url(${Outerspace});
+  background-image: url(${NASA});
   /* Photo by NASA on Unsplash */
 `
 

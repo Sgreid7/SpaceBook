@@ -5,29 +5,27 @@ import styled from "styled-components"
 import devices from "../utils/devices"
 
 const Header = ({ siteTitle }) => (
-  <HeaderWrapper>
-    <Nav>
-      <ul>
-        <li>
-          <Link to="/" className="brand">
-            {siteTitle}
-          </Link>
-        </li>
-        <li className="hide">
-          <Link>Most Tracked</Link>
-        </li>
-        <li className="hide">
-          <Link>Satellites on Orbit</Link>
-        </li>
-        <li className="hide">
-          <Link>Just Launched</Link>
-        </li>
-        <li className="hide">
-          <Link>Sign In</Link>
-        </li>
-      </ul>
-    </Nav>
-  </HeaderWrapper>
+  <Nav>
+    <ul>
+      <li>
+        <Link to="/" className="brand">
+          {siteTitle}
+        </Link>
+      </li>
+      <li className="hide">
+        <Link>Most Tracked</Link>
+      </li>
+      <li className="hide">
+        <Link>Satellites on Orbit</Link>
+      </li>
+      <li className="hide">
+        <Link>Just Launched</Link>
+      </li>
+      <li className="hide">
+        <Link>Sign In</Link>
+      </li>
+    </ul>
+  </Nav>
 )
 
 Header.propTypes = {
@@ -40,14 +38,11 @@ Header.defaultProps = {
 
 export default Header
 
-const HeaderWrapper = styled.div`
-  /* background: transparent; */
-`
 export const Nav = styled.nav`
   display: flex;
   background: #000;
   border-bottom: 0.1rem solid #8a2be2;
-  /* position: fixed; */
+  position: fixed;
   min-width: 100%;
 
   .brand {
@@ -98,8 +93,8 @@ export const Nav = styled.nav`
           content: "";
           right: 0;
           top: 0;
-          border-top: 0.15rem solid rgb(34, 240, 255);
-          border-right: 0.15rem solid rgb(34, 210, 255);
+          border-top: 0.15rem solid #8a2be2;
+          border-right: 0.15rem solid #8400ff;
           transform: translate(-100%, 50%);
         }
 
@@ -107,8 +102,8 @@ export const Nav = styled.nav`
           content: "";
           left: 0;
           bottom: 0;
-          border-bottom: 0.15rem solid rgb(34, 210, 255);
-          border-left: 0.15rem solid rgb(34, 240, 255);
+          border-bottom: 0.15rem solid #8400ff;
+          border-left: 0.15rem solid #8a2be2;
           transform: translate(100%, -50%);
         }
 
@@ -140,6 +135,12 @@ export const Nav = styled.nav`
       > a {
         font-size: 1rem;
       }
+    }
+  }
+
+  @media (${devices.laptop}) {
+    .hide > a {
+      font-size: 1.2rem;
     }
   }
 `
