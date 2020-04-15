@@ -81,7 +81,7 @@ const FooterSection = styled.footer`
   p {
     margin-top: 0.5rem;
     margin-bottom: 0;
-    font-style: italic;
+    /* font-style: italic; */
     font-size: 1.5rem;
   }
 
@@ -103,6 +103,7 @@ const FooterSection = styled.footer`
           color: #fff;
           font-size: 1.2rem;
           transition: 0.5s ease;
+          font-style: italic;
 
           :hover {
             color: #8a2be2;

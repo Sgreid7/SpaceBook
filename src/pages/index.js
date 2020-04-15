@@ -3,7 +3,6 @@ import { Link } from "gatsby"
 import { useSpring, animated } from "react-spring"
 import styled from "styled-components"
 import Satellite from "../images/satellite.jpg"
-import NASA from "../images/NASA.jpg"
 import Outerspace from "../images/outerspace.jpg"
 import devices from "../utils/devices"
 import Layout from "../components/layout"
@@ -45,7 +44,7 @@ const IndexPage = () => {
 export default IndexPage
 
 const Main = styled(animated.main)`
-  background-image: url(${NASA});
+  background-image: url(${Outerspace});
   /* Photo by NASA on Unsplash */
 `
 
@@ -95,6 +94,20 @@ const HeaderSection = styled.header`
       border: 0.2rem solid #fff;
     }
   }
+
+  @media (${devices.desktop}) {
+    h1 {
+      font-size: 6.5rem;
+      margin-bottom: 3rem;
+      text-shadow: 0.25rem 0.25rem 0.25rem #8a2be2;
+    }
+
+    h2 {
+      font-size: 4rem;
+      margin-bottom: 3rem;
+      text-shadow: 0.15rem 0.15rem 0.15rem #8a2be2;
+    }
+  }
 `
 const ContentSection = styled.section`
   display: flex;
@@ -122,6 +135,12 @@ const ContentSection = styled.section`
     grid-template-columns: repeat(2, 1fr);
     text-align: center;
     height: 50vh;
+  }
+
+  @media (${devices.desktop}) {
+    p {
+      font-size: 2rem;
+    }
   }
 `
 
