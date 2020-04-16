@@ -80,11 +80,8 @@ const Content = styled.section`
     }
 
     @media (${devices.tablet}) {
-      padding-top: 5rem;
-
-      > .description {
-        margin-top: 6rem;
-      }
+      padding-top: 1rem;
+      margin-bottom: 4rem;
     }
 
     @media (${devices.laptop}) {
@@ -194,12 +191,12 @@ const Image = styled.img`
   /* margin: auto; */
   border: 0.2rem solid #8a2be2;
 
-  @media (${devices.laptop}) {
-    width: 40%;
+  @media (${devices.tablet}) {
+    width: 50%;
   }
 
-  @media (${devices.tablet}) {
-    margin-bottom: 2rem;
+  @media (${devices.laptop}) {
+    width: 40%;
   }
 `
 const Buttons = styled.section`
