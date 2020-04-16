@@ -120,6 +120,7 @@ exports.createPages = async ({ graphql, actions }) => {
             name
             nameID
             resourceId
+            resolution
             startTime(formatString: "MMM DD, YYYY")
             endTime(formatString: "MMM DD, YYYY")
             details {
@@ -143,11 +144,12 @@ exports.createPages = async ({ graphql, actions }) => {
         // use the node props
         context: {
           id: node.id,
-          name: node.name,
           nameID: node.nameID,
-          resourceId: node.resourceId,
-          startTime: node.startTime,
+          resolution: node.resolution,
           endTime: node.endTime,
+          startTime: node.startTime,
+          name: node.name,
+          resourceId: node.resourceId,
           details: node.details,
           description: node.details.description,
         },
