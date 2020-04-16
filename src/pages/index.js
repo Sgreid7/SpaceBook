@@ -95,7 +95,7 @@ const HeaderSection = styled.header`
     }
   }
 
-  @media (${devices.desktop}) {
+  @media (${devices.laptopL}) {
     h1 {
       font-size: 6.5rem;
       margin-bottom: 3rem;
@@ -137,9 +137,10 @@ const ContentSection = styled.section`
     height: 50vh;
   }
 
-  @media (${devices.desktop}) {
+  @media (${devices.laptopL}) {
     p {
       font-size: 2rem;
+      text-shadow: 0.1rem 0.1rem 0.1rem #8a2be2;
     }
   }
 `

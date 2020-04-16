@@ -2,7 +2,6 @@ import React from "react"
 import Layout from "../components/layout"
 import styled from "styled-components"
 import { Link, useStaticQuery } from "gatsby"
-// import Satellite from "../templates/satellite"
 
 const Satellites = () => {
   const satellites = useStaticQuery(graphql`

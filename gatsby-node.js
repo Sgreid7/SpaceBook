@@ -47,7 +47,7 @@ exports.sourceNodes = async ({
     }
   }
 
-  console.log(observatories.data.Observatory[1].length)
+  // console.log(observatories.data.Observatory[1].length)
 
   const promise1 = new Promise(async (resolve, reject) => {
     await Promise.all(
@@ -109,7 +109,7 @@ exports.sourceNodes = async ({
 }
 
 exports.createPages = async ({ graphql, actions }) => {
-  const satelliteTemplate = path.resolve(`./src/templates/satelliteDetail.js`)
+  const satelliteTemplate = path.resolve(`./src/templates/satellite.js`)
   const { createPage } = actions
   const resp = await graphql(`
     query SatelliteInfo {
