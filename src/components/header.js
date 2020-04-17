@@ -66,10 +66,11 @@ export const HeaderSection = styled.header`
   position: fixed;
   min-width: 100%;
   padding: 0.5rem 0;
+  z-index: 5;
 
   .menu-button {
     color: #fff;
-    text-shadow: 0.1rem 0.1rem 0.1rem #8a2be2;
+    text-shadow: 0.2rem 0.2rem 0.2rem #00008b;
     font-weight: bold;
     font-size: 2rem;
     background: transparent;
@@ -94,8 +95,8 @@ export const HeaderSection = styled.header`
       content: "";
       right: 0;
       top: 0;
-      border-top: 0.15rem solid #8a2be2;
-      border-right: 0.15rem solid #8400ff;
+      border-top: 0.15rem solid #0000ff;
+      border-right: 0.15rem solid #0000ff;
       transform: translate(-100%, 50%);
     }
 
@@ -103,8 +104,8 @@ export const HeaderSection = styled.header`
       content: "";
       left: 0;
       bottom: 0;
-      border-bottom: 0.15rem solid #8400ff;
-      border-left: 0.15rem solid #8a2be2;
+      border-bottom: 0.15rem solid #0000ff;
+      border-left: 0.15rem solid #0000ff;
       transform: translate(100%, -50%);
     }
 
@@ -126,7 +127,7 @@ export const HeaderSection = styled.header`
 
   .brand {
     font-size: 2rem;
-    text-shadow: 0.1rem 0.1rem 0.1rem #8a2be2;
+    text-shadow: 0.2rem 0.2rem 0.2rem #00008b;
     transition: 0.5s ease;
     color: #fff;
     text-decoration: none;
@@ -147,8 +148,8 @@ export const HeaderSection = styled.header`
       content: "";
       right: 0;
       top: 0;
-      border-top: 0.15rem solid #8a2be2;
-      border-right: 0.15rem solid #8400ff;
+      border-top: 0.15rem solid #0000ff;
+      border-right: 0.15rem solid #0000ff;
       transform: translate(-100%, 50%);
     }
 
@@ -156,8 +157,8 @@ export const HeaderSection = styled.header`
       content: "";
       left: 0;
       bottom: 0;
-      border-bottom: 0.15rem solid #8400ff;
-      border-left: 0.15rem solid #8a2be2;
+      border-bottom: 0.15rem solid #0000ff;
+      border-left: 0.15rem solid #0000ff;
       transform: translate(100%, -50%);
     }
 

@@ -34,7 +34,7 @@ const IndexPage = () => {
           <h1>SpaceBook</h1>
           <h2>It's time to explore</h2>
           <Link to="/satellites">
-            <button>View Satellites</button>
+            <button className="satellite-button">View Satellites</button>
           </Link>
         </HeaderSection>
         <ContentSection>
@@ -71,7 +71,7 @@ const HeaderSection = styled.header`
   h1 {
     font-size: 5rem;
     margin-bottom: 2.55rem;
-    text-shadow: 0.2rem 0.2rem 0.2rem #8a2be2;
+    text-shadow: 0.2rem 0.2rem 0.2rem #0000ff;
     font-style: oblique;
   }
 
@@ -79,7 +79,7 @@ const HeaderSection = styled.header`
     font-size: 2.5rem;
     font-style: italic;
     margin-bottom: 2.55rem;
-    text-shadow: 0.1rem 0.1rem 0.1rem #8a2be2;
+    text-shadow: 0.1rem 0.1rem 0.1rem #0000ff;
   }
 
   button {
@@ -89,20 +89,40 @@ const HeaderSection = styled.header`
     height: 5rem;
     font-size: 1.4rem;
     border-radius: 0.5rem;
-    border: 0.2rem solid #8a2be2;
-    transition: 0.6s;
+    border: 0.2rem solid #00008b;
+    transition: 0.3s ease-in;
     letter-spacing: 0.1rem;
+    position: relative;
+    z-index: 1;
 
     :focus {
       outline: none;
     }
 
     :hover {
-      font-style: italic;
       cursor: pointer;
-      color: #8a2be2;
       border: 0.2rem solid #fff;
     }
+  }
+
+  button::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #00008b;
+    z-index: -1;
+    transition: 0.3s ease-in;
+  }
+
+  .satellite-button::after {
+    transform: scale(0);
+  }
+
+  .satellite-button:hover::after {
+    transform: scale(1);
   }
 
   @media (${devices.laptopL}) {
@@ -135,7 +155,7 @@ const ContentSection = styled.section`
     margin: 0 2rem 3rem 2rem;
     font-size: 1.5rem;
     color: #fff;
-    text-shadow: 0.05rem 0.05rem 0.05rem #8a2be2;
+    text-shadow: 0.05rem 0.05rem 0.05rem #0000ff;
     line-height: 2rem;
     /* width: 70%; */
   }

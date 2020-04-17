@@ -38,15 +38,10 @@ const NavWrapper = styled(animated.div)`
   padding: 4rem;
   background: rgba(0, 0, 0, 1);
   z-index: 10;
-  border-left: 0.1rem solid #8a2be2;
   border-bottom: 0.1rem solid #8a2be2;
 
   ul {
     list-style: none;
-    /* display: flex;
-    flex-direction: column;
-    margin: auto; */
-    /* display: block; */
     margin: auto;
     position: relative;
   }
@@ -61,8 +56,8 @@ const NavWrapper = styled(animated.div)`
     font-size: 2rem;
     color: #fff;
     text-decoration: none;
-    /* border-bottom: 0.25rem solid transparent; */
-    /* transition: 0.4s ease border; */
+    padding-bottom: 0.3rem;
+    text-shadow: 0.1rem 0.1rem 0.1rem #0000ff;
   }
   a::after {
     content: "";
@@ -82,13 +77,31 @@ const NavWrapper = styled(animated.div)`
     transform-origin: left;
   }
 
+  @media (${devices.tablet}) {
+    ul {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+
   @media (${devices.laptop}) {
-    top: 4.2rem;
-    padding: 4rem;
-    background: rgba(0, 0, 0, 0.5);
+    right: 0;
+    bottom: 0;
+    left: 71%;
+    padding: 3.5rem;
+    background: rgba(0, 0, 0, 0.8);
+    border-left: 0.1rem solid #8a2be2;
+
+    ul {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+    }
 
     a {
-      font-size: 2rem;
+      font-size: 1.7rem;
     }
   }
 `

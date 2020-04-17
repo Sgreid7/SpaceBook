@@ -85,10 +85,7 @@ const FooterSection = styled.footer`
           font-size: 1.2rem;
           transition: 0.5s ease;
           font-style: italic;
-
-          :hover {
-            color: #8a2be2;
-          }
+          text-shadow: 0.05rem 0.05rem 0.05rem #0000ff;
         }
       }
     }
