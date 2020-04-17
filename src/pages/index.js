@@ -1,13 +1,21 @@
-import React from "react"
+import React, { useState } from "react"
 import { Link } from "gatsby"
 import { useSpring, animated } from "react-spring"
 import styled from "styled-components"
 import Satellite from "../images/satellite.jpg"
 import Outerspace from "../images/outerspace.jpg"
+import SideNav from "../components/sideNav"
 import devices from "../utils/devices"
 import Layout from "../components/layout"
 
 const IndexPage = () => {
+  const [isNavOpen, setNavOpen] = useState(false)
+  const navAnimation = useSpring({
+    transform: isNavOpen
+      ? `translate3d(0, 0, 0) scale(1)`
+      : `translate3d(100%, 0, 0) scale(0.6)`,
+  })
+
   const fade = useSpring({
     from: {
       opacity: 0,
@@ -16,8 +24,10 @@ const IndexPage = () => {
       opacity: 1,
     },
   })
+
   return (
-    <Layout>
+    <Layout onClick={() => setNavOpen(!isNavOpen)}>
+      <SideNav style={navAnimation} />
       <Main style={fade}>
         <HeaderSection>
           {/* <SEO title="Home" /> */}
