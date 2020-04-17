@@ -32,31 +32,63 @@ export default SideNav
 const NavWrapper = styled(animated.div)`
   position: fixed;
   right: 0;
-  top: 3rem;
+  top: 4.2rem;
   bottom: 0;
+  left: 0;
   padding: 4rem;
-  background: rgba(0, 0, 0, .5);
+  background: rgba(0, 0, 0, 1);
   z-index: 10;
+  border-left: 0.1rem solid #8a2be2;
+  border-bottom: 0.1rem solid #8a2be2;
 
   ul {
     list-style: none;
+    /* display: flex;
+    flex-direction: column;
+    margin: auto; */
+    /* display: block; */
+    margin: auto;
+    position: relative;
+  }
+
+  li {
+    display: block;
   }
 
   a {
-    display: block;
+    position: relative;
     text-align: left;
     font-size: 2rem;
     color: #fff;
     text-decoration: none;
-    border-bottom: 0.25rem solid transparent;
-    transition: 0.4s ease border;
-    
-    :hover {
-      border-bottom: 0.25rem solid #8a2be2;
-    }
+    /* border-bottom: 0.25rem solid transparent; */
+    /* transition: 0.4s ease border; */
+  }
+  a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 0.15rem;
+    background: #8a2be2;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease-in;
   }
 
-  /* @media (${devices.laptop}) {
-    display: none;
-  } */
+  a:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+
+  @media (${devices.laptop}) {
+    top: 4.2rem;
+    padding: 4rem;
+    background: rgba(0, 0, 0, 0.5);
+
+    a {
+      font-size: 2rem;
+    }
+  }
 `

@@ -60,11 +60,12 @@ export default Header
 
 export const HeaderSection = styled.header`
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   background: #000;
   border-bottom: 0.1rem solid #8a2be2;
   position: fixed;
   min-width: 100%;
+  padding: 0.5rem 0;
 
   .menu-button {
     color: #fff;
@@ -73,10 +74,45 @@ export const HeaderSection = styled.header`
     font-size: 2rem;
     background: transparent;
     border: none;
+    position: relative;
     z-index: 15;
     outline: none;
     margin-right: 2rem;
     letter-spacing: 0.05rem;
+
+    ::before,
+    ::after {
+      content: "";
+      height: 1rem;
+      width: 1rem;
+      position: absolute;
+      transition: all 0.35s ease;
+      opacity: 0;
+    }
+
+    ::before {
+      content: "";
+      right: 0;
+      top: 0;
+      border-top: 0.15rem solid #8a2be2;
+      border-right: 0.15rem solid #8400ff;
+      transform: translate(-100%, 50%);
+    }
+
+    ::after {
+      content: "";
+      left: 0;
+      bottom: 0;
+      border-bottom: 0.15rem solid #8400ff;
+      border-left: 0.15rem solid #8a2be2;
+      transform: translate(100%, -50%);
+    }
+
+    :hover:before,
+    :hover:after {
+      transform: translate(0, 0);
+      opacity: 1;
+    }
 
     :hover {
       cursor: pointer;

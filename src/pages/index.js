@@ -65,7 +65,7 @@ const HeaderSection = styled.header`
   justify-content: center;
   height: 100vh;
   color: #fff;
-  font-family: "Archivo", sans-serif;
+  font-family: "Dosis", sans-serif;
   overflow-x: hidden;
 
   h1 {
