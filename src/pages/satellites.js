@@ -1,28 +1,39 @@
-import React from "react"
+import React, { useState } from "react"
+import SideNav from "../components/sideNav"
 import Layout from "../components/layout"
+import { useSpring, animated } from "react-spring"
 import styled from "styled-components"
 import { Link, useStaticQuery } from "gatsby"
 
 const Satellites = () => {
-  const satellites = useStaticQuery(graphql`
-    query getSatellites {
-      allSatellite(sort: { order: DESC }) {
-        edges {
-          node {
-            name
-            id
-            resourceId
-          }
-        }
-      }
-    }
-  `)
+  const [isNavOpen, setNavOpen] = useState(false)
+  const navAnimation = useSpring({
+    transform: isNavOpen
+      ? `translate3d(0, 0, 0) scale(1)`
+      : `translate3d(100%, 0, 0) scale(0.6)`,
+  })
+
+  // const satellites = useStaticQuery(graphql`
+  //   query getSatellites {
+  //     allSatellite(sort: { order: DESC }) {
+  //       edges {
+  //         node {
+  //           name
+  //           id
+  //           resourceId
+  //         }
+  //       }
+  //     }
+  //   }
+  // `)
 
   return (
-    <Layout>
+    <Layout onClick={() => setNavOpen(!isNavOpen)}>
+      <SideNav style={navAnimation} />
       <SatelliteSection>
         <input type="search" name="search" placeholder="Search satellites..." />
-        <ul>
+        <h1>This page is coming soon</h1>
+        {/* <ul>
           {satellites.allSatellite.edges.map(edge => (
             <li key={edge.node.id}>
               <h2>{edge.node.name}</h2>
@@ -31,7 +42,7 @@ const Satellites = () => {
               </Link>
             </li>
           ))}
-        </ul>
+        </ul> */}
       </SatelliteSection>
     </Layout>
   )
@@ -40,8 +51,8 @@ const Satellites = () => {
 export default Satellites
 
 const SatelliteSection = styled.section`
-  margin-top: 3rem;
-  padding-top: 2rem;
+  /* margin-top: 3rem; */
+  padding-top: 5rem;
   min-height: 100vh;
   display: flex;
   flex-direction: column;

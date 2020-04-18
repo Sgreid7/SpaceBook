@@ -9,16 +9,16 @@ const SideNav = ({ style }) => {
     <NavWrapper style={style}>
       <nav>
         <ul>
-          <li className="hide">
+          <li>
             <Link to="/mostTracked">Most Tracked</Link>
           </li>
-          <li className="hide">
+          <li>
             <Link to="/orbit">Satellites on Orbit</Link>
           </li>
-          <li className="hide">
+          <li>
             <Link to="/justLaunched">Just Launched</Link>
           </li>
-          <li className="hide">
+          <li>
             <Link to="/signup">Sign In</Link>
           </li>
         </ul>
@@ -38,7 +38,7 @@ const NavWrapper = styled(animated.div)`
   padding: 4rem;
   background: rgba(0, 0, 0, 1);
   z-index: 10;
-  border-bottom: 0.1rem solid #8a2be2;
+  border-bottom: 0.13rem solid #8a2be2;
 
   ul {
     list-style: none;
