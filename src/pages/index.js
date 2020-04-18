@@ -113,6 +113,7 @@ const HeaderSection = styled.header`
     width: 100%;
     height: 100%;
     background: #00008b;
+    border-radius: 0.4rem;
     z-index: -1;
     transition: 0.3s ease-in;
   }

@@ -15,6 +15,6 @@ const subscribe = () => {
 export default subscribe
 
 const SubscribeSection = styled.section`
-  padding-top: 3.5rem;
+  padding-top: 4rem;
   height: 100vh;
 `

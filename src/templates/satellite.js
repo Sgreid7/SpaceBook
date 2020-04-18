@@ -35,7 +35,7 @@ export default ({ data }) => {
           <p>{satellite.details.description}</p>
         </div>
         <Buttons>
-          <Link to="/">
+          <Link to="/satellites">
             <button>Go back</button>
           </Link>
           <Link to="subscribe">
@@ -142,7 +142,7 @@ const Content = styled.section`
     /* background: #fffafa; */
     background: rgba(0, 0, 0, 0.4);
     color: #fff;
-    border: 0.15rem solid #000;
+    border: 0.15rem solid #00008b;
     border-radius: 0.2rem;
     margin: 2rem;
     text-align: center;
