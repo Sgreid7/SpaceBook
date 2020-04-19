@@ -7,6 +7,7 @@ import Outerspace from "../images/outerspace.jpg"
 import SideNav from "../components/sideNav"
 import devices from "../utils/devices"
 import Layout from "../components/layout"
+import SEO from "../components/seo"
 
 const IndexPage = () => {
   const [isNavOpen, setNavOpen] = useState(false)
@@ -30,7 +31,7 @@ const IndexPage = () => {
       <SideNav style={navAnimation} />
       <Main style={fade}>
         <HeaderSection>
-          {/* <SEO title="Home" /> */}
+          <SEO title="Home" />
           <h1>SpaceBook</h1>
           <h2>It's time to explore</h2>
           <Link to="/satellites">

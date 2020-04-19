@@ -1,11 +1,13 @@
 import React, { useState } from "react"
 import SideNav from "../components/sideNav"
 import Layout from "../components/layout"
-import { useSpring, animated } from "react-spring"
+import { useSpring } from "react-spring"
 import styled from "styled-components"
-import { Link, useStaticQuery } from "gatsby"
+import { Link, graphql } from "gatsby"
+// import axios from "axios"
 
-const Satellites = () => {
+const Satellites = ({ data }) => {
+  // const [observatories, setObservatories] = useState([{}])
   const [isNavOpen, setNavOpen] = useState(false)
   const navAnimation = useSpring({
     transform: isNavOpen
@@ -13,40 +15,45 @@ const Satellites = () => {
       : `translate3d(100%, 0, 0) scale(0.6)`,
   })
 
-  // const satellites = useStaticQuery(graphql`
-  //   query getSatellites {
-  //     allSatellite(sort: { order: DESC }) {
-  //       edges {
-  //         node {
-  //           name
-  //           id
-  //           resourceId
-  //         }
-  //       }
-  //     }
-  //   }
-  // `)
+  // const getObservatories = async () => {
+  //   const resp = await axios.get(
+  //     "https://sscweb.sci.gsfc.nasa.gov/WS/sscr/2/observatories"
+  //   )
+  // }
+
+  const satellitesList = data.allSatellite
 
   return (
     <Layout onClick={() => setNavOpen(!isNavOpen)}>
       <SideNav style={navAnimation} />
       <SatelliteSection>
         <input type="search" name="search" placeholder="Search satellites..." />
-        <h1>This page is coming soon</h1>
-        {/* <ul>
-          {satellites.allSatellite.edges.map(edge => (
-            <li key={edge.node.id}>
-              <h2>{edge.node.name}</h2>
-              <Link to={`/satellites/${edge.node.id}`}>
+        <ul>
+          {satellitesList.nodes.map(node => (
+            <li key={node.id}>
+              <h2>{node.name}</h2>
+              <Link to={`/satellites/${node.id}`}>
                 <button>More Details</button>
               </Link>
             </li>
           ))}
-        </ul> */}
+        </ul>
       </SatelliteSection>
     </Layout>
   )
 }
+
+export const query = graphql`
+  query SatellitesPageQuery {
+    allSatellite {
+      nodes {
+        id
+        name
+        resourceId
+      }
+    }
+  }
+`
 
 export default Satellites
 

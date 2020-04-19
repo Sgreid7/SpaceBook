@@ -48,7 +48,6 @@ exports.sourceNodes = async ({
   }
 
   // console.log(observatories.data.Observatory[1].length)
-
   const promise1 = new Promise(async (resolve, reject) => {
     await Promise.all(
       observatories.data.Observatory[1].map(satellites => {
@@ -114,18 +113,16 @@ exports.createPages = async ({ graphql, actions }) => {
   const resp = await graphql(`
     query SatelliteInfo {
       allSatellite {
-        edges {
-          node {
-            id
-            name
-            nameID
-            resourceId
-            resolution
-            startTime(formatString: "MMM DD, YYYY")
-            endTime(formatString: "MMM DD, YYYY")
-            details {
-              description
-            }
+        nodes {
+          id
+          name
+          nameID
+          resourceId
+          resolution
+          startTime(formatString: "MMM DD, YYYY")
+          endTime(formatString: "MMM DD, YYYY")
+          details {
+            description
           }
         }
       }
@@ -133,29 +130,51 @@ exports.createPages = async ({ graphql, actions }) => {
   `)
 
   // console.log({ resp })
-  const satellitePages = resp.data.allSatellite.edges
-  await Promise.all(
-    satellitePages.map(({ node }) => {
-      // console.log(node)
-      return createPage({
-        // Path for this page — required
-        path: `/satellites/${node.id}`,
-        component: satelliteTemplate,
-        // use the node props
-        context: {
-          id: node.id,
-          nameID: node.nameID,
-          resolution: node.resolution,
-          endTime: node.endTime,
-          startTime: node.startTime,
-          name: node.name,
-          resourceId: node.resourceId,
-          details: node.details,
-          description: node.details.description,
-        },
-      })
+
+  const satellitePages = resp.data.allSatellite.nodes
+
+  satellitePages.forEach(node => {
+    createPage({
+      path: `/satellites/${node.id}`,
+      component: satelliteTemplate,
+      context: {
+        id: node.id,
+        nameID: node.nameID,
+        resolution: node.resolution,
+        endTime: node.endTime,
+        startTime: node.startTime,
+        name: node.name,
+        resourceId: node.resourceId,
+        details: node.details,
+        description: node.details.description,
+      },
     })
-  )
+  })
+
+  // console.log({ resp })
+  // const satellitePages = resp.data.allSatellite.edges
+  // await Promise.all(
+  //   satellitePages.map(({ node }) => {
+  //     // console.log(node)
+  //     return createPage({
+  //       // Path for this page — required
+  //       path: `/satellites/${node.id}`,
+  //       component: satelliteTemplate,
+  //       // use the node props
+  //       context: {
+  //         id: node.id,
+  //         nameID: node.nameID,
+  //         resolution: node.resolution,
+  //         endTime: node.endTime,
+  //         startTime: node.startTime,
+  //         name: node.name,
+  //         resourceId: node.resourceId,
+  //         details: node.details,
+  //         description: node.details.description,
+  //       },
+  //     })
+  //   })
+  // )
 }
 
 exports.createSchemaCustomization = ({ actions }) => {

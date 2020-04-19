@@ -1,9 +1,9 @@
 {
-  "name": "gatsby-starter-default",
+  "name": "SpaceBook",
   "private": true,
-  "description": "A simple starter to get up and developing quickly with Gatsby",
+  "description": "A satellite tracker that provides you with information",
   "version": "0.1.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "author": "Sam Greider",
   "dependencies": {
     "axios": "^0.19.2",
     "babel-plugin-styled-components": "^1.10.7",

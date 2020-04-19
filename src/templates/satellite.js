@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { Link, graphql } from "gatsby"
-import { useSpring, animated } from "react-spring"
+import { useSpring } from "react-spring"
 import styled from "styled-components"
 import Layout from "../components/layout"
 import SideNav from "../components/sideNav"
