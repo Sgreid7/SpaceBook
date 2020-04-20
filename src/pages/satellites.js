@@ -4,10 +4,10 @@ import Layout from "../components/layout"
 import { useSpring } from "react-spring"
 import styled from "styled-components"
 import { Link, graphql } from "gatsby"
-// import axios from "axios"
+import devices from "../utils/devices"
 
 const Satellites = ({ data }) => {
-  // const [observatories, setObservatories] = useState([{}])
+  const [searchFilter, setSearchFilter] = useState("")
   const [isNavOpen, setNavOpen] = useState(false)
   const navAnimation = useSpring({
     transform: isNavOpen
@@ -15,11 +15,9 @@ const Satellites = ({ data }) => {
       : `translate3d(100%, 0, 0) scale(0.6)`,
   })
 
-  // const getObservatories = async () => {
-  //   const resp = await axios.get(
-  //     "https://sscweb.sci.gsfc.nasa.gov/WS/sscr/2/observatories"
-  //   )
-  // }
+  const updateSearchFilter = e => {
+    setSearchFilter(e.target.value)
+  }
 
   const satellitesList = data.allSatellite
 
@@ -27,16 +25,27 @@ const Satellites = ({ data }) => {
     <Layout onClick={() => setNavOpen(!isNavOpen)}>
       <SideNav style={navAnimation} />
       <SatelliteSection>
-        <input type="search" name="search" placeholder="Search satellites..." />
+        <input
+          type="search"
+          name="search"
+          placeholder="Search satellites..."
+          onChange={updateSearchFilter}
+        />
         <ul>
-          {satellitesList.nodes.map(node => (
-            <li key={node.id}>
-              <h2>{node.name}</h2>
-              <Link to={`/satellites/${node.id}`}>
-                <button>More Details</button>
-              </Link>
-            </li>
-          ))}
+          {satellitesList.nodes
+            .filter(node => {
+              return node.name
+                .toLowerCase()
+                .includes(searchFilter.toLowerCase())
+            })
+            .map(node => (
+              <li key={node.id}>
+                <h2>{node.name}</h2>
+                <Link to={`/satellites/${node.id}`}>
+                  <button>More Details</button>
+                </Link>
+              </li>
+            ))}
         </ul>
       </SatelliteSection>
     </Layout>
@@ -69,13 +78,26 @@ const SatelliteSection = styled.section`
     width: 30vw;
   }
 
-  ul {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-row-gap: 2rem;
-    margin: 2rem 0;
+  h2 {
     text-align: center;
+    font-size: 1.5rem;
+  }
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     list-style: none;
+    margin: 0;
+  }
+
+  li {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 
   button {
@@ -122,6 +144,13 @@ const SatelliteSection = styled.section`
       background: #8a2be2;
       text-shadow: 0.05rem 0.05rem 0.05rem #000;
       border: 0.25rem solid #000;
+    }
+  }
+
+  @media (${devices.laptop}) {
+    ul {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
     }
   }
 `
