@@ -32,8 +32,8 @@ const Subscribe = () => {
             placeholder="email@email.com"
             required
           />
-          <label htmlFor="states">Please select your state</label>
-          <select name="states">
+          <label htmlFor="state">Please select your state</label>
+          <select name="state">
             <option value="AL">Alabama</option>
             <option value="AK">Alaska</option>
             <option value="AZ">Arizona</option>
@@ -88,9 +88,9 @@ const Subscribe = () => {
           </select>
           <p>Would you like to receive notifications for this satellite?</p>
           <div className="radio-buttons">
-            <input type="radio" name="answer" value="yes" />
+            <input type="radio" name="notification" value="yes" />
             <label htmlFor="yes">Yes</label>
-            <input type="radio" name="answer" value="no" />
+            <input type="radio" name="notification" value="no" />
             <label htmlFor="no">No</label>
           </div>
           <button>Send</button>
