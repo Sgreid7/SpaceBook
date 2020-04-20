@@ -22,6 +22,7 @@ const Subscribe = () => {
           data-netlify="true"
           data-netlify-honeypot="bot-field"
         >
+          <input type="hidden" name="form-name" value="subscribe" />
           <label htmlFor="name">Please enter your name</label>
           <input type="text" name="name" placeholder="John Doe" />
           <label htmlFor="email">Please enter your email</label>
@@ -92,7 +93,7 @@ const Subscribe = () => {
             <input type="radio" name="answer" value="no" />
             <label htmlFor="no">No</label>
           </div>
-          <button>Submit</button>
+          <button>Send</button>
         </form>
       </SubscribeSection>
     </Layout>
@@ -168,6 +169,10 @@ const SubscribeSection = styled.section`
 
       :focus {
         outline: none;
+      }
+
+      :hover {
+        cursor: pointer;
       }
     }
   }
