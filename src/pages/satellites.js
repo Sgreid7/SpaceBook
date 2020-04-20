@@ -30,6 +30,7 @@ const Satellites = ({ data }) => {
           name="search"
           placeholder="Search satellites..."
           onChange={updateSearchFilter}
+          // results=5
         />
         <ul>
           {satellitesList.nodes
