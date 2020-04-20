@@ -93,7 +93,7 @@ const Subscribe = () => {
             <input type="radio" name="notification" value="no" />
             <label htmlFor="no">No</label>
           </div>
-          <button>Send</button>
+          <button className="send-button">Send</button>
         </form>
       </SubscribeSection>
     </Layout>
@@ -130,6 +130,7 @@ const SubscribeSection = styled.section`
 
       :focus {
         outline: none;
+        border: 0.1rem solid #00008b;
       }
     }
 
@@ -138,7 +139,6 @@ const SubscribeSection = styled.section`
     }
 
     select {
-      /* margin-top: 2rem; */
       padding: 0.5rem;
 
       :focus {
@@ -157,23 +157,51 @@ const SubscribeSection = styled.section`
         margin: 0.3rem;
       }
     }
+  }
 
-    button {
-      margin-top: 2rem;
-      font-size: 1.5rem;
-      letter-spacing: 0.2rem;
-      background: transparent;
-      border-radius: 0.2rem;
-      border: 0.15rem solid #000;
-      height: 3rem;
+  button {
+    margin-top: 2rem;
+    font-size: 1.5rem;
+    letter-spacing: 0.2rem;
+    background: transparent;
+    border-radius: 0.2rem;
+    border: 0.15rem solid #000;
+    color: #000;
+    height: 3rem;
+    transition: 0.3s ease-in;
+    position: relative;
+    z-index: 1;
+    cursor: pointer;
 
-      :focus {
-        outline: none;
-      }
-
-      :hover {
-        cursor: pointer;
-      }
+    :focus {
+      outline: none;
     }
+
+    :hover {
+      color: #fff;
+      border: #fff 0.15rem solid;
+    }
+  }
+
+  button::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #00008b;
+    transition: 0.3s ease-in;
+    z-index: -1;
+  }
+
+  .send-button::after {
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+
+  .send-button:hover::after {
+    transform: scaleX(1);
+    transform-origin: right;
   }
 `

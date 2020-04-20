@@ -3,6 +3,8 @@ import SideNav from "../components/sideNav"
 import Layout from "../components/layout"
 import { useSpring } from "react-spring"
 import styled from "styled-components"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faSearch } from "@fortawesome/free-solid-svg-icons"
 import { Link, graphql } from "gatsby"
 import devices from "../utils/devices"
 
@@ -25,13 +27,17 @@ const Satellites = ({ data }) => {
     <Layout onClick={() => setNavOpen(!isNavOpen)}>
       <SideNav style={navAnimation} />
       <SatelliteSection>
-        <input
-          type="search"
-          name="search"
-          placeholder="Search satellites..."
-          onChange={updateSearchFilter}
-          // results=5
-        />
+        <div className="search-box">
+          <input
+            type="search"
+            name="search"
+            placeholder="Search satellites..."
+            onChange={updateSearchFilter}
+          />
+          <a className="search-btn" href="#">
+            <FontAwesomeIcon icon={faSearch} />
+          </a>
+        </div>
         <ul>
           {satellitesList.nodes
             .filter(node => {
@@ -74,9 +80,52 @@ const SatelliteSection = styled.section`
   display: flex;
   flex-direction: column;
 
+  .search-box {
+    position: absolute;
+    background: #00008b;
+    height: 2.5rem;
+    border-radius: 2.5rem;
+    padding: 0.6rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0 0.1rem 0.1rem #8a2be2;
+
+    :hover > input {
+      width: 15rem;
+      padding: 0 0.35rem;
+    }
+
+    :hover > .search-btn {
+      background: #fff;
+      color: #00008b;
+    }
+  }
+
+  .search-btn {
+    color: #fff;
+    float: right;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    background: #00008b;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.4s ease;
+  }
+
   input {
-    margin: 0 auto;
-    width: 30vw;
+    border: none;
+    background: none;
+    outline: none;
+    float: left;
+    padding: 0;
+    color: #fff;
+    transition: 0.4s ease;
+    width: 0rem;
   }
 
   h2 {
@@ -91,6 +140,7 @@ const SatelliteSection = styled.section`
     justify-content: center;
     list-style: none;
     margin: 0;
+    padding-top: 2rem;
   }
 
   li {
