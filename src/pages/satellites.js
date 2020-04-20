@@ -109,6 +109,7 @@ const SatelliteSection = styled.section`
     border: 0.25rem solid #8a2be2;
     transition: 0.4s ease;
     position: relative;
+    outline: none;
 
     ::before,
     ::after {

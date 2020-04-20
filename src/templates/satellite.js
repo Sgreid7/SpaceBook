@@ -163,6 +163,7 @@ const Content = styled.section`
     border: 0.25rem solid #00008b;
     transition: 0.4s ease;
     position: relative;
+    outline: none;
 
     ::before,
     ::after {
