@@ -3,6 +3,7 @@ import SideNav from "../components/sideNav"
 import Layout from "../components/layout"
 import { useSpring } from "react-spring"
 import styled from "styled-components"
+import Satellite from "../templates/satellite"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faSearch } from "@fortawesome/free-solid-svg-icons"
 import { Link, graphql } from "gatsby"
@@ -23,8 +24,6 @@ export default ({ data }) => {
     setSearchFilter(e.target.value)
   }
 
-  const satellitesList = data.allSatellite
-
   const getSatellites = async () => {
     const response = await fetch(
       "https://sscweb.sci.gsfc.nasa.gov/WS/sscr/2/spaseObservatories",
@@ -36,13 +35,8 @@ export default ({ data }) => {
       }
     )
     const data = await response.json()
-    console.log(data.Observatory[1])
-    // setSatellites(...satellites, {
-    //   id: satellites.Id,
-    //   name: satellites.Name,
-    // })
+    // console.log(data.Observatory[1])
     setSatellites(data.Observatory[1])
-    // console.log(satellites)
   }
 
   useEffect(() => {
@@ -69,19 +63,13 @@ export default ({ data }) => {
         <ul>
           {satellites
             .filter(satellite => {
-              console.log(satellite)
               return satellite.Name.toLowerCase().includes(
                 searchFilter.toLowerCase()
               )
             })
-            .map(satellite => (
-              <li key={satellite.Id}>
-                <h2>{satellite.Name}</h2>
-                <Link to={`/satellites/${satellite.Id}`}>
-                  <button>More Details</button>
-                </Link>
-              </li>
-            ))}
+            .map(satellite => {
+              return <Satellite key={satellite.Id} satelliteInfo={satellite} />
+            })}
         </ul>
       </SatelliteSection>
     </Layout>
@@ -170,62 +158,6 @@ const SatelliteSection = styled.section`
     list-style: none;
     margin: 0;
     padding-top: 2rem;
-  }
-
-  li {
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-
-  button {
-    background: transparent;
-    height: 3rem;
-    width: 10rem;
-    color: #8a2be2;
-    border: 0.25rem solid #8a2be2;
-    transition: 0.4s ease;
-    position: relative;
-    outline: none;
-
-    ::before,
-    ::after {
-      content: "";
-      position: absolute;
-      width: 0.8rem;
-      height: 0.25rem;
-      background: #fff;
-      transform: skewX(50deg);
-      transition: 0.4s linear;
-    }
-
-    ::before {
-      top: -4px;
-      left: 10%;
-    }
-
-    ::after {
-      bottom: -4px;
-      right: 10%;
-    }
-
-    :hover::before {
-      left: 80%;
-    }
-
-    :hover::after {
-      right: 80%;
-    }
-
-    :hover {
-      cursor: pointer;
-      color: #fff;
-      background: #8a2be2;
-      text-shadow: 0.05rem 0.05rem 0.05rem #000;
-      border: 0.25rem solid #000;
-    }
   }
 
   @media (${devices.tablet}) {

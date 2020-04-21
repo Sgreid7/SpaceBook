@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { Link, graphql } from "gatsby"
+import { Link } from "gatsby"
 import { useSpring } from "react-spring"
 import styled from "styled-components"
 import Layout from "../components/layout"
@@ -7,8 +7,11 @@ import SideNav from "../components/sideNav"
 import devices from "../utils/devices"
 import Satellite from "../images/satellite.jpg"
 import Galaxy from "../images/galaxy.jpg"
+import axios from "axios"
 
-const SatelliteDetail = ({ satellite }) => {
+const SatelliteDetail = props => {
+  const satelliteId = props.match.params.Id
+  const resourceId = props.match.params.ResourceId
   const [satellite, setSatellite] = useState({})
   const [isNavOpen, setNavOpen] = useState(false)
   const navAnimation = useSpring({
@@ -17,7 +20,14 @@ const SatelliteDetail = ({ satellite }) => {
       : `translate3d(100%, 0, 0) scale(0.6)`,
   })
 
-  // const satellite = data.satellite
+  const getSatelliteInfo = async () => {
+    const satelliteDetails = await axios.get(
+      `https://cdaweb.gsfc.nasa.gov/registry/hdp/Spase.xql?id=${resourceId}`
+    )
+
+    console.log(satelliteDetails)
+  }
+
   return (
     <Layout onClick={() => setNavOpen(!isNavOpen)}>
       <SideNav style={navAnimation} />
