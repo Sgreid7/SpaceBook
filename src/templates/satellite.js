@@ -35,10 +35,10 @@ export default ({ data }) => {
           <p>{satellite.details.description}</p>
         </div>
         <Buttons>
-          <Link to="/satellites">
+          <Link to="satellites">
             <button>Go back</button>
           </Link>
-          <Link to="subscribe">
+          <Link to={`subscribe/${satellite.id}`}>
             <button>Subscribe</button>
           </Link>
         </Buttons>
@@ -139,7 +139,6 @@ const Content = styled.section`
     padding: 2rem 2rem 1rem 2rem;
     font-size: 1.2rem;
     font-style: oblique;
-    /* background: #fffafa; */
     background: rgba(0, 0, 0, 0.4);
     color: #fff;
     border: 0.15rem solid #00008b;
@@ -151,6 +150,10 @@ const Content = styled.section`
 
     > p {
       line-height: 1.5rem;
+    }
+
+    @media (${devices.laptop}) {
+      margin: 2rem 7rem;
     }
   }
 
@@ -228,4 +231,8 @@ const Buttons = styled.section`
   justify-content: space-between;
   width: 100%;
   padding: 0 2rem 2rem 2rem;
+
+  @media (${devices.laptop}) {
+    padding: 0 7rem 2rem 7rem;
+  }
 `

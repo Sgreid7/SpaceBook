@@ -3,15 +3,18 @@ import Layout from "../components/layout"
 import SideNav from "../components/sideNav"
 import styled from "styled-components"
 import { useSpring } from "react-spring"
-import devices from "../utils/devices"
+// import devices from "../utils/devices"
 
-const Subscribe = () => {
+const Subscribe = ({ data }) => {
   const [isNavOpen, setNavOpen] = useState(false)
   const navAnimation = useSpring({
     transform: isNavOpen
       ? `translate3d(0, 0, 0) scale(1)`
       : `translate3d(100%, 0, 0) scale(0.6)`,
   })
+
+  const satellite = data.satellite
+
   return (
     <Layout onClick={() => setNavOpen(!isNavOpen)}>
       <SideNav style={navAnimation} />
@@ -86,7 +89,10 @@ const Subscribe = () => {
             <option value="WI">Wisconsin</option>
             <option value="WY">Wyoming</option>
           </select>
-          <p>Would you like to receive notifications for this satellite?</p>
+          <p>
+            Would you like to track and receive notifications for{" "}
+            {satellite.name}
+          </p>
           <div className="radio-buttons">
             <input type="radio" name="notification" value="yes" />
             <label htmlFor="yes">Yes</label>
@@ -101,6 +107,15 @@ const Subscribe = () => {
 }
 
 export default Subscribe
+
+export const query = graphql`
+  query SatelliteSubscribe($id: String!) {
+    satellite(id: { eq: $id }) {
+      id
+      name
+    }
+  }
+`
 
 const SubscribeSection = styled.section`
   padding-top: 4rem;

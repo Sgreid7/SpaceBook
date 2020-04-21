@@ -109,6 +109,7 @@ exports.sourceNodes = async ({
 
 exports.createPages = async ({ graphql, actions }) => {
   const satelliteTemplate = path.resolve(`./src/templates/satellite.js`)
+  const subscribeTemplate = path.resolve(`./src/templates/subscribe.js`)
   const { createPage } = actions
   const resp = await graphql(`
     query SatelliteInfo {
@@ -134,6 +135,7 @@ exports.createPages = async ({ graphql, actions }) => {
   const satellitePages = resp.data.allSatellite.nodes
 
   satellitePages.forEach(node => {
+    // create detail page
     createPage({
       path: `/satellites/${node.id}`,
       component: satelliteTemplate,
@@ -147,6 +149,16 @@ exports.createPages = async ({ graphql, actions }) => {
         resourceId: node.resourceId,
         details: node.details,
         description: node.details.description,
+      },
+    })
+
+    // create subscribe page
+    createPage({
+      path: `/subscribe/${node.id}`,
+      component: subscribeTemplate,
+      context: {
+        id: node.id,
+        name: node.name,
       },
     })
   })

@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import SideNav from "../components/sideNav"
 import Layout from "../components/layout"
 import { useSpring } from "react-spring"
@@ -7,8 +7,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faSearch } from "@fortawesome/free-solid-svg-icons"
 import { Link, graphql } from "gatsby"
 import devices from "../utils/devices"
+import axios from "axios"
 
-const Satellites = ({ data }) => {
+export default ({ data }) => {
+  const [satellites, setSatellites] = useState([])
   const [searchFilter, setSearchFilter] = useState("")
   const [isNavOpen, setNavOpen] = useState(false)
   const navAnimation = useSpring({
@@ -22,6 +24,19 @@ const Satellites = ({ data }) => {
   }
 
   const satellitesList = data.allSatellite
+
+  const getSatellites = async () => {
+    const response = await axios.get(
+      "https://sscweb.sci.gsfc.nasa.gov/WS/sscr/2/spaseObservatories"
+    )
+    // console.log(response.data.Observatory[1])
+    setSatellites(response.data.Observatory[1])
+    console.log(satellites)
+  }
+
+  useEffect(() => {
+    getSatellites()
+  }, [])
 
   return (
     <Layout onClick={() => setNavOpen(!isNavOpen)}>
@@ -54,6 +69,22 @@ const Satellites = ({ data }) => {
               </li>
             ))}
         </ul>
+        {/* <ul>
+          {satellites
+            .filter(satellite => {
+              return satellite.name
+                .toLowerCase()
+                .include(searchFilter.toLowerCase())
+            })
+            .map(satellite => (
+              <li key={satellite.Id}>
+                <h2>{satellite.Name}</h2>
+                <Link to={`/satellites/${satellite.Id}`}>
+                  <button>More Details</button>
+                </Link>
+              </li>
+            ))}
+        </ul> */}
       </SatelliteSection>
     </Layout>
   )
@@ -71,7 +102,7 @@ export const query = graphql`
   }
 `
 
-export default Satellites
+// export default Satellites
 
 const SatelliteSection = styled.section`
   /* margin-top: 3rem; */
@@ -199,10 +230,24 @@ const SatelliteSection = styled.section`
     }
   }
 
+  @media (${devices.tablet}) {
+    ul {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
   @media (${devices.laptop}) {
     ul {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (${devices.laptopL}) {
+    ul {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
     }
   }
 `
