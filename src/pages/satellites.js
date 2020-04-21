@@ -26,17 +26,30 @@ export default ({ data }) => {
   const satellitesList = data.allSatellite
 
   const getSatellites = async () => {
-    const response = await axios.get(
-      "https://sscweb.sci.gsfc.nasa.gov/WS/sscr/2/spaseObservatories"
+    const response = await fetch(
+      "https://sscweb.sci.gsfc.nasa.gov/WS/sscr/2/spaseObservatories",
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+      }
     )
-    // console.log(response.data.Observatory[1])
-    setSatellites(response.data.Observatory[1])
-    console.log(satellites)
+    const data = await response.json()
+    console.log(data.Observatory[1])
+    // setSatellites(...satellites, {
+    //   id: satellites.Id,
+    //   name: satellites.Name,
+    // })
+    setSatellites(data.Observatory[1])
+    // console.log(satellites)
   }
 
   useEffect(() => {
     getSatellites()
   }, [])
+
+  console.log(satellites)
 
   return (
     <Layout onClick={() => setNavOpen(!isNavOpen)}>
@@ -54,27 +67,12 @@ export default ({ data }) => {
           </a>
         </div>
         <ul>
-          {satellitesList.nodes
-            .filter(node => {
-              return node.name
-                .toLowerCase()
-                .includes(searchFilter.toLowerCase())
-            })
-            .map(node => (
-              <li key={node.id}>
-                <h2>{node.name}</h2>
-                <Link to={`/satellites/${node.id}`}>
-                  <button>More Details</button>
-                </Link>
-              </li>
-            ))}
-        </ul>
-        {/* <ul>
           {satellites
             .filter(satellite => {
-              return satellite.name
-                .toLowerCase()
-                .include(searchFilter.toLowerCase())
+              console.log(satellite)
+              return satellite.Name.toLowerCase().includes(
+                searchFilter.toLowerCase()
+              )
             })
             .map(satellite => (
               <li key={satellite.Id}>
@@ -84,7 +82,7 @@ export default ({ data }) => {
                 </Link>
               </li>
             ))}
-        </ul> */}
+        </ul>
       </SatelliteSection>
     </Layout>
   )
