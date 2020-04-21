@@ -16,7 +16,7 @@ const Details = props => {
 
   // console.log(satellite)
 
-  const [description, setDescription] = useState({})
+  const [description, setDescription] = useState("")
   const [isNavOpen, setNavOpen] = useState(false)
   const navAnimation = useSpring({
     transform: isNavOpen
@@ -29,7 +29,7 @@ const Details = props => {
       `https://cdaweb.gsfc.nasa.gov/registry/hdp/Spase.xql?id=${resourceId}`
     )
 
-    // console.log(satelliteDetails)
+    console.log(satelliteDetails)
     setDescription(satelliteDetails.data.ResourceHeader.Description)
   }
 
