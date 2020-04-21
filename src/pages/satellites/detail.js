@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react"
-import { Link } from "gatsby"
+// import { Link } from "gatsby"
 import { useSpring } from "react-spring"
 import styled from "styled-components"
 import Layout from "../../components/layout"
 import SideNav from "../../components/sideNav"
 import devices from "../../utils/devices"
+import { Router, Link, Location } from "@reach/router"
 import SatellitePic from "../../images/satellite.jpg"
 import Galaxy from "../../images/galaxy.jpg"
 import axios from "axios"
@@ -14,7 +15,7 @@ const Details = props => {
   const satellite = props.location.state.satelliteInfo
   const resourceId = props.location.state.satelliteInfo.ResourceId
 
-  // console.log(satellite)
+  console.log(satellite)
 
   const [description, setDescription] = useState("")
   const [isNavOpen, setNavOpen] = useState(false)

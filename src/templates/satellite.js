@@ -1,21 +1,31 @@
 import React, { useState } from "react"
-import { Link } from "gatsby"
+// import { Link } from "gatsby"
+import { Router, Link, Location } from "@reach/router"
 import { useSpring } from "react-spring"
 import styled from "styled-components"
+import Detail from "../pages/satellites/detail"
 
 const SatelliteInfo = ({ satelliteInfo }) => {
   return (
-    <Content>
-      <li key={satelliteInfo.Id}>
-        <h2>{satelliteInfo.Name}</h2>
-        <Link
-          to={`/satellites/detail?id=${satelliteInfo.ResourceId}`}
-          state={{ satelliteInfo }}
+    <>
+      <Content>
+        <li
+          key={satelliteInfo.Id}
+          // path={`/satellites/detail?id=:${satelliteInfo.ResourceId}`}
         >
-          <button>More Details</button>
-        </Link>
-      </li>
-    </Content>
+          <h2>{satelliteInfo.Name}</h2>
+          <Link
+            to={`/satellites/detail?id=${satelliteInfo.ResourceId}`}
+            state={{ satelliteInfo }}
+          >
+            <button>More Details</button>
+          </Link>
+        </li>
+      </Content>
+      <Router>
+        <Detail path={`/satellites/detail?id=:${satelliteInfo.ResourceId}`} />
+      </Router>
+    </>
   )
 }
 

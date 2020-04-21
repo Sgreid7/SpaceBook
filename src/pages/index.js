@@ -1,10 +1,13 @@
 import React, { useState } from "react"
-import { Link } from "gatsby"
+// import { Link } from "gatsby"
 import { useSpring, animated } from "react-spring"
 import styled from "styled-components"
-import Satellite from "../images/satellite.jpg"
+import Satellites from "../pages/satellites"
 import Outerspace from "../images/outerspace.jpg"
+import { Router, Link, Location } from "@reach/router"
 import SideNav from "../components/sideNav"
+import SatellitePic from "../images/satellite.jpg"
+import Satellite from "../templates/satellite"
 import devices from "../utils/devices"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
@@ -45,10 +48,14 @@ const IndexPage = () => {
             area. SpaceBook is also your go to website designed to keep you up
             to date and informed with all things related to satellites.
           </p>
-          <Image src={Satellite} alt="Satellite in space" />
+          <Image src={SatellitePic} alt="Satellite in space" />
         </ContentSection>
       </Main>
     </Layout>
+    //  <Router>
+    //   <Satellites path="satellites" />
+    //   <Satellite path={`/satellites/detail?id=:ResourceId}`} />
+    // </Router>
   )
 }
 
