@@ -2,25 +2,16 @@ import React, { useState } from "react"
 import { Link } from "gatsby"
 import { useSpring } from "react-spring"
 import styled from "styled-components"
-import Layout from "../components/layout"
-import SideNav from "../components/sideNav"
-import devices from "../utils/devices"
 
 const SatelliteInfo = ({ satelliteInfo }) => {
-  const [isNavOpen, setNavOpen] = useState(false)
-  const navAnimation = useSpring({
-    transform: isNavOpen
-      ? `translate3d(0, 0, 0) scale(1)`
-      : `translate3d(100%, 0, 0) scale(0.6)`,
-  })
-
-  // const satellite = data.satellite
   return (
     <Content>
       <li key={satelliteInfo.Id}>
         <h2>{satelliteInfo.Name}</h2>
-        {/* <Link to={`/satellites/detail?id=${satelliteInfo.ResourceId}`}> */}
-        <Link to={`/satellites/${satelliteInfo.Id}`}>
+        <Link
+          to={`/satellites/detail?id=${satelliteInfo.ResourceId}`}
+          state={{ satelliteInfo }}
+        >
           <button>More Details</button>
         </Link>
       </li>
@@ -29,22 +20,6 @@ const SatelliteInfo = ({ satelliteInfo }) => {
 }
 
 export default SatelliteInfo
-
-// export const query = graphql`
-//   query SatelliteQuery($resourceId: String!) {
-//     satellite(resourceId: { eq: $resourceId }) {
-//       id
-//       name
-//       nameID
-//       resourceId
-//       startTime(formatString: "MMM DD, YYYY")
-//       endTime(formatString: "MMM DD, YYYY")
-//       details {
-//         description
-//       }
-//     }
-//   }
-// `
 
 const Content = styled.section`
   li {
