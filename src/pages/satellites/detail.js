@@ -9,10 +9,10 @@ import { Router, Link, Location } from "@reach/router"
 import Cygnus from "../../images/Cygnus.jpg"
 import axios from "axios"
 
-const Details = props => {
-  // console.log(props)
-  const satellite = props.location.state.satelliteInfo
-  const resourceId = props.location.state.satelliteInfo.ResourceId
+const Details = ({ location }) => {
+  console.log(location)
+  const satellite = location.state.satelliteInfo
+  const resourceId = location.state.satelliteInfo.ResourceId
 
   console.log(satellite)
 
@@ -56,10 +56,10 @@ const Details = props => {
           <p>{description}</p>
         </div>
         <Buttons>
-          <Link to="satellites">
+          <Link to="/satellites">
             <button>Go back</button>
           </Link>
-          <Link to={`subscribe/${satellite.id}`}>
+          <Link to={`/satellites/subscribe?id=${satellite.Id}`}>
             <button>Subscribe</button>
           </Link>
         </Buttons>
