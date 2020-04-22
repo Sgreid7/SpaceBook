@@ -1,10 +1,16 @@
-// import React, { useState } from "react"
+import React, { useState } from "react"
 // import Layout from "../../components/layout"
 // import SideNav from "../../components/sideNav"
 // import styled from "styled-components"
 // import { Link } from "gatsby"
 // import { useSpring } from "react-spring"
 // // import devices from "../utils/devices"
+
+const Subscribe = () => {
+  return <></>
+}
+
+export default Subscribe
 
 // const Subscribe = props => {
 //   console.log(props)

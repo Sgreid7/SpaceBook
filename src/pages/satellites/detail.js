@@ -10,6 +10,9 @@ import Cygnus from "../../images/Cygnus.jpg"
 import axios from "axios"
 
 const Details = ({ location }) => {
+  if (!location || !location.state) {
+    return <></>
+  }
   console.log(location)
   const satellite = location.state.satelliteInfo
   const resourceId = location.state.satelliteInfo.ResourceId
@@ -181,7 +184,7 @@ const Content = styled.section`
       position: absolute;
       width: 0.8rem;
       height: 0.25rem;
-      background: #fff;
+      background: #000;
       transform: skewX(50deg);
       transition: 0.4s linear;
     }
@@ -206,9 +209,9 @@ const Content = styled.section`
 
     :hover {
       cursor: pointer;
-      color: #fff;
-      /* background: #8a2be2; */
-      text-shadow: 0.05rem 0.05rem 0.05rem #000;
+      /* color: #000; */
+      /* background: #fff; */
+      /* text-shadow: 0.05rem 0.05rem 0.05rem #000; */
       /* border: 0.25rem solid #0000ff; */
     }
   }
