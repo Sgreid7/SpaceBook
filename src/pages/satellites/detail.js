@@ -6,8 +6,7 @@ import Layout from "../../components/layout"
 import SideNav from "../../components/sideNav"
 import devices from "../../utils/devices"
 import { Router, Link, Location } from "@reach/router"
-import SatellitePic from "../../images/satellite.jpg"
-import Galaxy from "../../images/galaxy.jpg"
+import Cygnus from "../../images/Cygnus.jpg"
 import axios from "axios"
 
 const Details = props => {
@@ -74,7 +73,7 @@ export default Details
 const Content = styled.section`
   margin: 0;
   padding-top: 2rem;
-  background-image: url(${Galaxy});
+  background-image: url(${Cygnus});
   background-size: cover;
   /* Photo by Jeremy Thomas on Unsplash */
 
@@ -94,14 +93,14 @@ const Content = styled.section`
       font-size: 1.5rem;
       margin: 0.5rem;
       color: #fff;
-      text-shadow: 0.07rem 0.07rem 0.07rem #0000ff;
+      text-shadow: 0.07rem 0.07rem 0.07rem #8a2be2;
     }
 
     > div .day {
       font-style: italic;
       font-size: 1.3rem;
       color: #fff;
-      text-shadow: 0.05rem 0.05rem 0.05rem #0000ff;
+      text-shadow: 0.05rem 0.05rem 0.05rem #8a2be2;
     }
 
     @media (${devices.tablet}) {
@@ -123,12 +122,12 @@ const Content = styled.section`
 
       > div .date {
         font-size: 2rem;
-        text-shadow: 0.1rem 0.1rem 0.1rem #0000ff;
+        text-shadow: 0.1rem 0.1rem 0.1rem #8a2be2;
       }
 
       > div .day {
         font-size: 1.5rem;
-        text-shadow: 0.08rem 0.08rem 0.08rem #0000ff;
+        text-shadow: 0.08rem 0.08rem 0.08rem #8a2be2;
       }
     }
   }
@@ -136,7 +135,7 @@ const Content = styled.section`
   h2 {
     font-size: 4rem;
     color: #fff;
-    text-shadow: 0.15rem 0.15rem 0.15rem #0000ff;
+    text-shadow: 0.15rem 0.15rem 0.15rem #8a2be2;
     font-weight: normal;
     margin: 1rem;
   }
@@ -149,7 +148,7 @@ const Content = styled.section`
     font-style: oblique;
     background: rgba(0, 0, 0, 0.4);
     color: #fff;
-    border: 0.15rem solid #00008b;
+    border: 0.15rem solid #8a2be2;
     border-radius: 0.2rem;
     margin: 2rem;
     text-align: center;
@@ -171,7 +170,7 @@ const Content = styled.section`
     width: 10rem;
     color: #fff;
     font-size: 1.1rem;
-    border: 0.25rem solid #00008b;
+    border: 0.25rem solid #8a2be2;
     transition: 0.4s ease;
     position: relative;
     outline: none;
@@ -208,9 +207,9 @@ const Content = styled.section`
     :hover {
       cursor: pointer;
       color: #fff;
-      background: #00008b;
+      /* background: #8a2be2; */
       text-shadow: 0.05rem 0.05rem 0.05rem #000;
-      border: 0.25rem solid #000;
+      /* border: 0.25rem solid #0000ff; */
     }
   }
 `

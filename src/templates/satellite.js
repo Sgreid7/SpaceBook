@@ -3,29 +3,30 @@ import React, { useState } from "react"
 import { Router, Link, Location } from "@reach/router"
 import { useSpring } from "react-spring"
 import styled from "styled-components"
-import Detail from "../pages/satellites/detail"
+import devices from "../utils/devices"
+// import Detail from "../pages/satellites/detail"
 
 const SatelliteInfo = ({ satelliteInfo }) => {
   return (
-    <>
-      <Content>
-        <li
-          key={satelliteInfo.Id}
-          // path={`/satellites/detail?id=:${satelliteInfo.ResourceId}`}
+    // <>
+    <Content>
+      <li
+        key={satelliteInfo.Id}
+        // path={`/satellites/detail?id=:${satelliteInfo.ResourceId}`}
+      >
+        <h2>{satelliteInfo.Name}</h2>
+        <Link
+          to={`/satellites/detail?id=${satelliteInfo.ResourceId}`}
+          state={{ satelliteInfo }}
         >
-          <h2>{satelliteInfo.Name}</h2>
-          <Link
-            to={`/satellites/detail?id=${satelliteInfo.ResourceId}`}
-            state={{ satelliteInfo }}
-          >
-            <button>More Details</button>
-          </Link>
-        </li>
-      </Content>
-      <Router>
-        <Detail path={`/satellites/detail?id=:${satelliteInfo.ResourceId}`} />
-      </Router>
-    </>
+          <button>More Details</button>
+        </Link>
+      </li>
+    </Content>
+    //  <Router>
+    //   <Detail path={`/satellites/detail?id=:${satelliteInfo.ResourceId}`} />
+    // </Router>
+    //  </>
   )
 }
 
@@ -40,12 +41,19 @@ const Content = styled.section`
     align-items: center;
   }
 
+  h2 {
+    font-size: 1.8rem;
+    text-align: center;
+    font-style: italic;
+    margin-bottom: 1rem;
+  }
+
   button {
     background: transparent;
     height: 3rem;
-    width: 10rem;
-    color: #8a2be2;
-    border: 0.25rem solid #8a2be2;
+    width: 8rem;
+    color: #0000ff;
+    border: 0.25rem solid #0000ff;
     transition: 0.4s ease;
     position: relative;
     outline: none;
@@ -82,9 +90,15 @@ const Content = styled.section`
     :hover {
       cursor: pointer;
       color: #fff;
-      background: #8a2be2;
-      text-shadow: 0.05rem 0.05rem 0.05rem #000;
-      border: 0.25rem solid #000;
+      background: #000;
+      text-shadow: 0.05rem 0.05rem 0.05rem #0000ff;
+      border: 0.25rem solid #0000ff;
+    }
+  }
+
+  @media (${devices.laptop}) {
+    button {
+      width: 10rem;
     }
   }
 `

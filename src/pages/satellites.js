@@ -146,11 +146,6 @@ const SatelliteSection = styled.section`
     width: 0rem;
   }
 
-  h2 {
-    text-align: center;
-    font-size: 1.5rem;
-  }
-
   ul {
     display: flex;
     flex-direction: column;
