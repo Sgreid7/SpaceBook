@@ -6,6 +6,7 @@ import Layout from "../../components/layout"
 import SideNav from "../../components/sideNav"
 import devices from "../../utils/devices"
 import Cygnus from "../../images/Cygnus.jpg"
+import moment from "moment"
 import axios from "axios"
 
 const Details = ({ location }) => {
@@ -65,9 +66,13 @@ const Details = ({ location }) => {
           <div>
             <h2>{satellite.Name}</h2>
             <p className="date">Launch Date:</p>
-            <p className="day">{satellite.StartTime[1]}</p>
+            <p className="day">
+              {moment(satellite.StartTime[1]).format("MMM Do YYYY")}
+            </p>
             <p className="date">End Date:</p>
-            <p className="day">{satellite.EndTime[1]}</p>
+            <p className="day">
+              {moment(satellite.EndTime[1]).format("MMM Do YYYY")}
+            </p>
           </div>
         </header>
         <div className="description">
