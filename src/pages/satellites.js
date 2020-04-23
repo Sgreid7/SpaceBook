@@ -4,12 +4,10 @@ import Layout from "../components/layout"
 import { useSpring } from "react-spring"
 import styled from "styled-components"
 import Satellite from "../templates/satellite"
+import PageLoader from "../components/pageLoader"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faSearch } from "@fortawesome/free-solid-svg-icons"
-import { Router, Link, Location } from "@reach/router"
-// import { Link, graphql } from "gatsby"
 import devices from "../utils/devices"
-import axios from "axios"
 
 export default ({ data }) => {
   const [satellites, setSatellites] = useState([])
@@ -46,35 +44,41 @@ export default ({ data }) => {
 
   console.log(satellites)
 
-  return (
-    <Layout onClick={() => setNavOpen(!isNavOpen)}>
-      <SideNav style={navAnimation} />
-      <SatelliteSection>
-        <div className="search-box">
-          <input
-            type="search"
-            name="search"
-            placeholder="Search satellites..."
-            onChange={updateSearchFilter}
-          />
-          <a className="search-btn" href="#">
-            <FontAwesomeIcon icon={faSearch} />
-          </a>
-        </div>
-        <ul>
-          {satellites
-            .filter(satellite => {
-              return satellite.Name.toLowerCase().includes(
-                searchFilter.toLowerCase()
-              )
-            })
-            .map(satellite => {
-              return <Satellite key={satellite.Id} satelliteInfo={satellite} />
-            })}
-        </ul>
-      </SatelliteSection>
-    </Layout>
-  )
+  if (satellites) {
+    return (
+      <Layout onClick={() => setNavOpen(!isNavOpen)}>
+        <SideNav style={navAnimation} />
+        <SatelliteSection>
+          <div className="search-box">
+            <input
+              type="search"
+              name="search"
+              placeholder="Search satellites..."
+              onChange={updateSearchFilter}
+            />
+            <a className="search-btn" href="#">
+              <FontAwesomeIcon icon={faSearch} />
+            </a>
+          </div>
+          <ul>
+            {satellites
+              .filter(satellite => {
+                return satellite.Name.toLowerCase().includes(
+                  searchFilter.toLowerCase()
+                )
+              })
+              .map(satellite => {
+                return (
+                  <Satellite key={satellite.Id} satelliteInfo={satellite} />
+                )
+              })}
+          </ul>
+        </SatelliteSection>
+      </Layout>
+    )
+  } else {
+    return <PageLoader />
+  }
 }
 
 export const query = graphql`
@@ -97,6 +101,12 @@ const SatelliteSection = styled.section`
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background-image: linear-gradient(
+    138deg,
+    rgba(32, 201, 255, 1) 36.7%,
+    rgba(0, 8, 187, 1) 84.4%,
+    rgba(255, 255, 255, 1) 119.7%
+  );
 
   .search-box {
     position: absolute;

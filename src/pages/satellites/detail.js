@@ -1,24 +1,17 @@
 import React, { useState, useEffect } from "react"
-// import { Link } from "gatsby"
+import { Link } from "gatsby"
 import { useSpring } from "react-spring"
 import styled from "styled-components"
 import Layout from "../../components/layout"
 import SideNav from "../../components/sideNav"
 import devices from "../../utils/devices"
-import { Router, Link, Location } from "@reach/router"
 import Cygnus from "../../images/Cygnus.jpg"
 import axios from "axios"
 
 const Details = ({ location }) => {
-  if (!location || !location.state) {
-    return <></>
-  }
-  console.log(location)
-  const satellite = location.state.satelliteInfo
-  const resourceId = location.state.satelliteInfo.ResourceId
+  // console.log(location)
 
-  console.log(satellite)
-
+  const [satellite, setSatellite] = useState({ StartTime: [], EndTime: [] })
   const [description, setDescription] = useState("")
   const [isNavOpen, setNavOpen] = useState(false)
   const navAnimation = useSpring({
@@ -27,20 +20,42 @@ const Details = ({ location }) => {
       : `translate3d(100%, 0, 0) scale(0.6)`,
   })
 
-  const getSatelliteInfo = async () => {
-    const satelliteDetails = await axios.get(
-      `https://cdaweb.gsfc.nasa.gov/registry/hdp/Spase.xql?id=${resourceId}`
+  const getSatellites = async resId => {
+    const response = await fetch(
+      "https://sscweb.sci.gsfc.nasa.gov/WS/sscr/2/spaseObservatories",
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+      }
     )
+    const data = await response.json()
+    // console.log(data.Observatory[1])
 
-    console.log(satelliteDetails)
-    setDescription(satelliteDetails.data.ResourceHeader.Description)
+    const satellite = data.Observatory[1].filter(satellite => {
+      return satellite.ResourceId === resId
+    })
+    setSatellite(satellite[0])
+  }
+
+  const getSatelliteInfo = async resId => {
+    const response = await axios.get(
+      `https://cdaweb.gsfc.nasa.gov/registry/hdp/Spase.xql?id=${resId}`
+    )
+    console.log(response)
+    setDescription(response.data.ResourceHeader.Description)
   }
 
   useEffect(() => {
-    getSatelliteInfo()
-  }, [])
-
-  console.log(description)
+    if (location && location.state && location.state.satelliteInfo) {
+      setSatellite(location.state.satelliteInfo)
+    } else {
+      const resId = location.search.substring(4).replace(":/", "://")
+      getSatelliteInfo(resId)
+      getSatellites(resId)
+    }
+  }, [location])
 
   return (
     <Layout onClick={() => setNavOpen(!isNavOpen)}>
@@ -62,7 +77,10 @@ const Details = ({ location }) => {
           <Link to="/satellites">
             <button>Go back</button>
           </Link>
-          <Link to={`/satellites/subscribe?id=${satellite.Id}`}>
+          <Link
+            to={`/satellites/subscribe?id=${satellite.Id}`}
+            // state={{ satellite }}
+          >
             <button>Subscribe</button>
           </Link>
         </Buttons>

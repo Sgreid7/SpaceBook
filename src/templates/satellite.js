@@ -1,19 +1,13 @@
 import React, { useState } from "react"
-// import { Link } from "gatsby"
-import { Router, Link, Location } from "@reach/router"
+import { Link } from "gatsby"
 import { useSpring } from "react-spring"
 import styled from "styled-components"
 import devices from "../utils/devices"
-// import Detail from "../pages/satellites/detail"
 
 const SatelliteInfo = ({ satelliteInfo }) => {
   return (
-    // <>
     <Content>
-      <li
-        key={satelliteInfo.Id}
-        // path={`/satellites/detail?id=:${satelliteInfo.ResourceId}`}
-      >
+      <li key={satelliteInfo.Id}>
         <h2>{satelliteInfo.Name}</h2>
         <Link
           to={`/satellites/detail?id=${satelliteInfo.ResourceId}`}
@@ -23,10 +17,6 @@ const SatelliteInfo = ({ satelliteInfo }) => {
         </Link>
       </li>
     </Content>
-    //  <Router>
-    //   <Detail path={`/satellites/detail?id=:${satelliteInfo.ResourceId}`} />
-    // </Router>
-    //  </>
   )
 }
 
@@ -42,6 +32,7 @@ const Content = styled.section`
   }
 
   h2 {
+    color: #fff;
     font-size: 1.8rem;
     text-align: center;
     font-style: italic;
@@ -52,8 +43,8 @@ const Content = styled.section`
     background: transparent;
     height: 3rem;
     width: 8rem;
-    color: #0000ff;
-    border: 0.25rem solid #0000ff;
+    color: #fff;
+    border: 0.25rem solid #000;
     transition: 0.4s ease;
     position: relative;
     outline: none;
