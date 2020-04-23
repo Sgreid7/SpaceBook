@@ -1,10 +1,10 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import Layout from "../../components/layout"
 import SideNav from "../../components/sideNav"
 import styled from "styled-components"
 import { Link } from "gatsby"
 import { useSpring } from "react-spring"
-// import devices from "../utils/devices"
+import axios from "axios"
 
 // const Subscribe = () => {
 //   return <></>
@@ -13,7 +13,9 @@ import { useSpring } from "react-spring"
 // export default Subscribe
 
 const Subscribe = ({ location }) => {
-  // console.log(props)
+  // console.log(location)
+
+  const [satellite, setSatellite] = useState("")
   const [isNavOpen, setNavOpen] = useState(false)
   const navAnimation = useSpring({
     transform: isNavOpen
@@ -21,13 +23,26 @@ const Subscribe = ({ location }) => {
       : `translate3d(100%, 0, 0) scale(0.6)`,
   })
 
+  const resId = location.search.substring(4).replace(":/", "://")
+
+  const getSatelliteInfo = async resId => {
+    const response = await axios.get(
+      `https://cdaweb.gsfc.nasa.gov/registry/hdp/Spase.xql?id=${resId}`
+    )
+    console.log(response)
+    setSatellite(response.data.ResourceHeader.ResourceName)
+  }
+
+  useEffect(() => {
+    const resId = location.search.substring(4).replace(":/", "://")
+    getSatelliteInfo(resId)
+  })
+
   return (
     <Layout onClick={() => setNavOpen(!isNavOpen)}>
       <SideNav style={navAnimation} />
       <SubscribeSection>
-        <p>Hi</p>
-        {/* <h2>{location.state.satelliteInfo}</h2> */}
-        {/* <form
+        <form
           name="subscribe"
           method="post"
           data-netlify="true"
@@ -98,8 +113,7 @@ const Subscribe = ({ location }) => {
             <option value="WY">Wyoming</option>
           </select>
           <p>
-            Would you like to track and receive notifications for{" "}
-            {satellite.name}
+            Would you like to track and receive notifications for {satellite}?
           </p>
           <div className="radio-buttons">
             <input type="radio" name="notification" value="yes" />
@@ -109,10 +123,12 @@ const Subscribe = ({ location }) => {
           </div>
           <button className="send-button">Send</button>
         </form>
-        <Link to={`satellites/detail?id=${satelliteInfo.ResourceId}`}>
-          <button>Go back</button>
-        </Link> */}
       </SubscribeSection>
+      <ButtonSection>
+        <Link to={`satellites/detail?id=${resId}`}>
+          <button>Go back</button>
+        </Link>
+      </ButtonSection>
     </Layout>
   )
 }
@@ -220,5 +236,56 @@ const SubscribeSection = styled.section`
   .send-button:hover::after {
     transform: scaleX(1);
     transform-origin: right;
+  }
+`
+
+const ButtonSection = styled.section`
+  display: flex;
+  justify-content: center;
+  padding-bottom: 2rem;
+
+  button {
+    background: transparent;
+    color: #000;
+    height: 3rem;
+    width: 10rem;
+    font-size: 1.1rem;
+    border: 0.25rem solid #00008b;
+    transition: 0.4s ease;
+    position: relative;
+    outline: none;
+
+    ::before,
+    ::after {
+      content: "";
+      position: absolute;
+      width: 0.8rem;
+      height: 0.25rem;
+      background: #fff;
+      transform: skewX(50deg);
+      transition: 0.4s linear;
+    }
+
+    ::before {
+      top: -4px;
+      left: 10%;
+    }
+
+    ::after {
+      bottom: -4px;
+      right: 10%;
+    }
+
+    :hover::before {
+      left: 80%;
+    }
+
+    :hover::after {
+      right: 80%;
+    }
+
+    :hover {
+      cursor: pointer;
+    }
   }
 `

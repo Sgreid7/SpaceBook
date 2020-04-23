@@ -84,7 +84,7 @@ const Details = ({ location }) => {
             <button>Go back</button>
           </Link>
           <Link
-            to={`/satellites/subscribe?id=${satellite.Id}`}
+            to={`/satellites/subscribe?id=${satellite.ResourceId}`}
             // state={{ satellite }}
           >
             <button>Subscribe</button>
