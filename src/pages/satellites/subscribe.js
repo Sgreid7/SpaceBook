@@ -50,7 +50,7 @@ const Subscribe = ({ location }) => {
         >
           <input type="hidden" name="form-name" value="subscribe" />
           <label htmlFor="name">Please enter your name</label>
-          <input type="text" name="name" placeholder="John Doe" />
+          <input type="text" name="name" placeholder="John Doe" required />
           <label htmlFor="email">Please enter your email</label>
           <input
             type="email"
@@ -59,7 +59,7 @@ const Subscribe = ({ location }) => {
             required
           />
           <label htmlFor="state">Please select your state</label>
-          <select name="state">
+          <select name="state" required>
             <option value="AL">Alabama</option>
             <option value="AK">Alaska</option>
             <option value="AZ">Arizona</option>
@@ -113,12 +113,13 @@ const Subscribe = ({ location }) => {
             <option value="WY">Wyoming</option>
           </select>
           <p>
-            Would you like to track and receive notifications for {satellite}?
+            Would you like to track and receive notifications for{" "}
+            <span>{satellite}</span>?
           </p>
           <div className="radio-buttons">
-            <input type="radio" name="notification" value="yes" />
+            <input type="radio" name="notification" value="yes" required />
             <label htmlFor="yes">Yes</label>
-            <input type="radio" name="notification" value="no" />
+            <input type="radio" name="notification" value="no" required />
             <label htmlFor="no">No</label>
           </div>
           <button className="send-button">Send</button>
@@ -142,10 +143,18 @@ const SubscribeSection = styled.section`
   flex-direction: column;
   align-items: center;
 
+  span {
+    font-style: italic;
+    font-weight: bold;
+    color: #00008b;
+    font-size: 1.1rem;
+  }
+
   form {
     display: flex;
     flex-direction: column;
     border: 0.3rem solid #ccc;
+    border-radius: 0.25rem;
     height: 100vh;
     margin-top: 2rem;
     padding: 1rem;

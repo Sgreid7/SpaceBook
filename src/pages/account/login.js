@@ -27,7 +27,7 @@ const Login = () => {
           <input type="password" placeholder="Password" name="password" />
           <button className="sign-in-button">Sign In</button>
           <Link to="account/create">
-            Don't have an account? Create one here!
+            Don't have an account? <span>Create one here!</span>
           </Link>
         </form>
       </AccountSection>
@@ -39,7 +39,7 @@ export default Login
 
 const AccountSection = styled.section`
   height: 100vh;
-  padding-top: 4rem;
+  padding-top: 5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -47,6 +47,7 @@ const AccountSection = styled.section`
   p {
     text-align: center;
     margin-bottom: 0.5rem;
+    font-size: 1.5rem;
   }
 
   form {
@@ -120,6 +121,10 @@ const AccountSection = styled.section`
   .sign-in-button:hover::after {
     transform: scaleX(1);
     transform-origin: right;
+  }
+
+  span {
+    border-bottom: 0.15rem solid #00008b;
   }
 
   a {

@@ -29,7 +29,7 @@ const Create = () => {
           <input type="email" placeholder="JohnDoe@email.com" name="email" />
           <button className="create-button">Create Account</button>
           <Link to="/account/login">
-            Already have an account? Sign in here!
+            Already have an account? <span>Sign in here!</span>
           </Link>
         </form>
       </AccountSection>
@@ -49,6 +49,7 @@ const AccountSection = styled.section`
   p {
     text-align: center;
     margin-bottom: 0.5rem;
+    font-size: 1.5rem;
   }
 
   form {
@@ -121,6 +122,10 @@ const AccountSection = styled.section`
   .create-button:hover::after {
     transform: scaleX(1);
     transform-origin: right;
+  }
+
+  span {
+    border-bottom: 0.15rem solid #00008b;
   }
 
   a {
