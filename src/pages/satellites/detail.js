@@ -51,6 +51,7 @@ const Details = ({ location }) => {
   useEffect(() => {
     if (location && location.state && location.state.satelliteInfo) {
       setSatellite(location.state.satelliteInfo)
+      getSatelliteInfo(location.state.satelliteInfo.ResourceId)
     } else {
       const resId = location.search.substring(4).replace(":/", "://")
       getSatelliteInfo(resId)

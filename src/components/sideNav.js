@@ -19,7 +19,7 @@ const SideNav = ({ style }) => {
             <Link to="/justLaunched">Just Launched</Link>
           </li>
           <li>
-            <Link to="/signup">Sign In</Link>
+            <Link to="/account/login">Sign In</Link>
           </li>
         </ul>
       </nav>
