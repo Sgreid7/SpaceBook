@@ -197,6 +197,7 @@ const ContentSection = styled.section`
 `
 
 const Image = styled.img`
+  /* Photo by NASA on unsplash */
   display: flex;
   justify-content: center;
   width: 60%;

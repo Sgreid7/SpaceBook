@@ -33,7 +33,6 @@ const Details = ({ location }) => {
       }
     )
     const data = await response.json()
-    // console.log(data.Observatory[1])
 
     const satellite = data.Observatory[1].filter(satellite => {
       return satellite.ResourceId === resId
@@ -70,11 +69,11 @@ const Details = ({ location }) => {
             <h2>{satellite.Name}</h2>
             <p className="date">Launch Date:</p>
             <p className="day">
-              {moment(satellite.StartTime[1]).format("MMM Do YYYY")}
+              {moment(satellite.StartTime[1]).format("MMMM Do, YYYY")}
             </p>
             <p className="date">End Date:</p>
             <p className="day">
-              {moment(satellite.EndTime[1]).format("MMM Do YYYY")}
+              {moment(satellite.EndTime[1]).format("MMMM Do, YYYY")}
             </p>
           </div>
         </header>

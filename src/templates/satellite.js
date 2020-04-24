@@ -37,6 +37,7 @@ const Content = styled.section`
     text-align: center;
     font-style: italic;
     margin-bottom: 1rem;
+    text-shadow: 0.2rem 0.2rem 0.2rem #000;
   }
 
   button {

@@ -6,16 +6,9 @@ import { Link } from "gatsby"
 import { useSpring } from "react-spring"
 import axios from "axios"
 
-// const Subscribe = () => {
-//   return <></>
-// }
-
-// export default Subscribe
-
 const Subscribe = ({ location }) => {
-  // console.log(location)
-
-  const [satellite, setSatellite] = useState("")
+  const [satellite, setSatellite] = useState({ StartTime: [], EndTime: [] })
+  const [name, setName] = useState("")
   const [isNavOpen, setNavOpen] = useState(false)
   const navAnimation = useSpring({
     transform: isNavOpen
@@ -25,16 +18,35 @@ const Subscribe = ({ location }) => {
 
   const resId = location.search.substring(4).replace(":/", "://")
 
+  const getSatellites = async resId => {
+    const response = await fetch(
+      "https://sscweb.sci.gsfc.nasa.gov/WS/sscr/2/spaseObservatories",
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+      }
+    )
+    const data = await response.json()
+
+    const satellite = data.Observatory[1].filter(satellite => {
+      return satellite.ResourceId === resId
+    })
+    setSatellite(satellite[0])
+  }
+
   const getSatelliteInfo = async resId => {
     const response = await axios.get(
       `https://cdaweb.gsfc.nasa.gov/registry/hdp/Spase.xql?id=${resId}`
     )
     console.log(response)
-    setSatellite(response.data.ResourceHeader.ResourceName)
+    setName(response.data.ResourceHeader.ResourceName)
   }
 
   useEffect(() => {
     const resId = location.search.substring(4).replace(":/", "://")
+    getSatellites(resId)
     getSatelliteInfo(resId)
   })
 
@@ -114,7 +126,7 @@ const Subscribe = ({ location }) => {
           </select>
           <p>
             Would you like to track and receive notifications for{" "}
-            <span>{satellite}</span>?
+            <span>{name}</span>?
           </p>
           <div className="radio-buttons">
             <input type="radio" name="notification" value="yes" required />
@@ -221,7 +233,6 @@ const SubscribeSection = styled.section`
 
     :hover {
       color: #fff;
-      border: #fff 0.15rem solid;
     }
   }
 
@@ -295,6 +306,8 @@ const ButtonSection = styled.section`
 
     :hover {
       cursor: pointer;
+      background: #00008b;
+      color: #fff;
     }
   }
 `
