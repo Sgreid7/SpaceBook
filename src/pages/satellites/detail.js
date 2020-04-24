@@ -6,6 +6,7 @@ import Layout from "../../components/layout"
 import SideNav from "../../components/sideNav"
 import devices from "../../utils/devices"
 import Cygnus from "../../images/Cygnus.jpg"
+import SEO from "../../components/seo"
 import moment from "moment"
 import axios from "axios"
 
@@ -64,6 +65,7 @@ const Details = ({ location }) => {
       <SideNav style={navAnimation} />
       <Content>
         <header>
+          <SEO title={satellite.Name} />
           <div>
             <h2>{satellite.Name}</h2>
             <p className="date">Launch Date:</p>

@@ -2,6 +2,7 @@ import React from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 import styled from "styled-components"
+import devices from "../utils/devices"
 
 import Header from "./header"
 import "./layout.css"
@@ -63,7 +64,7 @@ const FooterSection = styled.footer`
     margin-top: 0.5rem;
     margin-bottom: 0;
     /* font-style: italic; */
-    font-size: 1.5rem;
+    font-size: 1.3rem;
   }
 
   nav {
@@ -77,7 +78,7 @@ const FooterSection = styled.footer`
       padding: 0;
 
       > li {
-        margin: 0.5rem 10rem;
+        margin: 0.5rem 8rem;
 
         > a {
           text-decoration: none;
@@ -86,6 +87,10 @@ const FooterSection = styled.footer`
           transition: 0.5s ease;
           font-style: italic;
           text-shadow: 0.05rem 0.05rem 0.05rem #0000ff;
+        }
+
+        @media (${devices.laptop}) {
+          margin: 1rem 10rem;
         }
       }
     }

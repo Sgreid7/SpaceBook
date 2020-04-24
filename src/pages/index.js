@@ -1,13 +1,12 @@
 import React, { useState } from "react"
-// import { Link } from "gatsby"
 import { useSpring, animated } from "react-spring"
 import styled from "styled-components"
-import Satellites from "../pages/satellites"
 import Outerspace from "../images/outerspace.jpg"
-import { Router, Link, Location } from "@reach/router"
+import { Router, Link } from "@reach/router"
 import SideNav from "../components/sideNav"
-import SatellitePic from "../images/satellite.jpg"
-import Satellite from "../templates/satellite"
+import Astronaut from "../images/Astronaut.jpg"
+import Login from "../pages/account/login"
+import Create from "../pages/account/create"
 import devices from "../utils/devices"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
@@ -30,32 +29,35 @@ const IndexPage = () => {
   })
 
   return (
-    <Layout onClick={() => setNavOpen(!isNavOpen)}>
-      <SideNav style={navAnimation} />
-      <Main style={fade}>
-        <HeaderSection>
-          <SEO title="Home" />
-          <h1>SpaceBook</h1>
-          <h2>It's time to explore</h2>
-          <Link to="/satellites">
-            <button className="satellite-button">View Satellites</button>
-          </Link>
-        </HeaderSection>
-        <ContentSection>
-          <p>
-            SpaceBook is a satellite tracker that notifies you via text and/or
-            tweet when a satellite you are subscribed to is within your viewing
-            area. SpaceBook is also your go to website designed to keep you up
-            to date and informed with all things related to satellites.
-          </p>
-          <Image src={SatellitePic} alt="Satellite in space" />
-        </ContentSection>
-      </Main>
-    </Layout>
-    //  <Router>
-    //   <Satellites path="satellites" />
-    //   <Satellite path={`/satellites/detail?id=:ResourceId}`} />
-    // </Router>
+    <>
+      <Layout onClick={() => setNavOpen(!isNavOpen)}>
+        <SideNav style={navAnimation} />
+        <Main style={fade}>
+          <HeaderSection>
+            <SEO title="Home" />
+            <h1>SpaceBook</h1>
+            <h2>It's time to explore</h2>
+            <Link to="/satellites">
+              <button className="satellite-button">View Satellites</button>
+            </Link>
+          </HeaderSection>
+          <ContentSection>
+            <p>
+              SpaceBook is a satellite tracker that notifies you via text and/or
+              tweet when a satellite you are subscribed to is within your
+              viewing area. SpaceBook is also your go to website designed to
+              keep you up to date and informed with all things related to
+              satellites.
+            </p>
+            <Image src={Astronaut} alt="Astronaut" />
+          </ContentSection>
+        </Main>
+      </Layout>
+      <Router>
+        <Login path="/account/login" />
+        <Create path="/account/create" />
+      </Router>
+    </>
   )
 }
 
@@ -77,14 +79,14 @@ const HeaderSection = styled.header`
   overflow-x: hidden;
 
   h1 {
-    font-size: 5rem;
+    font-size: 4rem;
     margin-bottom: 2.55rem;
     text-shadow: 0.2rem 0.2rem 0.2rem #0000ff;
     font-style: oblique;
   }
 
   h2 {
-    font-size: 2.5rem;
+    font-size: 2rem;
     font-style: italic;
     margin-bottom: 2.55rem;
     text-shadow: 0.1rem 0.1rem 0.1rem #0000ff;
@@ -132,6 +134,16 @@ const HeaderSection = styled.header`
 
   .satellite-button:hover::after {
     transform: scale(1);
+  }
+
+  @media (${devices.tablet}) {
+    h1 {
+      font-size: 5rem;
+    }
+
+    h2 {
+      font-size: 2.5rem;
+    }
   }
 
   @media (${devices.laptopL}) {
@@ -190,8 +202,8 @@ const Image = styled.img`
   width: 60%;
   height: auto;
   max-width: 720px;
-  border-radius: 2rem;
+  border-radius: 1rem;
   text-align: center;
   margin: auto;
-  border: 0.1rem solid #8a2be2;
+  border: 0.1rem solid #00008b;
 `

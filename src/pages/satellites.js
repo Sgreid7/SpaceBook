@@ -4,6 +4,7 @@ import Layout from "../components/layout"
 import { useSpring } from "react-spring"
 import styled from "styled-components"
 import Satellite from "../templates/satellite"
+import SEO from "../components/seo"
 import PageLoader from "../components/pageLoader"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faSearch } from "@fortawesome/free-solid-svg-icons"
@@ -48,6 +49,7 @@ export default ({ data }) => {
     return (
       <Layout onClick={() => setNavOpen(!isNavOpen)}>
         <SideNav style={navAnimation} />
+        <SEO title="Satellites" />
         <SatelliteSection>
           <div className="search-box">
             <input
