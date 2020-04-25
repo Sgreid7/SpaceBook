@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
 import Layout from "../../components/layout"
 import SideNav from "../../components/sideNav"
+import SEO from "../../components/seo"
 import styled from "styled-components"
 import { Link } from "gatsby"
 import { useSpring } from "react-spring"
@@ -53,6 +54,7 @@ const Subscribe = ({ location }) => {
   return (
     <Layout onClick={() => setNavOpen(!isNavOpen)}>
       <SideNav style={navAnimation} />
+      <SEO title="Subscribe" />
       <SubscribeSection>
         <form
           name="subscribe"

@@ -4,9 +4,12 @@ import SideNav from "../../components/sideNav"
 import styled from "styled-components"
 import { Link } from "gatsby"
 import { useSpring } from "react-spring"
+import SEO from "../../components/seo"
 import devices from "../../utils/devices"
 
 const Login = () => {
+  const [username, setUsername] = useState("")
+  const [password, setPassword] = useState("")
   const [isNavOpen, setNavOpen] = useState(false)
   const navAnimation = useSpring({
     transform: isNavOpen
@@ -17,14 +20,27 @@ const Login = () => {
   return (
     <Layout onClick={() => setNavOpen(!isNavOpen)}>
       <SideNav style={navAnimation} />
+      <SEO title="Login" />
       <AccountSection>
-        <h2>Welcome to SpaceBook!</h2>
+        <h2>Welcome back to SpaceBook!</h2>
         <p>Sign In</p>
         <form>
           <label htmlFor="username">Please enter your username</label>
-          <input type="text" placeholder="Username" name="username" />
+          <input
+            type="text"
+            placeholder="Username"
+            name="username"
+            value={username}
+            onChange={e => setUsername(e.target.value)}
+          />
           <label htmlFor="password">Please enter your password</label>
-          <input type="password" placeholder="Password" name="password" />
+          <input
+            type="password"
+            placeholder="Password"
+            name="password"
+            value={password}
+            onChange={e => setPassword(e.target.value)}
+          />
           <button className="sign-in-button">Sign In</button>
           <Link to="account/create">
             Don't have an account? <span>Create one here!</span>
@@ -47,7 +63,12 @@ const AccountSection = styled.section`
   p {
     text-align: center;
     margin-bottom: 0.5rem;
-    font-size: 1.5rem;
+    font-style: italic;
+    font-size: 2rem;
+    color: black;
+    -webkit-text-fill-color: white; /* Will override color (regardless of order) */
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: #00008b;
   }
 
   form {
@@ -97,7 +118,6 @@ const AccountSection = styled.section`
 
     :hover {
       color: #fff;
-      border: #fff 0.15rem solid;
     }
   }
 

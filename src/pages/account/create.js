@@ -4,9 +4,13 @@ import SideNav from "../../components/sideNav"
 import styled from "styled-components"
 import { Link } from "gatsby"
 import { useSpring } from "react-spring"
+import SEO from "../../components/seo"
 import devices from "../../utils/devices"
 
 const Create = () => {
+  const [username, setUsername] = useState("")
+  const [password, setPassword] = useState("")
+  const [email, setEmail] = useState("")
   const [isNavOpen, setNavOpen] = useState(false)
   const navAnimation = useSpring({
     transform: isNavOpen
@@ -17,16 +21,35 @@ const Create = () => {
   return (
     <Layout onClick={() => setNavOpen(!isNavOpen)}>
       <SideNav style={navAnimation} />
+      <SEO title="Create Account" />
       <AccountSection>
         <h2>Welcome to SpaceBook!</h2>
         <p>Create Account</p>
         <form>
           <label htmlFor="username">Please enter your username</label>
-          <input type="text" placeholder="Username" name="username" />
+          <input
+            type="text"
+            placeholder="Username"
+            name="username"
+            value={username}
+            onChange={e => setUsername(e.target.value)}
+          />
           <label htmlFor="password">Please enter your password</label>
-          <input type="password" placeholder="Password" name="password" />
+          <input
+            type="password"
+            placeholder="Password"
+            name="password"
+            value={password}
+            onChange={e => setPassword(e.target.value)}
+          />
           <label htmlFor="email">Please enter your email</label>
-          <input type="email" placeholder="JohnDoe@email.com" name="email" />
+          <input
+            type="email"
+            placeholder="JohnDoe@email.com"
+            name="email"
+            value={email}
+            onChange={e => setEmail(e.target.value)}
+          />
           <button className="create-button">Create Account</button>
           <Link to="/account/login">
             Already have an account? <span>Sign in here!</span>
@@ -41,7 +64,7 @@ export default Create
 
 const AccountSection = styled.section`
   height: 100vh;
-  padding-top: 4rem;
+  padding-top: 5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -49,7 +72,12 @@ const AccountSection = styled.section`
   p {
     text-align: center;
     margin-bottom: 0.5rem;
-    font-size: 1.5rem;
+    font-style: italic;
+    font-size: 2rem;
+    color: black;
+    -webkit-text-fill-color: white; /* Will override color (regardless of order) */
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: #00008b;
   }
 
   form {
@@ -98,7 +126,6 @@ const AccountSection = styled.section`
 
     :hover {
       color: #fff;
-      border: #fff 0.15rem solid;
     }
   }
 

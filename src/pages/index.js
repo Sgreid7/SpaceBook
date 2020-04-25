@@ -4,9 +4,9 @@ import styled from "styled-components"
 import Outerspace from "../images/outerspace.jpg"
 import { Router, Link } from "@reach/router"
 import SideNav from "../components/sideNav"
-import Astronaut from "../images/Astronaut.jpg"
 import Login from "../pages/account/login"
 import Create from "../pages/account/create"
+import Astronaut from "../images/Astronaut.jpg"
 import devices from "../utils/devices"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
@@ -43,11 +43,10 @@ const IndexPage = () => {
           </HeaderSection>
           <ContentSection>
             <p>
-              SpaceBook is a satellite tracker that notifies you via text and/or
-              tweet when a satellite you are subscribed to is within your
-              viewing area. SpaceBook is also your go to website designed to
-              keep you up to date and informed with all things related to
-              satellites.
+              SpaceBook is a satellite tracker that notifies you when a
+              satellite you are subscribed to is within your viewing area.
+              SpaceBook is also your go to website designed to keep you up to
+              date and informed with all things related to satellites.
             </p>
             <Image src={Astronaut} alt="Astronaut" />
           </ContentSection>

@@ -107,33 +107,6 @@ const path = require(`path`)
 //   return promise1
 // }
 
-const getSatellites = async () => {
-  const response = await fetch(
-    "https://sscweb.sci.gsfc.nasa.gov/WS/sscr/2/spaseObservatories",
-    {
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-    }
-  )
-  const data = await response.json()
-  // console.log(data.Observatory[1])
-  const satellites = data.Observatory[1]
-}
-
-const getDetails = async resId => {
-  // console.log("resId: ", resId)
-  // takes in resourceId to get more information about satellite
-  const details = await axios({
-    method: "GET",
-    url: `https://cdaweb.gsfc.nasa.gov/registry/hdp/Spase.xql?id=${resId}`,
-    headers: {
-      Accept: "application/json",
-    },
-  })
-}
-
 // const getSatelliteData = () => {
 //   Promise.all(
 //     observatories.data.Observatory[1].map(async observatory => {
@@ -150,87 +123,87 @@ const getDetails = async resId => {
 //   const satellites = await getSatelliteData()
 // }
 
-exports.createPages = async ({ graphql, actions }) => {
-  const satelliteTemplate = path.resolve(`./src/templates/satellite.js`)
-  const subscribeTemplate = path.resolve(`./src/templates/subscribe.js`)
-  const { createPage } = actions
-  const resp = await graphql(`
-    query SatelliteInfo {
-      allSatellite {
-        nodes {
-          id
-          name
-          nameID
-          resourceId
-          resolution
-          startTime(formatString: "MMM DD, YYYY")
-          endTime(formatString: "MMM DD, YYYY")
-          details {
-            description
-          }
-        }
-      }
-    }
-  `)
+// exports.createPages = async ({ graphql, actions }) => {
+//   const satelliteTemplate = path.resolve(`./src/templates/satellite.js`)
+//   const subscribeTemplate = path.resolve(`./src/templates/subscribe.js`)
+//   const { createPage } = actions
+//   const resp = await graphql(`
+//     query SatelliteInfo {
+//       allSatellite {
+//         nodes {
+//           id
+//           name
+//           nameID
+//           resourceId
+//           resolution
+//           startTime(formatString: "MMM DD, YYYY")
+//           endTime(formatString: "MMM DD, YYYY")
+//           details {
+//             description
+//           }
+//         }
+//       }
+//     }
+//   `)
 
-  // console.log({ resp })
+// console.log({ resp })
 
-  const satellitePages = resp.data.allSatellite.nodes
+// const satellitePages = resp.data.allSatellite.nodes
 
-  satellitePages.forEach(node => {
-    // create detail page
-    createPage({
-      path: `/satellites/${node.id}`,
-      component: satelliteTemplate,
-      context: {
-        id: node.id,
-        nameID: node.nameID,
-        resolution: node.resolution,
-        endTime: node.endTime,
-        startTime: node.startTime,
-        name: node.name,
-        resourceId: node.resourceId,
-        details: node.details,
-        description: node.details.description,
-      },
-    })
+// satellitePages.forEach(node => {
+//   // create detail page
+//   createPage({
+//     path: `/satellites/${node.id}`,
+//     component: satelliteTemplate,
+//     context: {
+//       id: node.id,
+//       nameID: node.nameID,
+//       resolution: node.resolution,
+//       endTime: node.endTime,
+//       startTime: node.startTime,
+//       name: node.name,
+//       resourceId: node.resourceId,
+//       details: node.details,
+//       description: node.details.description,
+//     },
+//   })
 
-    // create subscribe page
-    createPage({
-      path: `/subscribe/${node.id}`,
-      component: subscribeTemplate,
-      context: {
-        id: node.id,
-        name: node.name,
-      },
-    })
-  })
+//   // create subscribe page
+//   createPage({
+//     path: `/subscribe/${node.id}`,
+//     component: subscribeTemplate,
+//     context: {
+//       id: node.id,
+//       name: node.name,
+//     },
+//   })
+// })
 
-  // console.log({ resp })
-  // const satellitePages = resp.data.allSatellite.edges
-  // await Promise.all(
-  //   satellitePages.map(({ node }) => {
-  //     // console.log(node)
-  //     return createPage({
-  //       // Path for this page — required
-  //       path: `/satellites/${node.id}`,
-  //       component: satelliteTemplate,
-  //       // use the node props
-  //       context: {
-  //         id: node.id,
-  //         nameID: node.nameID,
-  //         resolution: node.resolution,
-  //         endTime: node.endTime,
-  //         startTime: node.startTime,
-  //         name: node.name,
-  //         resourceId: node.resourceId,
-  //         details: node.details,
-  //         description: node.details.description,
-  //       },
-  //     })
-  //   })
-  // )
-}
+// console.log({ resp })
+// const satellitePages = resp.data.allSatellite.edges
+// await Promise.all(
+//   satellitePages.map(({ node }) => {
+//     // console.log(node)
+//     return createPage({
+//       // Path for this page — required
+//       path: `/satellites/${node.id}`,
+//       component: satelliteTemplate,
+//       // use the node props
+//       context: {
+//         id: node.id,
+//         nameID: node.nameID,
+//         resolution: node.resolution,
+//         endTime: node.endTime,
+//         startTime: node.startTime,
+//         name: node.name,
+//         resourceId: node.resourceId,
+//         details: node.details,
+//         description: node.details.description,
+//       },
+//     })
+//   })
+// )
+// }
 
 exports.createSchemaCustomization = ({ actions }) => {
   const { createTypes } = actions
