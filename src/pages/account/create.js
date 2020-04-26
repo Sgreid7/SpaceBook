@@ -2,15 +2,17 @@ import React, { useState } from "react"
 import Layout from "../../components/layout"
 import SideNav from "../../components/sideNav"
 import styled from "styled-components"
-import { Link } from "gatsby"
+import { Link, navigate } from "gatsby"
 import { useSpring } from "react-spring"
 import SEO from "../../components/seo"
-import devices from "../../utils/devices"
+import axios from "axios"
 
 const Create = () => {
-  const [username, setUsername] = useState("")
+  const [name, setName] = useState("")
   const [password, setPassword] = useState("")
   const [email, setEmail] = useState("")
+  const [shouldRedirect, setShouldRedirect] = useState(false)
+
   const [isNavOpen, setNavOpen] = useState(false)
   const navAnimation = useSpring({
     transform: isNavOpen
@@ -18,21 +20,40 @@ const Create = () => {
       : `translate3d(100%, 0, 0) scale(0.6)`,
   })
 
+  const sendNewUserToApi = async e => {
+    e.preventDefault()
+    const resp = await axios.post("https://localhost:5001/auth/signup", {
+      name: name,
+      password: password,
+      email: email,
+    })
+    // console.log(resp.data)
+    if (resp.status === 200) {
+      localStorage.setItem("token", resp.data.token)
+      // redirect to home page
+      setShouldRedirect(true)
+    }
+  }
+
+  if (shouldRedirect) {
+    navigate("/")
+  }
+
   return (
     <Layout onClick={() => setNavOpen(!isNavOpen)}>
       <SideNav style={navAnimation} />
       <SEO title="Create Account" />
       <AccountSection>
         <h2>Welcome to SpaceBook!</h2>
-        <p>Create Account</p>
         <form>
-          <label htmlFor="username">Please enter your username</label>
+          <p>Create Account</p>
+          <label htmlFor="username">Please enter your name</label>
           <input
             type="text"
-            placeholder="Username"
-            name="username"
-            value={username}
-            onChange={e => setUsername(e.target.value)}
+            placeholder="John Doe"
+            name="name"
+            value={name}
+            onChange={e => setName(e.target.value)}
           />
           <label htmlFor="password">Please enter your password</label>
           <input
@@ -50,7 +71,9 @@ const Create = () => {
             value={email}
             onChange={e => setEmail(e.target.value)}
           />
-          <button className="create-button">Create Account</button>
+          <button className="create-button" onClick={sendNewUserToApi}>
+            Create Account
+          </button>
           <Link to="/account/login">
             Already have an account? <span>Sign in here!</span>
           </Link>
@@ -97,10 +120,11 @@ const AccountSection = styled.section`
 
     input {
       padding: 0.5rem;
+      border: 0.1rem solid #00008b;
 
       :focus {
         outline: none;
-        border: 0.1rem solid #00008b;
+        border: 0.1rem solid #8a2be2;
       }
     }
   }

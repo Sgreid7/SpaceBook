@@ -6,10 +6,17 @@ import { Link } from "gatsby"
 import { useSpring } from "react-spring"
 import SEO from "../../components/seo"
 import devices from "../../utils/devices"
+import axios from "axios"
 
 const Login = () => {
-  const [username, setUsername] = useState("")
+  const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+
+  const [loginEmail, setLoginEmail] = useState("")
+  const [loginPassword, setLoginPassword] = useState("")
+
+  const [token, setToken] = useState("")
+
   const [isNavOpen, setNavOpen] = useState(false)
   const navAnimation = useSpring({
     transform: isNavOpen
@@ -17,32 +24,52 @@ const Login = () => {
       : `translate3d(100%, 0, 0) scale(0.6)`,
   })
 
+  const loginUser = async e => {
+    e.preventDefault()
+    const resp = await axios.post("https://localhost:5001/auth/login", {
+      email: loginEmail,
+      password: loginPassword,
+    })
+    console.log(resp.data)
+    setToken(resp.data.token)
+  }
+
+  const getSecretInformation = async () => {
+    const resp = await axios.get("https://localhost:5001/api/secret", {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    })
+  }
+
   return (
     <Layout onClick={() => setNavOpen(!isNavOpen)}>
       <SideNav style={navAnimation} />
       <SEO title="Login" />
       <AccountSection>
         <h2>Welcome back to SpaceBook!</h2>
-        <p>Sign In</p>
         <form>
-          <label htmlFor="username">Please enter your username</label>
+          <p>Sign In</p>
+          <label htmlFor="username">Please enter your email</label>
           <input
             type="text"
             placeholder="Username"
             name="username"
-            value={username}
-            onChange={e => setUsername(e.target.value)}
+            value={loginEmail}
+            onChange={e => setLoginEmail(e.target.value)}
           />
           <label htmlFor="password">Please enter your password</label>
           <input
             type="password"
             placeholder="Password"
             name="password"
-            value={password}
-            onChange={e => setPassword(e.target.value)}
+            value={loginPassword}
+            onChange={e => setLoginPassword(e.target.value)}
           />
-          <button className="sign-in-button">Sign In</button>
-          <Link to="account/create">
+          <button className="sign-in-button" onClick={loginUser}>
+            Sign In
+          </button>
+          <Link to="/account/create">
             Don't have an account? <span>Create one here!</span>
           </Link>
         </form>
@@ -62,7 +89,7 @@ const AccountSection = styled.section`
 
   p {
     text-align: center;
-    margin-bottom: 0.5rem;
+    margin: 0;
     font-style: italic;
     font-size: 2rem;
     color: black;
@@ -89,10 +116,11 @@ const AccountSection = styled.section`
 
     input {
       padding: 0.5rem;
+      border: 0.1rem solid #00008b;
 
       :focus {
         outline: none;
-        border: 0.1rem solid #00008b;
+        border: 0.1rem solid #8a2be2;
       }
     }
   }

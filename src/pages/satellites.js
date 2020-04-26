@@ -45,7 +45,7 @@ export default ({ data }) => {
 
   console.log(satellites)
 
-  if (satellites) {
+  if (satellites.length > 0) {
     return (
       <Layout onClick={() => setNavOpen(!isNavOpen)}>
         <SideNav style={navAnimation} />
