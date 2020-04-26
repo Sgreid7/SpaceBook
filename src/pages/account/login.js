@@ -30,7 +30,7 @@ const Login = () => {
       email: loginEmail,
       password: loginPassword,
     })
-    console.log(resp.data)
+    // console.log(resp.data)
     setToken(resp.data.token)
   }
 

@@ -27,7 +27,6 @@ const Create = () => {
       password: password,
       email: email,
     })
-    // console.log(resp.data)
     if (resp.status === 200) {
       localStorage.setItem("token", resp.data.token)
       // redirect to home page
@@ -36,7 +35,7 @@ const Create = () => {
   }
 
   if (shouldRedirect) {
-    navigate("/")
+    navigate("/account/profile")
   }
 
   return (

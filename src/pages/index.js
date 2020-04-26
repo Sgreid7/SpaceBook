@@ -51,11 +51,11 @@ const IndexPage = () => {
             <Image src={Astronaut} alt="Astronaut" />
           </ContentSection>
         </Main>
+        <Router>
+          <Login path="/account/login" />
+          <Create path="/account/create" />
+        </Router>
       </Layout>
-      <Router>
-        <Login path="/account/login" />
-        <Create path="/account/create" />
-      </Router>
     </>
   )
 }
