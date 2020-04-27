@@ -27,6 +27,7 @@ const Create = () => {
       password: password,
       email: email,
     })
+
     if (resp.status === 200) {
       localStorage.setItem("token", resp.data.token)
       // redirect to profile
@@ -43,7 +44,6 @@ const Create = () => {
       <SideNav style={navAnimation} />
       <SEO title="Create Account" />
       <AccountSection>
-        <h2>Welcome to SpaceBook!</h2>
         <form>
           <p>Create Account</p>
           <label htmlFor="username">Please enter your name</label>
@@ -95,7 +95,7 @@ const AccountSection = styled.section`
     text-align: center;
     margin-bottom: 0.5rem;
     font-style: italic;
-    font-size: 2rem;
+    font-size: 3rem;
     color: black;
     -webkit-text-fill-color: white; /* Will override color (regardless of order) */
     -webkit-text-stroke-width: 1px;
@@ -120,6 +120,7 @@ const AccountSection = styled.section`
     input {
       padding: 0.5rem;
       border: 0.1rem solid #00008b;
+      margin-bottom: 1rem;
 
       :focus {
         outline: none;

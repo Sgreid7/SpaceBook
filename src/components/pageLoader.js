@@ -1,5 +1,4 @@
 import React, { useState } from "react"
-import SVG from "../images/SVG.svg"
 import styled from "styled-components"
 import Layout from "../components/layout"
 import SideNav from "../components/sideNav"

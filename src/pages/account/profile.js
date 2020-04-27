@@ -3,6 +3,7 @@ import { navigate } from "gatsby"
 import { useSpring } from "react-spring"
 import Layout from "../../components/layout"
 import SideNav from "../../components/sideNav"
+import SEO from "../../components/seo"
 import styled from "styled-components"
 import moment from "moment"
 import axios from "axios"
@@ -47,6 +48,7 @@ const Profile = () => {
   return (
     <Layout onClick={() => setNavOpen(!isNavOpen)}>
       <SideNav style={navAnimation} />
+      <SEO title="Profile" />
       <ProfileSection>
         <h1>Hello, {profile.name}</h1>
         <h3>Here are the satellites you are subscribed to:</h3>

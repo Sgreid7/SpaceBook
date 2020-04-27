@@ -51,7 +51,6 @@ const Login = () => {
       <SideNav style={navAnimation} />
       <SEO title="Login" />
       <AccountSection>
-        <h2>Welcome back to SpaceBook!</h2>
         <form>
           <p>Sign In</p>
           <label htmlFor="email">Please enter your email</label>
@@ -95,7 +94,7 @@ const AccountSection = styled.section`
     text-align: center;
     margin: 0;
     font-style: italic;
-    font-size: 2rem;
+    font-size: 3rem;
     color: black;
     -webkit-text-fill-color: white; /* Will override color (regardless of order) */
     -webkit-text-stroke-width: 1px;

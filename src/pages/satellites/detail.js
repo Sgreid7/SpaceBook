@@ -11,8 +11,6 @@ import moment from "moment"
 import axios from "axios"
 
 const Details = ({ location }) => {
-  // console.log(location)
-
   const [satellite, setSatellite] = useState({ StartTime: [], EndTime: [] })
   const [description, setDescription] = useState("")
   const [token, setToken] = useState(undefined)
@@ -34,10 +32,10 @@ const Details = ({ location }) => {
       }
     )
     const data = await response.json()
-
     const satellite = data.Observatory[1].filter(satellite => {
       return satellite.ResourceId === resId
     })
+
     setSatellite(satellite[0])
   }
 
@@ -45,12 +43,13 @@ const Details = ({ location }) => {
     const response = await axios.get(
       `https://cdaweb.gsfc.nasa.gov/registry/hdp/Spase.xql?id=${resId}`
     )
-    console.log(response)
+
     setDescription(response.data.ResourceHeader.Description)
   }
 
   useEffect(() => {
     setToken(localStorage.getItem("token"))
+
     if (location && location.state && location.state.satelliteInfo) {
       setSatellite(location.state.satelliteInfo)
       getSatelliteInfo(location.state.satelliteInfo.ResourceId)
