@@ -15,6 +15,7 @@ const Details = ({ location }) => {
 
   const [satellite, setSatellite] = useState({ StartTime: [], EndTime: [] })
   const [description, setDescription] = useState("")
+  const [token, setToken] = useState(undefined)
   const [isNavOpen, setNavOpen] = useState(false)
   const navAnimation = useSpring({
     transform: isNavOpen
@@ -49,6 +50,7 @@ const Details = ({ location }) => {
   }
 
   useEffect(() => {
+    setToken(localStorage.getItem("token"))
     if (location && location.state && location.state.satelliteInfo) {
       setSatellite(location.state.satelliteInfo)
       getSatelliteInfo(location.state.satelliteInfo.ResourceId)
@@ -84,7 +86,7 @@ const Details = ({ location }) => {
           <Link to="/satellites">
             <button>Go back</button>
           </Link>
-          {localStorage.getItem("token") ? (
+          {token ? (
             <Link to={`/satellites/subscribe?id=${satellite.ResourceId}`}>
               <button>Subscribe</button>
             </Link>
