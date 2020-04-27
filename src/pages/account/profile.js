@@ -39,11 +39,10 @@ const Profile = () => {
   useEffect(() => {
     loadProfile()
     // getUsersSatellites()
+    if (!localStorage.getItem("token")) {
+      navigate("/account/login")
+    }
   }, [])
-
-  if (!localStorage.getItem("token")) {
-    navigate("/account/login")
-  }
 
   return (
     <Layout onClick={() => setNavOpen(!isNavOpen)}>

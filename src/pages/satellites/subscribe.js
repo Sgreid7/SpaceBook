@@ -9,6 +9,8 @@ import axios from "axios"
 
 const Subscribe = ({ location }) => {
   const [satellite, setSatellite] = useState({ StartTime: [], EndTime: [] })
+  const [state, setState] = useState("")
+  const [receiveNotifications, setReceiveNotifications] = useState(false)
   const [name, setName] = useState("")
   const [isNavOpen, setNavOpen] = useState(false)
   const navAnimation = useSpring({
@@ -58,11 +60,27 @@ const Subscribe = ({ location }) => {
     )
   }
 
+  const updateUserInfo = async e => {
+    e.preventDefault()
+    const resp = axios.put(
+      `https://localhost:5001/api/user`,
+      {
+        state: state,
+        receiveNotifications: receiveNotifications,
+      },
+      {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      }
+    )
+  }
+
   useEffect(() => {
     const resId = location.search.substring(4).replace(":/", "://")
     getSatellites(resId)
     getSatelliteInfo(resId)
-  })
+  }, [])
 
   return (
     <Layout onClick={() => setNavOpen(!isNavOpen)}>
@@ -86,7 +104,11 @@ const Subscribe = ({ location }) => {
             required
           />
           <label htmlFor="state">Please select your state</label>
-          <select name="state" required>
+          <select
+            name="state"
+            required
+            onChange={e => setState(e.target.value)}
+          >
             <option value="AL">Alabama</option>
             <option value="AK">Alaska</option>
             <option value="AZ">Arizona</option>
@@ -144,12 +166,30 @@ const Subscribe = ({ location }) => {
             <span>{name}</span>?
           </p>
           <div className="radio-buttons">
-            <input type="radio" name="notification" value="yes" required />
+            <input
+              type="radio"
+              name="notification"
+              value="yes"
+              onChange={e => setReceiveNotifications(true)}
+              required
+            />
             <label htmlFor="yes">Yes</label>
-            <input type="radio" name="notification" value="no" required />
+            <input
+              type="radio"
+              name="notification"
+              value="no"
+              onChange={e => setReceiveNotifications(true)}
+              required
+            />
             <label htmlFor="no">No</label>
           </div>
-          <button className="send-button" onClick={saveSatelliteForUser}>
+          <button
+            className="send-button"
+            onClick={() => {
+              saveSatelliteForUser()
+              updateUserInfo()
+            }}
+          >
             Send
           </button>
         </form>
