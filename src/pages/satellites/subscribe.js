@@ -30,10 +30,10 @@ const Subscribe = ({ location }) => {
       }
     )
     const data = await response.json()
-
     const satellite = data.Observatory[1].filter(satellite => {
       return satellite.ResourceId === resId
     })
+    // console.log(satellite[0])
     setSatellite(satellite[0])
   }
 
@@ -41,8 +41,21 @@ const Subscribe = ({ location }) => {
     const response = await axios.get(
       `https://cdaweb.gsfc.nasa.gov/registry/hdp/Spase.xql?id=${resId}`
     )
-    console.log(response)
+    // console.log(response)
     setName(response.data.ResourceHeader.ResourceName)
+  }
+
+  const saveSatelliteForUser = async e => {
+    e.preventDefault()
+    const resp = axios.post(
+      `https://localhost:5001/api/subscribedto/${satellite.Id}`,
+      {},
+      {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      }
+    )
   }
 
   useEffect(() => {
@@ -136,7 +149,9 @@ const Subscribe = ({ location }) => {
             <input type="radio" name="notification" value="no" required />
             <label htmlFor="no">No</label>
           </div>
-          <button className="send-button">Send</button>
+          <button className="send-button" onClick={saveSatelliteForUser}>
+            Send
+          </button>
         </form>
       </SubscribeSection>
       <ButtonSection>
@@ -178,19 +193,23 @@ const SubscribeSection = styled.section`
     label {
       margin-top: 1.5rem;
       margin-bottom: 0.5rem;
+      color: #00008b;
     }
 
     input[type="text"],
-    input[type="email"] {
+    input[type="email"],
+    select {
       padding: 0.5rem;
+      border: 0.1rem solid #00008b;
 
       :focus {
         outline: none;
-        border: 0.1rem solid #00008b;
+        border: 0.1rem solid #8a2be2;
       }
     }
 
     p {
+      color: #00008b;
       margin-top: 1.5rem;
     }
 

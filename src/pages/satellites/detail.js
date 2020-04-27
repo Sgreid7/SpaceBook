@@ -84,12 +84,13 @@ const Details = ({ location }) => {
           <Link to="/satellites">
             <button>Go back</button>
           </Link>
-          <Link
-            to={`/satellites/subscribe?id=${satellite.ResourceId}`}
-            // state={{ satellite }}
-          >
-            <button>Subscribe</button>
-          </Link>
+          {localStorage.getItem("token") ? (
+            <Link to={`/satellites/subscribe?id=${satellite.ResourceId}`}>
+              <button>Subscribe</button>
+            </Link>
+          ) : (
+            <></>
+          )}
         </Buttons>
       </Content>
     </Layout>
