@@ -2,20 +2,16 @@ import React, { useState } from "react"
 import Layout from "../../components/layout"
 import SideNav from "../../components/sideNav"
 import styled from "styled-components"
-import { Link } from "gatsby"
+import { Link, navigate } from "gatsby"
 import { useSpring } from "react-spring"
 import SEO from "../../components/seo"
 import devices from "../../utils/devices"
 import axios from "axios"
 
 const Login = () => {
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-
   const [loginEmail, setLoginEmail] = useState("")
   const [loginPassword, setLoginPassword] = useState("")
-
-  const [token, setToken] = useState("")
+  const [shouldRedirect, setShouldRedirect] = useState(false)
 
   const [isNavOpen, setNavOpen] = useState(false)
   const navAnimation = useSpring({
@@ -31,15 +27,23 @@ const Login = () => {
       password: loginPassword,
     })
     // console.log(resp.data)
-    setToken(resp.data.token)
+    if (resp.status === 200) {
+      localStorage.setItem("token", resp.data.token)
+      // redirect to profile
+      setShouldRedirect(true)
+    }
   }
 
-  const getSecretInformation = async () => {
-    const resp = await axios.get("https://localhost:5001/api/secret", {
-      headers: {
-        Authorization: "Bearer " + token,
-      },
-    })
+  // const getSecretInformation = async () => {
+  //   const resp = await axios.get("https://localhost:5001/api/secret", {
+  //     headers: {
+  //       Authorization: `Bearer ${token}`,
+  //     },
+  //   })
+  // }
+
+  if (shouldRedirect) {
+    navigate("/account/profile")
   }
 
   return (
@@ -50,10 +54,10 @@ const Login = () => {
         <h2>Welcome back to SpaceBook!</h2>
         <form>
           <p>Sign In</p>
-          <label htmlFor="username">Please enter your email</label>
+          <label htmlFor="email">Please enter your email</label>
           <input
             type="text"
-            placeholder="Username"
+            placeholder="Email"
             name="username"
             value={loginEmail}
             onChange={e => setLoginEmail(e.target.value)}

@@ -29,7 +29,7 @@ const Create = () => {
     })
     if (resp.status === 200) {
       localStorage.setItem("token", resp.data.token)
-      // redirect to home page
+      // redirect to profile
       setShouldRedirect(true)
     }
   }
