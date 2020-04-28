@@ -5,7 +5,6 @@ import styled from "styled-components"
 import { Link, navigate } from "gatsby"
 import { useSpring } from "react-spring"
 import SEO from "../../components/seo"
-import devices from "../../utils/devices"
 import axios from "axios"
 
 const Login = () => {
@@ -22,25 +21,20 @@ const Login = () => {
 
   const loginUser = async e => {
     e.preventDefault()
-    const resp = await axios.post("https://localhost:5001/auth/login", {
-      email: loginEmail,
-      password: loginPassword,
-    })
-    // console.log(resp.data)
+    const resp = await axios.post(
+      "https://spacebookapi.herokuapp.com/auth/login",
+      {
+        email: loginEmail,
+        password: loginPassword,
+      }
+    )
+
     if (resp.status === 200) {
       localStorage.setItem("token", resp.data.token)
       // redirect to profile
       setShouldRedirect(true)
     }
   }
-
-  // const getSecretInformation = async () => {
-  //   const resp = await axios.get("https://localhost:5001/api/secret", {
-  //     headers: {
-  //       Authorization: `Bearer ${token}`,
-  //     },
-  //   })
-  // }
 
   if (shouldRedirect) {
     navigate("/account/profile")

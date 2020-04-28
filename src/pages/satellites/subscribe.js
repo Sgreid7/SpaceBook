@@ -36,7 +36,7 @@ const Subscribe = ({ location }) => {
     const satellite = data.Observatory[1].filter(satellite => {
       return satellite.ResourceId === resId
     })
-    // console.log(satellite[0])
+
     setSatellite(satellite[0])
   }
 
@@ -44,13 +44,13 @@ const Subscribe = ({ location }) => {
     const response = await axios.get(
       `https://cdaweb.gsfc.nasa.gov/registry/hdp/Spase.xql?id=${resId}`
     )
-    // console.log(response)
+
     setName(response.data.ResourceHeader.ResourceName)
   }
 
   const saveSatelliteForUser = async () => {
     const resp = axios.post(
-      `https://localhost:5001/api/subscribedto/${satellite.Id}`,
+      `https://spacebookapi.herokuapp.com/api/subscribedto/${satellite.Id}`,
       {},
       {
         headers: {
@@ -62,22 +62,6 @@ const Subscribe = ({ location }) => {
     if (resp.status === 200) {
       setShouldRedirect(true)
     }
-  }
-
-  const updateUserInfo = async e => {
-    e.preventDefault()
-    const resp = axios.put(
-      `https://localhost:5001/api/user`,
-      {
-        state: state,
-        receiveNotifications: receiveNotifications,
-      },
-      {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      }
-    )
   }
 
   useEffect(() => {
@@ -195,7 +179,6 @@ const Subscribe = ({ location }) => {
             className="send-button"
             onClick={() => {
               saveSatelliteForUser()
-              updateUserInfo()
             }}
           >
             Send

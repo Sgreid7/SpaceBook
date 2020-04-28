@@ -178,7 +178,6 @@ const ContentSection = styled.section`
     color: #fff;
     text-shadow: 0.05rem 0.05rem 0.05rem #0000ff;
     line-height: 2rem;
-    /* width: 70%; */
   }
 
   @media (${devices.laptop}) {

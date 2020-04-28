@@ -19,18 +19,21 @@ const Profile = () => {
   })
 
   const loadProfile = async () => {
-    const resp = await axios.get("https://localhost:5001/api/profile", {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    })
+    const resp = await axios.get(
+      "https://spacebookapi.herokuapp.com/api/profile",
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
+    )
 
     setProfile(resp.data)
   }
 
   const deleteSatellite = async id => {
     const resp = await axios.delete(
-      `https://localhost:5001/api/subscribedto/${id}`,
+      `https://spacebookapi.herokuapp.com/api/subscribedto/${id}`,
       {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,

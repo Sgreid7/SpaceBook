@@ -22,11 +22,14 @@ const Create = () => {
 
   const sendNewUserToApi = async e => {
     e.preventDefault()
-    const resp = await axios.post("https://localhost:5001/auth/signup", {
-      name: name,
-      password: password,
-      email: email,
-    })
+    const resp = await axios.post(
+      "https://spacebookapi.herokuapp.com/auth/signup",
+      {
+        name: name,
+        password: password,
+        email: email,
+      }
+    )
 
     if (resp.status === 200) {
       localStorage.setItem("token", resp.data.token)

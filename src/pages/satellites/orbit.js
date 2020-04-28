@@ -35,13 +35,13 @@ const Orbit = () => {
       }
     )
     const data = await response.json()
-    // console.log(data.Observatory[1])
+
     const now = new Date()
     now.setHours(0, 0, 0, 0)
     const satellites = data.Observatory[1].filter(
       satellite => Date.parse(satellite.EndTime[1]) > now
     )
-    console.log(satellites)
+
     setSatellites(satellites)
   }
 
@@ -90,7 +90,6 @@ const Orbit = () => {
 export default Orbit
 
 const SatelliteSection = styled.section`
-  /* margin-top: 3rem; */
   padding-top: 5rem;
   min-height: 100vh;
   display: flex;

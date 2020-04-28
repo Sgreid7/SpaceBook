@@ -35,15 +35,12 @@ const Satellites = () => {
       }
     )
     const data = await response.json()
-    // console.log(data.Observatory[1])
     setSatellites(data.Observatory[1])
   }
 
   useEffect(() => {
     getSatellites()
   }, [])
-
-  console.log(satellites)
 
   if (satellites.length > 0) {
     return (
