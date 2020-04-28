@@ -10,16 +10,19 @@ const SideNav = ({ style }) => {
       <nav>
         <ul>
           <li>
+            <Link to="/satellites">All Satellites</Link>
+          </li>
+          <li>
             <Link to="/mostTracked">Most Tracked</Link>
           </li>
           <li>
-            <Link to="/orbit">Satellites on Orbit</Link>
-          </li>
-          <li>
-            <Link to="/justLaunched">Just Launched</Link>
+            <Link to="satellites/orbit">Satellites on Orbit</Link>
           </li>
           <li>
             <Link to="/account/login">Sign In</Link>
+          </li>
+          <li>
+            <Link to="/account/profile">Account</Link>
           </li>
         </ul>
       </nav>

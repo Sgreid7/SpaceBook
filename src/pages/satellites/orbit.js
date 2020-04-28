@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react"
-import SideNav from "../components/sideNav"
-import Layout from "../components/layout"
+import SideNav from "../../components/sideNav"
+import Layout from "../../components/layout"
 import { useSpring } from "react-spring"
 import styled from "styled-components"
-import Satellite from "../components/satellite"
-import SEO from "../components/seo"
-import PageLoader from "../components/pageLoader"
+import Satellite from "../../components/satellite"
+import SEO from "../../components/seo"
+import PageLoader from "../../components/pageLoader"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faSearch } from "@fortawesome/free-solid-svg-icons"
-import devices from "../utils/devices"
+import devices from "../../utils/devices"
 
-const Satellites = () => {
+const Orbit = () => {
   const [satellites, setSatellites] = useState([])
   const [searchFilter, setSearchFilter] = useState("")
   const [isNavOpen, setNavOpen] = useState(false)
@@ -36,20 +36,24 @@ const Satellites = () => {
     )
     const data = await response.json()
     // console.log(data.Observatory[1])
-    setSatellites(data.Observatory[1])
+    const now = new Date()
+    now.setHours(0, 0, 0, 0)
+    const satellites = data.Observatory[1].filter(
+      satellite => Date.parse(satellite.EndTime[1]) > now
+    )
+    console.log(satellites)
+    setSatellites(satellites)
   }
 
   useEffect(() => {
     getSatellites()
   }, [])
 
-  console.log(satellites)
-
   if (satellites.length > 0) {
     return (
       <Layout onClick={() => setNavOpen(!isNavOpen)}>
         <SideNav style={navAnimation} />
-        <SEO title="Satellites" />
+        <SEO title="Satellites on Orbit" />
         <SatelliteSection>
           <div className="search-box">
             <input
@@ -83,9 +87,10 @@ const Satellites = () => {
   }
 }
 
-export default Satellites
+export default Orbit
 
 const SatelliteSection = styled.section`
+  /* margin-top: 3rem; */
   padding-top: 5rem;
   min-height: 100vh;
   display: flex;
