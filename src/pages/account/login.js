@@ -19,8 +19,7 @@ const Login = () => {
       : `translate3d(100%, 0, 0) scale(0.6)`,
   })
 
-  const loginUser = async e => {
-    e.preventDefault()
+  const loginUser = async () => {
     const resp = await axios.post(
       "https://spacebookapi.herokuapp.com/auth/login",
       {
