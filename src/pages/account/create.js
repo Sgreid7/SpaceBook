@@ -20,7 +20,8 @@ const Create = () => {
       : `translate3d(100%, 0, 0) scale(0.6)`,
   })
 
-  const sendNewUserToApi = async () => {
+  const sendNewUserToApi = async e => {
+    e.preventDefault()
     const resp = await axios.post(
       "https://spacebookapi.herokuapp.com/auth/signup",
       {
