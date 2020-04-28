@@ -61,6 +61,7 @@ const NavWrapper = styled(animated.div)`
     text-decoration: none;
     padding-bottom: 0.3rem;
     text-shadow: 0.1rem 0.1rem 0.1rem #0000ff;
+    font-family: "Rubik", sans-serif;
   }
   a::after {
     content: "";

@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: `SpaceBook`,
+    title: `Spacebook`,
     description: `A personalized satellite tracker.`,
     author: `Sam Greider`,
   },
@@ -31,7 +31,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-google-fonts`,
       options: {
-        fonts: [`Dosis`],
+        fonts: [`Dosis`, `Comic Neue`, `Rubik`],
         display: "swap",
       },
     },

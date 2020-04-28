@@ -90,6 +90,7 @@ const AccountSection = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-family: "Rubik", sans-serif;
 
   p {
     text-align: center;

@@ -96,6 +96,7 @@ const SatelliteSection = styled.section`
     rgba(0, 8, 187, 1) 84.4%,
     rgba(255, 255, 255, 1) 119.7%
   );
+  font-family: "Dosis", sans-serif;
 
   .search-box {
     position: absolute;

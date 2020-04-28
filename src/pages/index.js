@@ -35,7 +35,7 @@ const IndexPage = () => {
         <Main style={fade}>
           <HeaderSection>
             <SEO title="Home" />
-            <h1>SpaceBook</h1>
+            <h1>Spacebook</h1>
             <h2>It's time to explore</h2>
             <Link to="/satellites">
               <button className="satellite-button">View Satellites</button>
@@ -43,9 +43,9 @@ const IndexPage = () => {
           </HeaderSection>
           <ContentSection>
             <p>
-              SpaceBook is a satellite tracker that notifies you when a
+              Spacebook is a satellite tracker that notifies you when a
               satellite you are subscribed to is within your viewing area.
-              SpaceBook is also your go to website designed to keep you up to
+              Spacebook is also your go to website designed to keep you up to
               date and informed with all things related to satellites.
             </p>
             <Image src={Astronaut} alt="Astronaut" />
@@ -74,7 +74,7 @@ const HeaderSection = styled.header`
   justify-content: center;
   height: 100vh;
   color: #fff;
-  font-family: "Dosis", sans-serif;
+  font-family: "Rubik", sans-serif;
   overflow-x: hidden;
 
   h1 {
@@ -167,6 +167,7 @@ const ContentSection = styled.section`
   justify-content: center;
   padding-bottom: 3rem;
   overflow-x: hidden;
+  font-family: "Rubik", sans-serif;
 
   p {
     display: flex;

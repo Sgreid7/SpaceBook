@@ -25,20 +25,20 @@ const Profile = () => {
       },
     })
 
-    // console.log(resp.data)
     setProfile(resp.data)
   }
 
-  // const deleteSatellite = async id => {
-  //   const resp = await axios.delete(
-  //     `https://localhost:5001/api/subscribedto/${id}`,
-  //     {
-  //       headers: {
-  //         Authorization: `Bearer ${localStorage.getItem("token")}`,
-  //       },
-  //     }
-  //   )
-  // }
+  const deleteSatellite = async id => {
+    const resp = await axios.delete(
+      `https://localhost:5001/api/subscribedto/${id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
+    )
+    loadProfile()
+  }
 
   useEffect(() => {
     loadProfile()
@@ -67,8 +67,9 @@ const Profile = () => {
                     <li key={satellite.id}>
                       <h3>{satellite.satelliteId}</h3>
                     </li>
-                    <button>X</button>
-                    {/* onClick={deleteSatellite(satellite.id)} */}
+                    <button onClick={() => deleteSatellite(satellite.id)}>
+                      X
+                    </button>
                   </div>
                 )
               })}
@@ -101,13 +102,14 @@ const ProfileSection = styled.section`
 
   header {
     text-align: center;
+    font-family: "Rubik", sans-serif;
 
     h1 {
       font-style: italic;
       font-size: 3rem;
       color: black;
       -webkit-text-fill-color: white;
-      -webkit-text-stroke-width: 1.5px;
+      -webkit-text-stroke-width: 1px;
       -webkit-text-stroke-color: #00008b;
     }
 
@@ -164,8 +166,8 @@ const SatelliteList = styled.section`
 
       h3 {
         font-size: 2rem;
-        font-weight: normal;
         color: #00008b;
+        font-family: "Dosis", sans-serif;
       }
 
       h3:first-letter {
@@ -187,6 +189,7 @@ const Info = styled.section`
   align-items: center;
   width: 100%;
   margin-top: 5rem;
+  font-family: "Rubik", sans-serif;
 
   span {
     font-size: 1.1rem;
