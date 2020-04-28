@@ -4,6 +4,7 @@ import { useSpring } from "react-spring"
 import Layout from "../../components/layout"
 import SideNav from "../../components/sideNav"
 import SEO from "../../components/seo"
+import devices from "../../utils/devices"
 import styled from "styled-components"
 import moment from "moment"
 import axios from "axios"
@@ -28,7 +29,7 @@ const Profile = () => {
     setProfile(resp.data)
   }
 
-  // const deleteSatellite = async () => {
+  // const deleteSatellite = async id => {
   //   const resp = await axios.delete(
   //     `https://localhost:5001/api/subscribedto/${id}`,
   //     {
@@ -55,6 +56,7 @@ const Profile = () => {
         <header>
           <h1>Hello, {profile.name}</h1>
           <h3>Here are the satellites you are subscribed to:</h3>
+          <hr />
         </header>
         <SatelliteList>
           {profile.satellites && (
@@ -62,10 +64,11 @@ const Profile = () => {
               {profile.satellites.map(satellite => {
                 return (
                   <div>
-                    <li>
+                    <li key={satellite.id}>
                       <h3>{satellite.satelliteId}</h3>
                     </li>
                     <button>X</button>
+                    {/* onClick={deleteSatellite(satellite.id)} */}
                   </div>
                 )
               })}
@@ -73,10 +76,12 @@ const Profile = () => {
           )}
         </SatelliteList>
         <Info>
-          <p>Email: {profile.email}</p>
-          {/* <p>State: {profile.state}</p> */}
           <p>
-            Account created: {moment(profile.joined).format("MMM Do, YYYY")}
+            <span>Email:</span> {profile.email}
+          </p>
+          <p>
+            <span>Account created:</span>{" "}
+            {moment(profile.joined).format("MMM Do, YYYY")}
           </p>
         </Info>
       </ProfileSection>
@@ -90,36 +95,54 @@ const ProfileSection = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   padding-top: 5rem;
+  background: whitesmoke;
 
   header {
-    border-bottom: 0.15rem solid #ccc;
+    text-align: center;
 
     h1 {
       font-style: italic;
       font-size: 3rem;
       color: black;
-      -webkit-text-fill-color: white; /* Will override color (regardless of order) */
+      -webkit-text-fill-color: white;
       -webkit-text-stroke-width: 1.5px;
       -webkit-text-stroke-color: #00008b;
+    }
+
+    h3 {
+      color: #00008b;
+    }
+
+    hr {
+      border: 0;
+      height: 1.5px;
+      background-image: linear-gradient(
+        to right,
+        rgba(0, 0, 0, 0),
+        rgba(0, 0, 0, 0.75),
+        rgba(0, 0, 0, 0)
+      );
     }
   }
 `
 const SatelliteList = styled.section`
+  height: 100vh;
+
   ul {
     list-style: none;
     margin: 0;
-    width: 100%;
+    width: 100vw;
 
     div {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-bottom: 0.1rem solid #00008b;
+      border-bottom: 0.1rem solid #8a2be2;
       margin: 1rem;
 
       button {
-        /* padding-top: 0.5rem; */
         background: #fff;
         color: red;
         height: 2rem;
@@ -130,18 +153,19 @@ const SatelliteList = styled.section`
         :hover {
           background: red;
           color: #fff;
+          cursor: pointer;
         }
       }
     }
 
     li {
-      /* display: flex;
-      justify-content: space-between; */
       margin: 1rem;
       width: 100%;
 
       h3 {
         font-size: 2rem;
+        font-weight: normal;
+        color: #00008b;
       }
 
       h3:first-letter {
@@ -149,10 +173,28 @@ const SatelliteList = styled.section`
       }
     }
   }
+
+  @media (${devices.laptop}) {
+    ul {
+      width: 70vw;
+    }
+  }
 `
 const Info = styled.section`
   display: flex;
+  flex-direction: column;
   justify-content: space-evenly;
+  align-items: center;
   width: 100%;
   margin-top: 5rem;
+
+  span {
+    font-size: 1.1rem;
+    color: #00008b;
+  }
+
+  @media (${devices.laptop}) {
+    display: flex;
+    flex-direction: row;
+  }
 `

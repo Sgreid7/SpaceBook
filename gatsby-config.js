@@ -28,6 +28,13 @@ module.exports = {
     },
     `gatsby-plugin-styled-components`,
     `gatsby-plugin-netlify`,
+    {
+      resolve: `gatsby-plugin-google-fonts`,
+      options: {
+        fonts: [`Dosis`],
+        display: "swap",
+      },
+    },
   ],
   // this (optional) plugin enables Progressive Web App + Offline functionality
   // To learn more, visit: https://gatsby.dev/offline

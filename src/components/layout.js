@@ -55,15 +55,12 @@ const FooterSection = styled.footer`
   color: #fff;
   background: #000;
   margin-top: auto;
-  /* bottom: 0; */
-  /* width: 100%; */
   border-top: 0.1rem solid #8a2be2;
   overflow-x: hidden;
 
   p {
     margin-top: 0.5rem;
     margin-bottom: 0;
-    /* font-style: italic; */
     font-size: 1.3rem;
   }
 
@@ -78,7 +75,7 @@ const FooterSection = styled.footer`
       padding: 0;
 
       > li {
-        margin: 0.5rem 8rem;
+        margin: 0.5rem 6rem;
 
         > a {
           text-decoration: none;

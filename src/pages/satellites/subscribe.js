@@ -3,13 +3,14 @@ import Layout from "../../components/layout"
 import SideNav from "../../components/sideNav"
 import SEO from "../../components/seo"
 import styled from "styled-components"
-import { Link } from "gatsby"
+import { Link, navigate } from "gatsby"
 import { useSpring } from "react-spring"
 import axios from "axios"
 
 const Subscribe = ({ location }) => {
   const [satellite, setSatellite] = useState({ StartTime: [], EndTime: [] })
   const [state, setState] = useState("")
+  const [shouldRedirect, setShouldRedirect] = useState(false)
   const [receiveNotifications, setReceiveNotifications] = useState(false)
   const [name, setName] = useState("")
   const [isNavOpen, setNavOpen] = useState(false)
@@ -47,8 +48,7 @@ const Subscribe = ({ location }) => {
     setName(response.data.ResourceHeader.ResourceName)
   }
 
-  const saveSatelliteForUser = async e => {
-    e.preventDefault()
+  const saveSatelliteForUser = async () => {
     const resp = axios.post(
       `https://localhost:5001/api/subscribedto/${satellite.Id}`,
       {},
@@ -58,6 +58,10 @@ const Subscribe = ({ location }) => {
         },
       }
     )
+
+    if (resp.status === 200) {
+      setShouldRedirect(true)
+    }
   }
 
   const updateUserInfo = async e => {
@@ -81,6 +85,10 @@ const Subscribe = ({ location }) => {
     getSatellites(resId)
     getSatelliteInfo(resId)
   }, [])
+
+  if (shouldRedirect) {
+    navigate("/account/profile")
+  }
 
   return (
     <Layout onClick={() => setNavOpen(!isNavOpen)}>
