@@ -13,10 +13,12 @@ Spacebook is a satellite subscription and tracking app where users can subscribe
 
 - [GATSBY](https://www.gatsbyjs.org/)
 - [REACT](https://reactjs.org/docs/getting-started.html)
+- [REACT SPRING](https://www.react-spring.io/)
 - [C#](https://docs.microsoft.com/en-us/dotnet/csharp/)
 - [ASP.NET](https://dotnet.microsoft.com/apps/aspnet)
 - [EF CORE](https://docs.microsoft.com/en-us/ef/core/)
 - [POSTGRESQL](https://www.postgresql.org/)
+- [AXIOS](https://github.com/axios/axios)
 
 ## Live Site
 
