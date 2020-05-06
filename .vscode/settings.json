@@ -9,6 +9,7 @@
     "fortawesome",
     "infer",
     "outerspace",
+    "postgresql",
     "react",
     "spitzer"
   ]
