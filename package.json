@@ -1,5 +1,5 @@
 {
-  "name": "SpaceBook",
+  "name": "spacebook",
   "private": true,
   "description": "A satellite tracker that provides you with information",
   "version": "0.1.0",
@@ -31,11 +31,7 @@
     "react-dom": "^16.12.0",
     "react-helmet": "^5.2.1",
     "react-spring": "^8.0.27",
-<<<<<<< HEAD
-    "styled-components": "^5.0.1"
-=======
     "styled-components": "^5.1.0"
->>>>>>> testing
   },
   "devDependencies": {
     "prettier": "^1.19.1"
