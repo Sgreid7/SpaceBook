@@ -1,19 +1,13 @@
-/**
- * Layout component that queries for data
- * with Gatsby's useStaticQuery component
- *
- * See: https://www.gatsbyjs.org/docs/use-static-query/
- */
-
 import React from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 import styled from "styled-components"
+import devices from "../utils/devices"
 
 import Header from "./header"
 import "./layout.css"
 
-const Layout = ({ children }) => {
+const Layout = ({ children, onClick }) => {
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
@@ -26,7 +20,7 @@ const Layout = ({ children }) => {
 
   return (
     <>
-      <Header siteTitle={data.site.siteMetadata.title} />
+      <Header siteTitle={data.site.siteMetadata.title} onClick={onClick} />
       <div>
         <main>{children}</main>
         <FooterSection>
@@ -61,15 +55,13 @@ const FooterSection = styled.footer`
   color: #fff;
   background: #000;
   margin-top: auto;
-  /* bottom: 0; */
-  width: 100%;
   border-top: 0.1rem solid #8a2be2;
+  overflow-x: hidden;
 
   p {
     margin-top: 0.5rem;
     margin-bottom: 0;
-    font-style: italic;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
   }
 
   nav {
@@ -80,20 +72,22 @@ const FooterSection = styled.footer`
       display: flex;
       list-style: none;
       margin: 0;
-      padding: 0.1rem;
+      padding: 0;
 
       > li {
-        margin: 0.5rem 10rem;
+        margin: 0.5rem 6rem;
 
         > a {
           text-decoration: none;
           color: #fff;
           font-size: 1.2rem;
           transition: 0.5s ease;
+          font-style: italic;
+          text-shadow: 0.05rem 0.05rem 0.05rem #0000ff;
+        }
 
-          :hover {
-            color: #8a2be2;
-          }
+        @media (${devices.laptop}) {
+          margin: 1rem 10rem;
         }
       }
     }
