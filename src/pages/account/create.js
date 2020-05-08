@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import Layout from "../../components/layout"
 import SideNav from "../../components/sideNav"
+import devices from "../../utils/devices"
 import styled from "styled-components"
 import { Link, navigate } from "gatsby"
 import { useSpring } from "react-spring"
@@ -92,12 +93,14 @@ const AccountSection = styled.section`
   padding-top: 5rem;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   font-family: "Rubik", sans-serif;
+  background: rgb(0, 0, 139);
 
   p {
     text-align: center;
-    margin-bottom: 0.5rem;
+    margin: 0.5rem;
     font-style: italic;
     font-size: 3rem;
     color: black;
@@ -112,19 +115,24 @@ const AccountSection = styled.section`
     align-items: center;
     justify-content: space-evenly;
     border: 0.3rem solid #ccc;
-    height: 100vh;
+    height: 65vh;
+    width: 80vw;
     padding: 1rem;
     background: whitesmoke;
-    box-shadow: 0 0 1rem 0.25rem rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 2rem 0.5rem #000;
 
     label {
       color: #00008b;
+      margin: 0.5rem;
+      font-size: 1.2rem;
+      text-align: center;
     }
 
     input {
       padding: 0.5rem;
       border: 0.1rem solid #00008b;
       margin-bottom: 1rem;
+      width: 70%;
 
       :focus {
         outline: none;
@@ -134,15 +142,15 @@ const AccountSection = styled.section`
   }
 
   button {
-    margin-top: 2rem;
-    font-size: 1.5rem;
+    margin-top: 1rem;
+    font-size: 1.1rem;
     letter-spacing: 0.2rem;
     background: transparent;
     border-radius: 0.2rem;
     border: 0.15rem solid #000;
     color: #000;
     height: 3rem;
-    width: 100%;
+    width: 80%;
     transition: 0.3s ease-in;
     position: relative;
     z-index: 1;
@@ -185,12 +193,59 @@ const AccountSection = styled.section`
 
   a {
     text-decoration: none;
+    text-align: center;
     color: #000;
     transition: 0.3s ease;
+    margin: 1rem;
 
     :hover {
       color: #00008b;
       box-shadow: 0 0.2rem 0.2rem #ccc;
+    }
+  }
+
+  @media (${devices.tablet}) {
+    button {
+      font-size: 1.5rem;
+    }
+  }
+
+  @media (${devices.laptop}) {
+    p {
+      font-size: 4rem;
+    }
+
+    form {
+      height: 75vh;
+      justify-content: space-around;
+
+      input {
+        height: 3rem;
+      }
+
+      label {
+        font-size: 1.5rem;
+      }
+
+      button {
+        height: 4rem;
+      }
+    }
+  }
+
+  @media (${devices.laptopL}) {
+    form {
+      input {
+        width: 60%;
+      }
+
+      button {
+        width: 70%;
+      }
+
+      a {
+        margin: 2rem;
+      }
     }
   }
 `

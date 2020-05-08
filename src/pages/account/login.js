@@ -87,6 +87,7 @@ const AccountSection = styled.section`
   justify-content: center;
   align-items: center;
   font-family: "Rubik", sans-serif;
+  background: rgb(0, 0, 139);
 
   p {
     text-align: center;
@@ -109,7 +110,7 @@ const AccountSection = styled.section`
     width: 80vw;
     padding: 1rem;
     background: whitesmoke;
-    box-shadow: 0 0 1rem 0.25rem rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 2rem 0.5rem #000;
 
     label {
       text-align: center;
@@ -122,6 +123,7 @@ const AccountSection = styled.section`
       padding: 0.5rem;
       border: 0.1rem solid #00008b;
       width: 70%;
+      background: #fff;
 
       :focus {
         outline: none;
@@ -215,6 +217,7 @@ const AccountSection = styled.section`
     form {
       height: 75vh;
       justify-content: space-around;
+
       input {
         height: 3rem;
       }
