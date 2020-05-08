@@ -149,13 +149,13 @@ const HeaderSection = styled.header`
     h1 {
       font-size: 6.5rem;
       margin-bottom: 3rem;
-      text-shadow: 0.25rem 0.25rem 0.25rem #8a2be2;
+      text-shadow: 0.25rem 0.25rem 0.25rem #0000ff;
     }
 
     h2 {
       font-size: 4rem;
       margin-bottom: 3rem;
-      text-shadow: 0.15rem 0.15rem 0.15rem #8a2be2;
+      text-shadow: 0.15rem 0.15rem 0.15rem #0000ff;
     }
   }
 `

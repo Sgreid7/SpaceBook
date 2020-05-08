@@ -49,6 +49,8 @@ const Content = styled.section`
     transition: 0.4s ease;
     position: relative;
     outline: none;
+    font-size: 1.1rem;
+    letter-spacing: 0.05rem;
 
     ::before,
     ::after {

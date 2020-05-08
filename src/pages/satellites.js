@@ -54,6 +54,7 @@ const Satellites = () => {
               name="search"
               placeholder="Search satellites..."
               onChange={updateSearchFilter}
+              autoComplete="off"
             />
             <a className="search-btn" href="#">
               <FontAwesomeIcon icon={faSearch} />
