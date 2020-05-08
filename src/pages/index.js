@@ -1,7 +1,6 @@
-import React from "react"
-import { Link } from "gatsby"
-import { useSpring, animated } from 'react-spring'
 import React, { useState } from "react"
+import { Link } from "gatsby"
+import { useSpring, animated } from "react-spring"
 import { useSpring, animated } from "react-spring"
 import styled from "styled-components"
 import Outerspace from "../images/outerspace.jpg"
