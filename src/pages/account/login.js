@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import Layout from "../../components/layout"
 import SideNav from "../../components/sideNav"
+import devices from "../../utils/devices"
 import styled from "styled-components"
 import { Link, navigate } from "gatsby"
 import { useSpring } from "react-spring"
@@ -54,6 +55,7 @@ const Login = () => {
             name="username"
             value={loginEmail}
             onChange={e => setLoginEmail(e.target.value)}
+            autoComplete="new-password"
           />
           <label htmlFor="password">Please enter your password</label>
           <input
@@ -82,6 +84,7 @@ const AccountSection = styled.section`
   padding-top: 5rem;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   font-family: "Rubik", sans-serif;
 
@@ -100,21 +103,25 @@ const AccountSection = styled.section`
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-evenly;
+    /* justify-content: space-around; */
     border: 0.3rem solid #ccc;
-    height: 100vh;
+    height: 60vh;
+    width: 80vw;
     padding: 1rem;
     background: whitesmoke;
     box-shadow: 0 0 1rem 0.25rem rgba(0, 0, 0, 0.3);
 
     label {
+      text-align: center;
       font-size: 1.2rem;
       color: #00008b;
+      margin: 2rem;
     }
 
     input {
       padding: 0.5rem;
       border: 0.1rem solid #00008b;
+      width: 70%;
 
       :focus {
         outline: none;
@@ -132,7 +139,7 @@ const AccountSection = styled.section`
     border: 0.15rem solid #000;
     color: #000;
     height: 3rem;
-    width: 100%;
+    width: 80%;
     transition: 0.3s ease-in;
     position: relative;
     z-index: 1;
@@ -174,13 +181,63 @@ const AccountSection = styled.section`
   }
 
   a {
+    text-align: center;
     text-decoration: none;
     color: #000;
     transition: 0.3s ease;
+    margin: 1rem;
 
     :hover {
       color: #00008b;
       box-shadow: 0 0.2rem 0.2rem #ccc;
+    }
+  }
+
+  @media (${devices.mobileL}) {
+    form {
+      a {
+        margin: 2rem;
+      }
+    }
+  }
+
+  @media (${devices.tablet}) {
+    button {
+      width: 80%;
+    }
+  }
+
+  @media (${devices.laptop}) {
+    p {
+      font-size: 4rem;
+    }
+
+    form {
+      height: 75vh;
+      justify-content: space-around;
+      input {
+        height: 3rem;
+      }
+
+      label {
+        font-size: 1.5rem;
+      }
+
+      button {
+        height: 4rem;
+      }
+    }
+  }
+
+  @media (${devices.laptopL}) {
+    form {
+      input {
+        width: 60%;
+      }
+
+      button {
+        width: 70%;
+      }
     }
   }
 `
