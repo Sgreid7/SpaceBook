@@ -99,10 +99,26 @@ const NavWrapper = styled(animated.div)`
       flex-direction: column;
       justify-content: flex-start;
       align-items: flex-start;
+
+      li {
+        margin: 1rem;
+      }
     }
 
     a {
       font-size: 1.7rem;
+    }
+  }
+
+  @media (${devices.laptopL}) {
+    ul {
+      li {
+        margin: 1rem;
+      }
+    }
+
+    a {
+      font-size: 2rem;
     }
   }
 `
