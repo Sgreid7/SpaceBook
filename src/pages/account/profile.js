@@ -8,6 +8,7 @@ import devices from "../../utils/devices"
 import styled from "styled-components"
 import moment from "moment"
 import axios from "axios"
+import Spaceman from "../../images/spaceman.jpg"
 
 const Profile = () => {
   const [profile, setProfile] = useState({})
@@ -101,7 +102,10 @@ const ProfileSection = styled.section`
   align-items: center;
   justify-content: center;
   padding-top: 5rem;
-  background: whitesmoke;
+  background: url(${Spaceman});
+  background-size: cover;
+  background-position: center;
+  /* Photo by Greg Rakozy on Unsplash */
 
   header {
     text-align: center;
@@ -110,14 +114,15 @@ const ProfileSection = styled.section`
     h1 {
       font-style: italic;
       font-size: 3rem;
-      color: black;
+      color: #fff;
       -webkit-text-fill-color: white;
-      -webkit-text-stroke-width: 1px;
-      -webkit-text-stroke-color: #00008b;
+      -webkit-text-stroke-width: 0.75px;
+      -webkit-text-stroke-color: #0000ff;
     }
 
     h3 {
-      color: #00008b;
+      color: #fff;
+      text-shadow: 0.1rem 0.1rem 0.1rem #0000ff;
     }
 
     hr {
@@ -125,9 +130,9 @@ const ProfileSection = styled.section`
       height: 1.5px;
       background-image: linear-gradient(
         to right,
-        rgba(0, 0, 0, 0),
-        rgba(0, 0, 0, 0.75),
-        rgba(0, 0, 0, 0)
+        rgba(255, 255, 255, 0.5),
+        rgba(255, 255, 255, 1),
+        rgba(255, 255, 255, 0.5)
       );
     }
   }
@@ -144,11 +149,12 @@ const SatelliteList = styled.section`
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-bottom: 0.1rem solid #8a2be2;
+      /* border-bottom: 0.1rem solid #8a2be2; */
+      border-bottom: 0.1rem solid #fff;
       margin: 1rem;
 
       button {
-        background: #fff;
+        background: transparent;
         color: red;
         height: 2rem;
         outline: none;
@@ -158,6 +164,7 @@ const SatelliteList = styled.section`
         :hover {
           background: red;
           color: #fff;
+          border: 0.1rem solid #fff;
           cursor: pointer;
         }
       }
@@ -168,9 +175,12 @@ const SatelliteList = styled.section`
       width: 100%;
 
       h3 {
-        font-size: 2rem;
+        font-size: 3rem;
         color: #00008b;
         font-family: "Dosis", sans-serif;
+        -webkit-text-fill-color: black;
+        -webkit-text-stroke-width: 0.75px;
+        -webkit-text-stroke-color: #8a2be2;
       }
 
       h3:first-letter {
@@ -193,10 +203,14 @@ const Info = styled.section`
   width: 100%;
   margin-top: 5rem;
   font-family: "Rubik", sans-serif;
+  color: #fff;
+  font-style: italic;
 
   span {
     font-size: 1.1rem;
-    color: #00008b;
+    color: #fff;
+    border-bottom: 0.2rem solid #0000ff;
+    font-style: normal;
   }
 
   @media (${devices.laptop}) {
