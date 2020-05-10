@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react"
 import Layout from "../../components/layout"
 import SideNav from "../../components/sideNav"
 import SEO from "../../components/seo"
+import devices from "../../utils/devices"
 import styled from "styled-components"
 import { Link, navigate } from "gatsby"
 import { useSpring } from "react-spring"
@@ -201,29 +202,33 @@ const SubscribeSection = styled.section`
   height: 100vh;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
+  background: rgb(0, 0, 139);
 
   span {
     font-style: italic;
     font-weight: bold;
     color: #00008b;
+    border-bottom: 0.1rem solid #8a2be2;
     font-size: 1.1rem;
   }
 
   form {
     display: flex;
     flex-direction: column;
+    align-items: center;
     border: 0.3rem solid #ccc;
     border-radius: 0.25rem;
-    height: 100vh;
+    height: 60vh;
+    width: 80vw;
     margin-top: 2rem;
     padding: 1rem;
     background: whitesmoke;
-    box-shadow: 0 0 1rem 0.25rem rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 2rem 0.5rem #000;
 
     label {
-      margin-top: 1.5rem;
-      margin-bottom: 0.5rem;
+      margin: 1rem;
       color: #00008b;
     }
 
@@ -232,6 +237,7 @@ const SubscribeSection = styled.section`
     select {
       padding: 0.5rem;
       border: 0.1rem solid #00008b;
+      width: 70%;
 
       :focus {
         outline: none;
@@ -242,25 +248,20 @@ const SubscribeSection = styled.section`
     p {
       color: #00008b;
       margin-top: 1.5rem;
-    }
-
-    select {
-      padding: 0.5rem;
-
-      :focus {
-        outline: none;
-      }
+      text-align: center;
     }
 
     .radio-buttons {
       text-align: center;
+      display: flex;
+      justify-content: center;
 
       input[type="radio"] {
-        margin: 0 0.5rem;
+        margin: 0 1rem;
       }
 
       label {
-        margin: 0.3rem;
+        margin: 0rem;
       }
     }
   }
@@ -274,6 +275,7 @@ const SubscribeSection = styled.section`
     border: 0.15rem solid #000;
     color: #000;
     height: 3rem;
+    width: 80%;
     transition: 0.3s ease-in;
     position: relative;
     z-index: 1;
@@ -308,6 +310,62 @@ const SubscribeSection = styled.section`
   .send-button:hover::after {
     transform: scaleX(1);
     transform-origin: right;
+  }
+
+  @media (${devices.tablet}) {
+    button {
+      width: 80%;
+    }
+  }
+
+  @media (${devices.laptop}) {
+    p {
+      font-size: 1.5rem;
+    }
+
+    span {
+      font-size: 2rem;
+    }
+
+    form {
+      height: 75vh;
+      justify-content: space-around;
+
+      input {
+        height: 3rem;
+      }
+
+      label {
+        font-size: 1.5rem;
+      }
+
+      button {
+        height: 4rem;
+        font-size: 2rem;
+      }
+
+      .radio-buttons {
+        input[type="radio"] {
+          margin: 0 2rem;
+        }
+
+        label {
+          margin: 0.5rem;
+        }
+      }
+    }
+  }
+
+  @media (${devices.laptopL}) {
+    form {
+      input {
+        width: 60%;
+      }
+
+      button {
+        width: 70%;
+      }
+    }
   }
 `
 

@@ -11,7 +11,7 @@ import axios from "axios"
 import Spaceman from "../../images/spaceman.jpg"
 
 const Profile = () => {
-  const [profile, setProfile] = useState({})
+  const [profile, setProfile] = useState({ satellites: [] })
   const [isNavOpen, setNavOpen] = useState(false)
   const navAnimation = useSpring({
     transform: isNavOpen
@@ -43,6 +43,8 @@ const Profile = () => {
     )
     loadProfile()
   }
+
+  console.log(profile)
 
   useEffect(() => {
     loadProfile()
@@ -179,7 +181,7 @@ const SatelliteList = styled.section`
         color: #00008b;
         font-family: "Dosis", sans-serif;
         -webkit-text-fill-color: black;
-        -webkit-text-stroke-width: 0.75px;
+        -webkit-text-stroke-width: 0.3px;
         -webkit-text-stroke-color: #8a2be2;
       }
 
